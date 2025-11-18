@@ -1,111 +1,970 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yann Sadou – Academic Profile</title>
+  <meta charset="UTF-8" />
+  <title>Yann Sadou – Space Systems Engineering</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Academic website of Yann Sadou – Space Systems Engineering, Caltech & Politecnico di Milano." />
 
+  <!-- Typo & Style Apple-like -->
   <style>
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #f7f7f8;
+      --fg: #111111;
+      --fg-soft: #555555;
+      --accent: #0070c9;
+      --border-soft: #e5e5e7;
+      --radius-xl: 24px;
+      --radius: 16px;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.08);
+      --max-width: 960px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-      background-color: #ffffff;
-      color: #111;
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text",
+        "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--fg);
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
-    header {
-      text-align: center;
-      padding: 120px 20px 80px;
+    a {
+      color: var(--accent);
+      text-decoration: none;
     }
 
-    h1 {
-      font-size: 48px;
-      font-weight: 700;
-      margin-bottom: 10px;
+    a:hover {
+      text-decoration: underline;
     }
 
-    h2 {
-      font-size: 20px;
-      font-weight: 400;
-      color: #666;
-      margin-top: 0;
+    /* NAVBAR */
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(18px);
+      background: rgba(255, 255, 255, 0.9);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .nav-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-brand {
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      font-size: 14px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      color: #444;
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 3px;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--fg);
+      transition: width 0.18s ease-out;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    @media (max-width: 720px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+    }
+
+    /* LAYOUT */
+
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 32px 20px 64px;
     }
 
     section {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 40px 20px;
+      padding: 40px 0;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    section:last-of-type {
+      border-bottom: none;
+      padding-bottom: 0;
     }
 
     .section-title {
-      font-size: 28px;
-      margin-bottom: 10px;
+      font-size: 22px;
       font-weight: 600;
+      margin-bottom: 20px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #777;
+    }
+
+    /* HERO */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 32px;
+      align-items: center;
+      padding-top: 32px;
+      padding-bottom: 20px;
+    }
+
+    .hero-title {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin: 0 0 10px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: var(--fg-soft);
+      margin-bottom: 16px;
+    }
+
+    .hero-highlight {
+      font-size: 14px;
+      color: #777;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+    }
+
+    .hero-text {
+      font-size: 15px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+      margin-bottom: 10px;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 9px 16px;
+      font-size: 14px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out,
+        background 0.12s ease-out, border-color 0.12s ease-out;
+    }
+
+    .btn-primary {
+      background: #111;
+      color: #fff;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-ghost {
+      background: #fff;
+      color: #222;
+      border-color: var(--border-soft);
+    }
+
+    .btn-ghost:hover {
+      background: #f2f2f2;
+      transform: translateY(-1px);
+    }
+
+    /* HERO PHOTO / COVER */
+
+    .hero-photo-card {
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top left, #f5f7ff, #ffffff);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .hero-photo-frame {
+      border-radius: 18px;
+      overflow: hidden;
+      background: #ddd;
+      aspect-ratio: 4 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      font-size: 13px;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .hero-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-photo-caption {
+      font-size: 12px;
+      color: #777;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #f2f2f3;
+      color: #555;
+      border: 1px solid #e4e4e6;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* LOGO STRIP */
+
+    .logos-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      margin-top: 14px;
+    }
+
+    .logos-strip img {
+      height: 32px;
+      filter: grayscale(100%) contrast(1.05);
+      opacity: 0.9;
+    }
+
+    .logos-caption {
+      font-size: 11px;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    /* GRID SECTIONS */
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 32px;
+    }
+
+    @media (max-width: 900px) {
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
     .card {
-      border: 1px solid #eee;
-      padding: 20px;
-      border-radius: 14px;
-      margin: 20px 0;
-      transition: 0.2s ease;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-soft);
+      background: #ffffff;
+      padding: 18px 18px 16px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.04);
+      margin-bottom: 14px;
     }
 
-    .card:hover {
-      border-color: #000;
-      transform: translateY(-3px);
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 4px;
     }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .card-sub {
+      font-size: 13px;
+      color: #777;
+    }
+
+    .card-badge {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid #ddd;
+      color: #555;
+      align-self: flex-start;
+      white-space: nowrap;
+    }
+
+    .card-body {
+      font-size: 14px;
+      color: #444;
+      margin-top: 4px;
+    }
+
+    .card-body ul {
+      margin: 6px 0 0 18px;
+      padding: 0;
+    }
+
+    .card-body li {
+      margin-bottom: 4px;
+    }
+
+    /* TIMELINES */
+
+    .timeline {
+      border-left: 1px solid #ddd;
+      padding-left: 16px;
+      margin-left: 4px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 18px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -9px;
+      top: 4px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #111;
+    }
+
+    .timeline-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .timeline-meta {
+      font-size: 13px;
+      color: #777;
+      margin-bottom: 4px;
+    }
+
+    .timeline-desc {
+      font-size: 14px;
+      color: #444;
+    }
+
+    /* SMALL LISTS / LABELS */
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .pill {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: #f4f4f5;
+      border: 1px solid #e4e4e7;
+      color: #555;
+    }
+
+    /* FOOTER */
 
     footer {
-      text-align: center;
-      padding: 40px;
-      color: #aaa;
-      font-size: 14px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 24px 20px 40px;
+      font-size: 12px;
+      color: #999;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    footer a {
+      color: #666;
+    }
+
+    /* SMOOTH SCROLL */
+
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 </head>
-
 <body>
 
-<header>
-  <h1>Yann Sadou</h1>
-  <h2>Space Systems Engineering • Caltech • Politecnico di Milano</h2>
-</header>
+  <!-- NAVBAR -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-brand">YANN SADOU</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-<section>
-  <div class="section-title">About Me</div>
-  <p>
-    I am a Research Assistant at Caltech, specializing in cryogenic instrumentation, dark matter detectors, 
-    and advanced space systems engineering. I previously studied at Arts et Métiers, ISAE-Supaero, UPM Madrid, 
-    and Politecnico di Milano.
-  </p>
-</section>
+  <main>
+    <!-- HERO -->
+    <section id="top" aria-labelledby="hero-title">
+      <div class="hero">
+        <div>
+          <div class="hero-highlight">Space Systems Engineering · Cryogenic Instrumentation · Power Systems</div>
+          <h1 id="hero-title" class="hero-title">Yann Sadou</h1>
+          <div class="hero-subtitle">
+            Research Assistant – Caltech · PhD Candidate – Politecnico di Milano
+          </div>
+          <p class="hero-text">
+            I design, build, and optimize advanced hardware and architectures for
+            space missions — from cryogenic dark-matter detectors and CMB
+            instrumentation at Caltech to hybrid surface power systems for
+            lunar and Martian infrastructures at Politecnico di Milano.
+          </p>
 
-<section>
-  <div class="section-title">Projects</div>
+          <div class="hero-actions">
+            <!-- TODO: replace href with actual CV link -->
+            <a class="btn-primary" href="#" target="_blank" rel="noopener">
+              Download CV (PDF)
+            </a>
+            <!-- TODO: replace email with your real one -->
+            <a class="btn-ghost" href="mailto:your.email@domain.com">
+              Contact me
+            </a>
+          </div>
 
-  <div class="card">
-    <strong>Mars Surface Power Systems – Politecnico di Milano</strong>
-    <p>Digital-twin driven architecture & modeling of hybrid microgrids for lunar & Martian infrastructures.</p>
-  </div>
+          <div class="logos-caption">Affiliations & training</div>
+          <div class="logos-strip">
+            <!-- Place your logo files in /assets/logos/ and update filenames -->
+            <img src="assets/logos/caltech.png" alt="Caltech logo" />
+            <img src="assets/logos/polimi.png" alt="Politecnico di Milano logo" />
+            <img src="assets/logos/supaero.png" alt="ISAE-Supaero logo" />
+            <img src="assets/logos/arts-et-metiers.png" alt="Arts et Métiers logo" />
+            <img src="assets/logos/upm.png" alt="Universidad Politécnica de Madrid logo" />
+            <img src="assets/logos/esa.png" alt="ESA logo" />
+          </div>
+        </div>
 
-  <div class="card">
-    <strong>Cryogenic Detector Modules – Caltech (BICEP Array)</strong>
-    <p>Mechanical/thermal design, Belleville stacks, vacuum cryostat integration, cryogenic optimization.</p>
-  </div>
+        <aside class="hero-photo-card">
+          <div class="hero-photo-frame">
+            <!-- TODO: replace with your own image, e.g. assets/photos/portrait.jpg -->
+            <!-- Example: <img src="assets/photos/portrait.jpg" alt="Yann Sadou" /> -->
+            Drop a portrait or lab photo here (replace this box with an <img> tag).
+          </div>
+          <div class="hero-photo-caption">
+            Suggested: a clean portrait or a lab photo (cryostat, clean room, telescope, etc.)
+            sized around 1600×1200 and saved as <code>assets/photos/portrait.jpg</code>.
+          </div>
+          <div class="hero-tags">
+            <span class="tag">Cryogenic Detectors</span>
+            <span class="tag">Dark Matter & CMB</span>
+            <span class="tag">Lunar & Martian Power</span>
+            <span class="tag">Trajectory & Systems</span>
+          </div>
+        </aside>
+      </div>
+    </section>
 
-  <div class="card">
-    <strong>Dark Matter Instrumentation – Caltech</strong>
-    <p>MKID development, optics structures, and phonon-mediated detection hardware.</p>
-  </div>
+    <!-- ABOUT -->
+    <section id="about" aria-labelledby="about-title">
+      <h2 id="about-title" class="section-title">About</h2>
+      <div class="two-col">
+        <div>
+          <p>
+            I am a French space systems engineer with a background spanning
+            mechanical engineering, energy systems, and space systems design.
+            My work lives at the interface between <strong>hardware</strong>
+            (cryogenic structures, detector modules, power hardware) and
+            <strong>systems-level architecture</strong> (digital twins,
+            trajectories, and mission-level optimization).
+          </p>
+          <p>
+            At Caltech, I have been deeply involved in the development of
+            cryogenic instrumentation for dark-matter searches and for the
+            BICEP Array CMB experiment, contributing to mechanical and thermal
+            design, integration of detector modules, Belleville washer stacks,
+            and cryostat optimization down to sub-Kelvin temperatures.
+          </p>
+          <p>
+            At Politecnico di Milano, my PhD focuses on
+            <strong>hybrid surface power systems</strong> for future
+            <strong>lunar and Martian infrastructures</strong>, combining
+            microgrids, PMAD, advanced energy storage, and ISRU into digital
+            twin–driven architectures for large-scale off-world settlements.
+          </p>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Current Focus</div>
+                <div class="card-sub">High-impact, hardware-grounded space systems</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>Cryogenic instrument design for dark matter & CMB experiments.</li>
+                <li>Digital twins for lunar & Martian surface power architectures.</li>
+                <li>Robust mechanical & thermal design for extreme environments.</li>
+                <li>Bridging academic research and mission-class engineering.</li>
+              </ul>
+            </div>
+          </div>
 
-</section>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Keywords</div>
+            </div>
+            <div class="card-body">
+              <div class="pill-list">
+                <span class="pill">Space Systems Engineering</span>
+                <span class="pill">Surface Power & Microgrids</span>
+                <span class="pill">Cryogenics</span>
+                <span class="pill">Dark Matter Detectors</span>
+                <span class="pill">CMB Instrumentation</span>
+                <span class="pill">Digital Twins</span>
+                <span class="pill">Thermal–Mechanical Design</span>
+                <span class="pill">Mission Architecture</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<footer>
-  © 2025 – Yann Sadou
-</footer>
+    <!-- RESEARCH -->
+    <section id="research" aria-labelledby="research-title">
+      <h2 id="research-title" class="section-title">Research & Technical Interests</h2>
+      <div class="two-col">
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Cryogenic Instrumentation</div>
+                <div class="card-sub">Dark-matter and CMB experiments – Caltech</div>
+              </div>
+              <div class="card-badge">Hardware</div>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>Mechanical and thermal design of sub-Kelvin cryogenic structures.</li>
+                <li>Belleville washer stacks and preload management across cooldown.</li>
+                <li>Integration of MKID/TES detector modules into vacuum cryostats.</li>
+                <li>Optimization of optical paths, mirrors, and support structures.</li>
+              </ul>
+            </div>
+          </div>
 
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Hybrid Surface Power Systems</div>
+                <div class="card-sub">Lunar & Martian infrastructure – Politecnico di Milano</div>
+              </div>
+              <div class="card-badge">Systems</div>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>Architecture and modeling of hybrid power systems for off-world bases.</li>
+                <li>Microgrids, PMAD networks, and advanced energy storage integration.</li>
+                <li>Use of ISRU-driven power flows in large-scale lunar/Martian settlements.</li>
+                <li>Digital twin–driven design to explore trade-offs and mission robustness.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Trajectory & Mission Design</div>
+                <div class="card-sub">SEEDS / ESA – Human Mars lander & station concepts</div>
+              </div>
+              <div class="card-badge">Architecture</div>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>Trajectory optimization and entry–descent–landing (EDL) trade studies.</li>
+                <li>Inflatable EDL systems for human-class Mars landers.</li>
+                <li>Conceptual design of Mars surface and orbital infrastructure.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Methods & Tools</div>
+            </div>
+            <div class="card-body">
+              <div class="pill-list">
+                <span class="pill">SolidWorks</span>
+                <span class="pill">FEA / Mechanical Design</span>
+                <span class="pill">Thermal Modeling</span>
+                <span class="pill">Python / MATLAB</span>
+                <span class="pill">Git / GitHub</span>
+                <span class="pill">Systems Engineering</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" aria-labelledby="experience-title">
+      <h2 id="experience-title" class="section-title">Professional Experience</h2>
+      <div class="two-col">
+        <div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-title">Research Assistant – Caltech</div>
+              <div class="timeline-meta">Observational Cosmology · Pasadena, USA · YYYY–YYYY</div>
+              <div class="timeline-desc">
+                Work with Prof. Sunil Golwala and Prof. Jamie Bock on cryogenic detector
+                instrumentation for dark-matter searches and the BICEP Array CMB experiment.
+                <ul>
+                  <li>Mechanical and thermal design of cryogenic structures and support hardware.</li>
+                  <li>Development and sizing of Belleville washer stacks for sub-Kelvin modules.</li>
+                  <li>Integration of detector wafers, modules, and readout into vacuum cryostats.</li>
+                  <li>Collaboration with JPL and international partners on next-generation CMB instruments.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-title">Head of Design Office – Dreyer</div>
+              <div class="timeline-meta">Engineering company · France · YYYY–YYYY</div>
+              <div class="timeline-desc">
+                Led the mechanical design office, managing industrial projects from concept to
+                detailed design and manufacturing support.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-title">Energy & Engineering Roles – Safran, APP Consultoría, Easycube</div>
+              <div class="timeline-meta">Europe · YYYY–YYYY</div>
+              <div class="timeline-desc">
+                Industrial internships and engineering roles across aerospace and energy,
+                focusing on modeling, design, and optimization of complex systems.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-title">Mathematics Teacher – Middle School</div>
+              <div class="timeline-meta">France · YYYY–YYYY</div>
+              <div class="timeline-desc">
+                Taught mathematics at the middle-school level, building strong communication
+                and pedagogy skills while mentoring younger students.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Selected Responsibilities</div>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>Owned mechanical and thermal interfaces in multi-partner cryogenic projects.</li>
+                <li>Coordinated with experimentalists, electronics teams, and fabrication shops.</li>
+                <li>Prepared technical documentation, drawings, and integration procedures.</li>
+                <li>Supervised or supported students and collaborators on specific tasks.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Highlights</div>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>
+                  Panel chair representative at the 2025 California Science and Engineering
+                  Fair, presenting the best project in Senior – Applied Mechanics to the full congress.
+                </li>
+                <li>
+                  Participation in ESA’s SEEDS program on a human Mars lander and space station design project.
+                </li>
+                <li>
+                  Long-standing involvement in hands-on technical projects, from industrial design
+                  to high-precision cryogenic hardware.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" aria-labelledby="education-title">
+      <h2 id="education-title" class="section-title">Education</h2>
+      <div class="two-col">
+        <div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-title">PhD in Aerospace / Space Systems Engineering</div>
+              <div class="timeline-meta">Politecnico di Milano · Italy · YYYY–YYYY (ongoing)</div>
+              <div class="timeline-desc">
+                PhD project on
+                <em>“Advanced Power Supply Solutions for Large Infrastructures in Space”</em>,
+                focusing on digital twin–driven design and modeling of hybrid surface power architectures
+                for large-scale lunar and Martian infrastructures.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-title">MSc – Space Systems Engineering</div>
+              <div class="timeline-meta">ISAE-Supaero · France · YYYY–YYYY</div>
+              <div class="timeline-desc">
+                Specialized MSc in space systems engineering, including mission design, spacecraft
+                architecture, and advanced systems engineering methods. Participation in ESA-related
+                projects and student teams.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-title">Double MSc – Energy Engineering</div>
+              <div class="timeline-meta">Universidad Politécnica de Madrid (UPM) · Spain · YYYY–YYYY</div>
+              <div class="timeline-desc">
+                Focus on energy systems, modeling, and optimization, later leveraged toward
+                space power systems and microgrids.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-title">Diplôme d’ingénieur – Arts et Métiers ParisTech</div>
+              <div class="timeline-meta">Arts et Métiers · France · YYYY–YYYY</div>
+              <div class="timeline-desc">
+                General mechanical and industrial engineering education with strong emphasis on
+                structures, manufacturing, and hands-on engineering.
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-title">Classes Préparatoires – PCSI / PSI</div>
+              <div class="timeline-meta">France · YYYY–YYYY</div>
+              <div class="timeline-desc">
+                Intensive two-year preparation in mathematics, physics, and engineering for entrance
+                into French Grandes Écoles.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">International & ESA-linked Training</div>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li>SEEDS program with ESA partners (Mars lander and space station design).</li>
+                <li>Collaborations with Caltech, JPL, and international CMB/dark-matter consortia.</li>
+                <li>Academic trajectory spanning France, Spain, Italy, and the United States.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Suggested visuals</div>
+            </div>
+            <div class="card-body">
+              <p style="font-size: 13px; color: #666;">
+                You can add a small collage of campus or lab photos here
+                by inserting an <code>&lt;img&gt;</code> or a grid of images.
+                For example, create <code>assets/photos/campuses.jpg</code>
+                and include:
+              </p>
+              <pre style="font-size: 11px; background:#f6f6f7; padding:8px 10px; border-radius:10px; overflow-x:auto;">
+&lt;img src="assets/photos/campuses.jpg" alt="Campuses" style="width:100%; border-radius:16px;" /&gt;
+              </pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title" class="section-title">Selected Projects</h2>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Hybrid Surface Power Architectures for Lunar & Martian Infrastructures</div>
+            <div class="card-sub">PhD – Politecnico di Milano</div>
+          </div>
+          <div class="card-badge">In progress</div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li>Digital twin–driven design of hybrid power systems for large surface infrastructures.</li>
+            <li>Integration of microgrids, PMAD networks, advanced storage, and ISRU-based generation.</li>
+            <li>Study of robustness, scalability, and mission-level performance for off-world bases.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Cryogenic Detector Modules & Belleville Washer Stacks – BICEP Array</div>
+            <div class="card-sub">Research Assistant – Caltech</div>
+          </div>
+          <div class="card-badge">Cryogenics</div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li>Design and analysis of mechanical stacks to maintain controlled preload at cryogenic temperatures.</li>
+            <li>Interface design between detector wafers, modules, and cryostat structures.</li>
+            <li>Support to integration and testing of CMB detector hardware.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Dark Matter Detector Instrumentation</div>
+            <div class="card-sub">Research Assistant – Caltech</div>
+          </div>
+          <div class="card-badge">Instrumentation</div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li>Mechanical and thermal optimization of cryostat and fridge design for phonon-mediated detectors.</li>
+            <li>Support to MKID-based instruments and related optics structures.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Human Mars Lander & Station Design – SEEDS / ESA</div>
+            <div class="card-sub">Collaborative project with multiple European universities</div>
+          </div>
+          <div class="card-badge">Systems & Trajectories</div>
+        </div>
+        <div class="card-body">
+          <ul>
+            <li>Trajectory and architecture work for human Mars missions, including surface and orbital assets.</li>
+            <li>Study of inflatable EDL concepts and mission-level trade-offs.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title" class="section-title">Contact</h2>
+      <div class="two-col">
+        <div>
+          <p>
+            I am always happy to discuss collaborations at the intersection of
+            <strong>space systems engineering</strong>, <strong>cryogenic instrumentation</strong>,
+            and <strong>surface power systems</strong>, as well as mentoring and educational initiatives.
+          </p>
+          <p>
+            <!-- TODO: replace email with your real one -->
+            The easiest way to reach me is by email:
+            <a href="mailto:your.email@domain.com">your.email@domain.com</a>.
+          </p>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Quick links</div>
+            </div>
+            <div class="card-body">
+              <ul>
+                <li><a href="#top">Back to top</a></li>
+                <!-- TODO: replace with actual URLs if you want -->
+                <li><a href="#" target="_blank" rel="noopener">CV (PDF)</a></li>
+                <li><a href="#" target="_blank" rel="noopener">Google Scholar</a> (if applicable)</li>
+                <li><a href="#" target="_blank" rel="noopener">LinkedIn / ORCID</a> (optional)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Yann Sadou. Designed with a minimalist, Apple-inspired layout.
+    <br />
+    This site is hosted on GitHub Pages (<code>yannsadou.github.io</code>).
+  </footer>
+
+  <script>
+    // Update year automatically
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
