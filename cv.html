@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CV & Documents – Yann Sadou</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text",
+        "Helvetica Neue", Arial, sans-serif;
+      background: #ffffff;
+      color: #111;
+      -webkit-font-smoothing: antialiased;
+    }
+    header {
+      padding: 18px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .title {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .back-link {
+      font-size: 13px;
+      color: #555;
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1px solid #ddd;
+      padding: 6px 12px;
+      background: #fafafa;
+    }
+    .back-link:hover {
+      background: #f0f0f0;
+      text-decoration: none;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 20px 40px;
+      font-size: 14px;
+      color: #444;
+    }
+    .card {
+      border-radius: 18px;
+      border: 1px solid #eee;
+      padding: 16px 18px;
+      background: #fafafa;
+      margin-bottom: 20px;
+    }
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 15px;
+    }
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+    .btn {
+      border-radius: 999px;
+      padding: 7px 14px;
+      border: 1px solid #ddd;
+      font-size: 13px;
+      background: #ffffff;
+      color: #222;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn:hover {
+      background: #f0f0f0;
+      text-decoration: none;
+    }
+    .pdf-container {
+      margin-top: 20px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #eee;
+      background: #f8f8f8;
+    }
+    .pdf-container iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+    @media (max-width: 700px) {
+      .pdf-container iframe {
+        height: 420px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title">CV & Academic Documents</div>
+    <a class="back-link" href="index.html">← Back to main site</a>
+  </header>
+
+  <main>
+    <div class="card">
+      <div class="card-title">Curriculum Vitae (PDF)</div>
+      <p>
+        You can download or view my latest academic CV below. It summarizes
+        my education, research experience, technical skills, and selected projects.
+      </p>
+      <div class="button-row">
+        <!-- TODO: mets le bon chemin vers ton PDF -->
+        <a class="btn" href="assets/cv/Yann_Sadou_CV.pdf" target="_blank" rel="noopener">
+          View in browser
+        </a>
+        <a class="btn" href="assets/cv/Yann_Sadou_CV.pdf" download>
+          Download PDF
+        </a>
+      </div>
+    </div>
+
+    <div class="pdf-container">
+      <!-- TODO: même chemin que ci-dessus -->
+      <iframe src="assets/cv/Yann_Sadou_CV.pdf" title="Yann Sadou CV"></iframe>
+    </div>
+  </main>
+</body>
+</html>
