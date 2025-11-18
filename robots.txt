@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://yannsadou.github.io/sitemap.xml
