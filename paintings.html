@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Art & Paintings – Yann Sadou</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text",
+        "Helvetica Neue", Arial, sans-serif;
+      background: #ffffff;
+      color: #111;
+      -webkit-font-smoothing: antialiased;
+    }
+    header {
+      padding: 18px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .title {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: #777;
+      margin-top: 2px;
+    }
+    .back-link {
+      font-size: 13px;
+      color: #555;
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1px solid #ddd;
+      padding: 6px 12px;
+      background: #fafafa;
+    }
+    .back-link:hover {
+      background: #f0f0f0;
+      text-decoration: none;
+    }
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 24px 20px 40px;
+    }
+    p {
+      font-size: 14px;
+      color: #444;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+    .card {
+      border-radius: 18px;
+      border: 1px solid #eee;
+      overflow: hidden;
+      background: #fafafa;
+      display: flex;
+      flex-direction: column;
+    }
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+    .card-body {
+      padding: 10px 12px 12px;
+      font-size: 13px;
+      color: #444;
+    }
+    .card-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .card-meta {
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <div class="title">Art & Paintings</div>
+      <div class="subtitle">Personal projects & visual experiments</div>
+    </div>
+    <a class="back-link" href="index.html">← Back to main site</a>
+  </header>
+
+  <main>
+    <p>
+      Beyond engineering and research, I enjoy creating visual work — paintings and
+      personal projects that explore color, composition, and sometimes science-inspired themes.
+      This page showcases a selection of those pieces.
+    </p>
+
+    <div class="grid">
+      <!-- Exemple de carte, dupliques et remplaces les chemins / titres -->
+      <div class="card">
+        <!-- TODO: remplace par une vraie image, ex: assets/paintings/painting-1.jpg -->
+        <!-- <img src="assets/paintings/painting-1.jpg" alt="Painting 1" /> -->
+        <div style="height:220px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:12px;">
+          Drop painting-1.jpg here
+        </div>
+        <div class="card-body">
+          <div class="card-title">Title of painting #1</div>
+          <div class="card-meta">Medium · Year</div>
+          <div>
+            Short description of the piece, context, or what you explored with it.
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <!-- <img src="assets/paintings/painting-2.jpg" alt="Painting 2" /> -->
+        <div style="height:220px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:12px;">
+          Drop painting-2.jpg here
+        </div>
+        <div class="card-body">
+          <div class="card-title">Title of painting #2</div>
+          <div class="card-meta">Medium · Year</div>
+          <div>
+            Another example piece. You can keep this very minimal or add more narrative.
+          </div>
+        </div>
+      </div>
+
+      <!-- Tu peux copier/coller ce bloc pour ajouter autant de peintures que tu veux -->
+    </div>
+  </main>
+</body>
+</html>
