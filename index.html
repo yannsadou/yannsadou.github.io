@@ -402,7 +402,7 @@
       border-radius: 18px;
       overflow: hidden;
       background: #ddd;
-      aspect-ratio: 4 / 3;
+      /*aspect-ratio: 4 / 3;*/
       display: flex;
       align-items: center;
       justify-content: center;
@@ -414,7 +414,7 @@
 
     .hero-photo-frame img {
       width: 100%;
-      height: 100%;
+      height: auto;
       object-fit: cover;
       display: block;
     }
@@ -734,11 +734,9 @@
           <div class="hero-photo-frame">
             <!-- TODO: remplace par ton image, ex: assets/photos/portrait.jpg -->
             <img src="assets/photos/IMG_2315.HEIC" alt="Yann Sadou" />
-            Drop a portrait or lab photo here (replace this box with an &lt;img&gt; tag).
           </div>
           <div class="hero-photo-caption">
-            Suggested: a clean portrait or a lab photo (cryostat, clean room, telescope, etc.)
-            sized around 1600×1200 and saved as <code>assets/photos/portrait.jpg</code>.
+            Selfie taken in front of the NASA JPL campus center
           </div>
           <div class="hero-tags">
             <span class="tag">Cryogenic Detectors</span>
