@@ -537,6 +537,21 @@
       margin-bottom: 4px;
     }
 
+    .card-photo {
+      width: 200px;              /* adjust size */
+      height: 200px;
+      border-radius: 14px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .card-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
     /* TIMELINES */
 
     .timeline {
@@ -859,6 +874,9 @@
                 <li>Multi-physics simulation of mission-scale energy flows and load profiles.</li>
                 <li>Optimization of autonomy, reliability and fault-tolerance of surface infrastructures.</li>
               </ul>
+            </div>
+            <div class="card-photo">
+              <img src="assets/logo/nasajpl.png" alt="NASAJPL logo" />
             </div>
           </div>
 
