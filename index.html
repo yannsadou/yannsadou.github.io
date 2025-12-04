@@ -633,6 +633,81 @@
     html {
       scroll-behavior: smooth;
     }
+
+    /* ---- THEY SPEAK ABOUT ME (IFRAME VERSION) ---- */
+
+    #they-speak-about-me {
+      padding: 60px 0;
+    }
+
+    #they-speak-about-me .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    #they-speak-about-me .section-subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 0.98rem;
+    }
+
+    .embed-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    .embed-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+      padding: 16px 16px 18px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .embed-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .embed-badge {
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #eef2ff;
+      color: #4f46e5;
+      font-weight: 600;
+    }
+
+    .embed-link {
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: #2563eb;
+    }
+
+    .embed-link:hover {
+      text-decoration: underline;
+    }
+
+    .embed-frame-wrapper {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f5f5f7;
+    }
+
+    /* Format “preview”, pas pleine hauteur */
+    .embed-frame {
+      width: 100%;
+      height: 260px; /* ajuste si tu veux plus/moins de contenu visible */
+      border: none;
+    }
   </style>
 </head>
 <body>
@@ -1252,6 +1327,54 @@
         </div>
       </div>
     </section>
+
+    <section id="they-speak-about-me" class="section">
+    <div class="container">
+    <h2 class="section-title">They Speak About Me</h2>
+
+    <p class="section-subtitle">
+      A selection of media appearances and interviews.
+    </p>
+
+    <div class="embed-grid">
+      <!-- Interview 1 -->
+      <div class="embed-card">
+        <div class="embed-header">
+          <span class="embed-badge">Interview</span>
+          <a href="https://URL_OF_INTERVIEW_1" target="_blank" class="embed-link">
+            Open article ↗
+          </a>
+        </div>
+        <div class="embed-frame-wrapper">
+          <iframe
+            src="https://URL_OF_INTERVIEW_1"
+            loading="lazy"
+            class="embed-frame"
+            title="Interview 1">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Interview 2 -->
+      <div class="embed-card">
+        <div class="embed-header">
+          <span class="embed-badge">Interview</span>
+          <a href="https://URL_OF_INTERVIEW_2" target="_blank" class="embed-link">
+            Open article ↗
+          </a>
+        </div>
+        <div class="embed-frame-wrapper">
+          <iframe
+            src="https://URL_OF_INTERVIEW_2"
+            loading="lazy"
+            class="embed-frame"
+              title="Interview 2">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
     <!-- CONTACT -->
     <section id="contact" aria-labelledby="contact-title">
