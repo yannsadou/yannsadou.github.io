@@ -4,104 +4,227 @@
   <meta charset="UTF-8" />
   <title>CV & Documents – Yann Sadou</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
-    body {
+    /* =========================================================
+       STAR BACKGROUND (canvas)
+    ========================================================= */
+    #stars{
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Put content above stars */
+    header, main{
+      position: relative;
+      z-index: 1;
+    }
+
+    /* =========================================================
+       THEME
+    ========================================================= */
+    :root{
+      --fg: rgba(255,255,255,0.92);
+      --fg-soft: rgba(255,255,255,0.70);
+      --border-soft: rgba(255,255,255,0.14);
+      --shadow-strong: 0 18px 60px rgba(0,0,0,0.30);
+      --radius-xl: 18px;
+      --max-width: 1400px;
+      --accent: #7cc7ff;
+    }
+
+    *{ box-sizing: border-box; }
+
+    body{
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text",
         "Helvetica Neue", Arial, sans-serif;
-      background: #ffffff;
-      color: #111;
+      background: transparent; /* let stars show */
+      color: var(--fg);
       -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
-    header {
+
+    a{ color: var(--accent); text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+    header{
       padding: 18px 20px;
-      border-bottom: 1px solid #eee;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 1400px;
+
+      max-width: var(--max-width);
       margin: 0 auto;
+
+      /* subtle glass bar */
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      backdrop-filter: blur(16px);
+      background: rgba(255,255,255,0.04);
     }
-    .title {
+
+    .title{
       font-size: 24px;
-      font-weight: 600;
+      font-weight: 650;
       letter-spacing: -0.02em;
     }
-    .back-link {
+
+    .back-link{
       font-size: 13px;
-      color: #555;
+      color: rgba(255,255,255,0.86);
       text-decoration: none;
       border-radius: 999px;
-      border: 1px solid #ddd;
+      border: 1px solid rgba(255,255,255,0.18);
       padding: 6px 12px;
-      background: #fafafa;
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(10px);
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
     }
-    .back-link:hover {
-      background: #f0f0f0;
+    .back-link:hover{
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(124,199,255,0.22);
+      transform: translateY(-1px);
       text-decoration: none;
     }
-    main {
-      max-width: 1400px;
+
+    /* =========================================================
+       MAIN
+    ========================================================= */
+    main{
+      max-width: var(--max-width);
       margin: 0 auto;
       padding: 24px 20px 40px;
       font-size: 14px;
-      color: #444;
+      color: var(--fg-soft);
     }
-    .card {
-      border-radius: 18px;
-      border: 1px solid #eee;
+
+    /* =========================================================
+       GLASS CARDS (same vibe as index)
+    ========================================================= */
+    .card{
+      border-radius: var(--radius-xl);
       padding: 16px 18px;
-      background: #fafafa;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
+
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(16px);
+
+      box-shadow: var(--shadow-strong),
+        inset 0 1px 0 rgba(255,255,255,0.10);
+
+      position: relative;
+      overflow: hidden;
     }
-    .card-title {
-      font-weight: 600;
-      margin-bottom: 4px;
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 260px at 18% 0%, rgba(124,199,255,0.12), transparent 60%),
+        radial-gradient(650px 240px at 85% 0%, rgba(255,255,255,0.07), transparent 55%);
+      pointer-events:none;
+      opacity: 0.85;
+    }
+
+    .card-title{
+      position: relative;
+      font-weight: 650;
+      margin-bottom: 6px;
       font-size: 15px;
+      color: rgba(255,255,255,0.92);
     }
-    .button-row {
+
+    .card p{
+      position: relative;
+      margin: 0;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       BUTTONS (keep Apple-ish, but readable on dark)
+    ========================================================= */
+    .button-row{
+      position: relative;
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 8px;
-      margin-bottom: 4px;
+      margin-top: 10px;
+      margin-bottom: 2px;
     }
-    .btn {
+
+    .btn{
       border-radius: 999px;
-      padding: 7px 14px;
-      border: 1px solid #ddd;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,0.18);
       font-size: 13px;
-      background: #ffffff;
-      color: #222;
+
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.88);
       text-decoration: none;
+
       display: inline-flex;
       align-items: center;
       gap: 6px;
+
+      backdrop-filter: blur(12px);
+
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
     }
-    .btn:hover {
-      background: #f0f0f0;
+
+    .btn:hover{
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(124,199,255,0.22);
+      transform: translateY(-1px);
       text-decoration: none;
     }
-    .pdf-container {
-      margin-top: 20px;
+
+    /* =========================================================
+       PDF FRAME (same frame vibe)
+    ========================================================= */
+    .pdf-container{
       border-radius: 16px;
       overflow: hidden;
-      border: 1px solid #eee;
-      background: #f8f8f8;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow-strong), inset 0 1px 0 rgba(255,255,255,0.08);
     }
-    .pdf-container iframe {
+
+    .pdf-container iframe{
       width: 100%;
-      height: 600px;
+      height: 650px;
       border: none;
+      display: block;
+      background: transparent;
     }
-    @media (max-width: 700px) {
-      .pdf-container iframe {
-        height: 420px;
-      }
+
+    @media (max-width: 700px){
+      .pdf-container iframe{ height: 440px; }
+      header{ gap: 12px; }
+      .title{ font-size: 20px; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .btn, .back-link{ transition: none; }
+      .btn:hover, .back-link:hover{ transform: none; }
     }
   </style>
 </head>
+
 <body>
+  <!-- STARS -->
+  <canvas id="stars" aria-hidden="true"></canvas>
+
   <header>
     <div class="title">CV & Academic Documents</div>
     <a class="back-link" href="index.html">← Back to main site</a>
@@ -114,8 +237,8 @@
         You can download or view my latest academic CV below. It summarizes
         my education, research experience, technical skills, and selected projects.
       </p>
+
       <div class="button-row">
-        <!-- TODO: mets le bon chemin vers ton PDF -->
         <a class="btn" href="assets/cv/CV Yann Sadou.pdf" target="_blank" rel="noopener">
           View in browser
         </a>
@@ -126,9 +249,11 @@
     </div>
 
     <div class="pdf-container">
-      <!-- TODO: même chemin que ci-dessus -->
       <iframe src="assets/cv/CV Yann Sadou.pdf" title="Yann Sadou CV"></iframe>
     </div>
   </main>
+
+  <!-- stars.js must be reachable from this page -->
+  <script src="stars.js"></script>
 </body>
 </html>
