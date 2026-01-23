@@ -4,95 +4,293 @@
   <meta charset="UTF-8" />
   <title>Art & Paintings – Yann Sadou</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+
   <style>
-    body {
+    /* ---- Page theme (sits nicely on the starry background) ---- */
+    :root{
+      --glass: rgba(255,255,255,0.08);
+      --glass2: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.14);
+      --txt: rgba(255,255,255,0.92);
+      --txt2: rgba(255,255,255,0.72);
+      --shadow: 0 18px 60px rgba(0,0,0,0.38);
+      --radius: 18px;
+      --max: 1400px;
+    }
+
+    body{
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text",
-        "Helvetica Neue", Arial, sans-serif;
-      background: #ffffff;
-      color: #111;
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text","Helvetica Neue", Arial, sans-serif;
+      color: var(--txt);
+      background: transparent; /* important: stars canvas stays visible */
       -webkit-font-smoothing: antialiased;
     }
-    header {
-      padding: 18px 20px;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1400px;
+
+    /* content above stars */
+    header, main, footer{ position: relative; z-index: 1; }
+
+    header{
+      max-width: var(--max);
       margin: 0 auto;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
     }
-    .title {
-      font-size: 24px;
-      font-weight: 600;
+
+    .title{
+      font-size: 26px;
+      font-weight: 800;
       letter-spacing: -0.02em;
+      line-height: 1.05;
+      text-shadow: 0 0 22px rgba(124,199,255,0.14);
     }
-    .subtitle {
+
+    .subtitle{
+      margin-top: 4px;
       font-size: 13px;
-      color: #777;
-      margin-top: 2px;
+      color: var(--txt2);
     }
-    .back-link {
+
+    .back-link{
       font-size: 13px;
-      color: #555;
+      color: rgba(255,255,255,0.88);
       text-decoration: none;
       border-radius: 999px;
-      border: 1px solid #ddd;
-      padding: 6px 12px;
-      background: #fafafa;
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      background: var(--glass2);
+      backdrop-filter: blur(14px);
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+      white-space: nowrap;
     }
-    .back-link:hover {
-      background: #f0f0f0;
+    .back-link:hover{
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.22);
+      transform: translateY(-1px);
       text-decoration: none;
     }
-    main {
-      max-width: 1400px;
+
+    main{
+      max-width: var(--max);
       margin: 0 auto;
-      padding: 24px 20px 40px;
+      padding: 6px 20px 46px;
     }
-    p {
-      font-size: 14px;
-      color: #444;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-      gap: 18px;
-      margin-top: 20px;
-    }
-    .card {
-      border-radius: 18px;
-      border: 1px solid #eee;
+
+    /* ---- Intro block ---- */
+    .intro{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      padding: 16px 16px 14px;
       overflow: hidden;
-      background: #fafafa;
-      display: flex;
-      flex-direction: column;
+      position: relative;
     }
-    .card img {
+
+    .intro::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(800px 260px at 20% 10%, rgba(124,199,255,0.16), transparent 60%),
+                  radial-gradient(700px 280px at 80% 0%, rgba(255,255,255,0.10), transparent 55%);
+      pointer-events:none;
+    }
+
+    .intro h1{
+      margin: 0;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      position: relative;
+    }
+
+    .intro p{
+      margin: 10px 0 0;
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.80);
+      max-width: 1040px;
+      position: relative;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top: 12px;
+      position: relative;
+    }
+
+    .chip{
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.78);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ---- Grid ---- */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    /* ---- Painting Card ---- */
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 16px 46px rgba(0,0,0,0.34);
+      overflow: hidden;
+      display:flex;
+      flex-direction:column;
+
+      opacity: 0;
+      transform: translateY(10px);
+      transition: transform 650ms ease, opacity 650ms ease, border-color 200ms ease;
+      will-change: transform;
+    }
+    .card.reveal{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .media{
+      height: 340px;
+      position: relative;
+      overflow: hidden;
+      cursor: zoom-in;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .media img{
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
+      transform: scale(1);
+      transition: transform 420ms ease;
+      display:block;
     }
-    .card-body {
-      padding: 10px 12px 12px;
-      font-size: 30px;
-      color: #444;
+
+    /* fancy overlay */
+    .media::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(to top, rgba(0,0,0,0.60), rgba(0,0,0,0) 62%);
+      opacity: 0.35;
+      transition: opacity 250ms ease;
+      pointer-events:none;
     }
-    .card-title {
-      font-weight: 600;
-      margin-bottom: 2px;
-      text-align: center;
+
+    /* hover zoom */
+    .card:hover .media img{ transform: scale(1.07); }
+    .card:hover .media::after{ opacity: 0.55; }
+    .card:hover{ border-color: rgba(124,199,255,0.30); }
+
+    /* tilt effect (applied via JS) */
+    .card.tilt{
+      transition: transform 120ms ease, border-color 200ms ease, box-shadow 200ms ease;
     }
-    .card-meta {
-      font-size: 11px;
-      color: #888;
-      margin-bottom: 4px;
-      text-align: center;
+
+    .card-body{
+      padding: 12px 14px 14px;
+    }
+
+    .card-title{
+      text-align:center;
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+      margin: 0 0 2px;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .card-meta{
+      text-align:center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.62);
+      margin-bottom: 8px;
+    }
+
+    .card-desc{
+      font-size: 13px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.6;
+    }
+
+    /* ---- Lightbox ---- */
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      display:none;
+      z-index: 999;
+      background: rgba(0,0,0,0.74);
+      backdrop-filter: blur(10px);
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+    }
+    .lightbox.open{ display:flex; }
+
+    .lightbox-inner{
+      width: min(1100px, 96vw);
+      max-height: 86vh;
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      box-shadow: 0 20px 80px rgba(0,0,0,0.48);
+    }
+
+    .lightbox-img{
+      width: 100%;
+      height: 100%;
+      max-height: 86vh;
+      object-fit: contain;
+      background: rgba(0,0,0,0.22);
+      display:block;
+    }
+
+    .lightbox-close{
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 1000;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.92);
+      padding: 8px 12px;
+      cursor:pointer;
+      transition: transform 180ms ease, background 180ms ease;
+    }
+    .lightbox-close:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.12);
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .card, .media img, .back-link{ transition: none; }
+      .card.tilt{ transition:none; }
     }
   </style>
 </head>
+
 <body>
+  <!-- Put canvas in BODY (you already discovered this ✅) -->
+  <canvas id="stars" aria-hidden="true"></canvas>
+
   <header>
     <div>
       <div class="title">Art & Paintings</div>
@@ -102,110 +300,192 @@
   </header>
 
   <main>
-    <p>
-      Beyond engineering and research, I enjoy creating visual work — paintings and
-      personal projects that explore color, composition, and sometimes science-inspired themes.
-      This page showcases a selection of those pieces.
-    </p>
+    <div class="intro">
+      <h1>A small gallery of my visual work</h1>
+      <p>
+        Beyond engineering and research, I enjoy creating visual pieces—digital paintings and small personal projects—
+        exploring color, composition, and sometimes science-inspired themes. This page is a curated selection of my work.
+        <strong>Click any piece</strong> to view it larger.
+      </p>
+      <div class="chips">
+        <span class="chip">Digital painting</span>
+        <span class="chip">Procreate</span>
+        <span class="chip">Space-inspired</span>
+        <span class="chip">Personal projects</span>
+      </div>
+    </div>
 
     <div class="grid">
-      <!-- Exemple de carte, dupliques et remplaces les chemins / titres -->
+      <!-- CARD 1 -->
       <div class="card">
-        <!-- TODO: remplace par une vraie image, ex: assets/paintings/painting-1.jpg -->
-        <img src="assets/paintings/Astronaut.png" alt="Astronaut" />
-        <div style="height:220px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:12px;">
+        <div class="media">
+          <img src="assets/paintings/Astronaut.png" alt="Astronaut" />
         </div>
         <div class="card-body">
-          <div class="card-title">Title of painting #1</div>
-          <div class="card-meta">Medium · Year</div>
-          <div>
-            My most recent painting, I wanted to represent my dream to become an astronaut one day. I have always had this hunger of discovering the mysteries
-            behind the cosmos.  
+          <div class="card-title">Astronaut</div>
+          <div class="card-meta">Digital · Year</div>
+          <div class="card-desc">
+            My most recent painting—an homage to my dream of becoming an astronaut and my fascination for the cosmos.
           </div>
         </div>
       </div>
 
+      <!-- CARD 2 -->
       <div class="card">
-        <img src="assets/paintings/Universe.png" alt="Universe" />
-        <div style="height:220px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:12px;">
+        <div class="media">
+          <img src="assets/paintings/Universe.png" alt="Universe" />
         </div>
         <div class="card-body">
-          <div class="card-title">Title of painting #2</div>
-          <div class="card-meta">Medium · Year</div>
-          <div>
-            Another example piece. I wanted to show the fascination I have for the Universe through 
-            the image of this cat spending hours watching our solar system.
+          <div class="card-title">Universe</div>
+          <div class="card-meta">Digital · Year</div>
+          <div class="card-desc">
+            A playful scene: a cat spending hours watching our solar system—my way of expressing awe for the Universe.
           </div>
         </div>
       </div>
 
+      <!-- CARD 3 -->
       <div class="card">
-        <img src="assets/paintings/Lighthouse.png" alt="Lighthouse" />
-        <div style="height:220px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:12px;">
+        <div class="media">
+          <img src="assets/paintings/Lighthouse.png" alt="Lighthouse" />
         </div>
         <div class="card-body">
-          <div class="card-title">Title of painting #2</div>
-          <div class="card-meta">Medium · Year</div>
-          <div>
-            My most romantic paint, displaying a lighthouse and the contrast between the light coming from it and the sun shining through the horizon. 
+          <div class="card-title">Lighthouse</div>
+          <div class="card-meta">Digital · Year</div>
+          <div class="card-desc">
+            A romantic contrast between a lighthouse’s beam and the last sunlight on the horizon.
           </div>
         </div>
       </div>
 
+      <!-- CARD 4 -->
       <div class="card">
-        <img src="assets/paintings/Iris.png" alt="Iris" />
-        <div style="height:220px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:12px;">
+        <div class="media">
+          <img src="assets/paintings/Iris.png" alt="Iris" />
         </div>
         <div class="card-body">
-          <div class="card-title">Title of painting #2</div>
-          <div class="card-meta">Medium · Year</div>
-          <div>
-            I have always been fascinated by eyes, you can sometimes feel like you could read people's soul just by looking right in their eyes.
+          <div class="card-title">Iris</div>
+          <div class="card-meta">Digital · Year</div>
+          <div class="card-desc">
+            I’ve always been fascinated by eyes—the feeling that you can read a soul just by looking closely.
           </div>
         </div>
       </div>
 
+      <!-- CARD 5 -->
       <div class="card">
-        <img src="assets/paintings/Cat.png" alt="Cat" />
-        <div style="height:220px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:12px;">
+        <div class="media">
+          <img src="assets/paintings/Cat.png" alt="Cat" />
         </div>
         <div class="card-body">
-          <div class="card-title">Title of painting #2</div>
-          <div class="card-meta">Medium · Year</div>
-          <div>
-            Back in my hometown in France I remember my cats loving to play with these toilet paper rolls.
+          <div class="card-title">Cat</div>
+          <div class="card-meta">Digital · Year</div>
+          <div class="card-desc">
+            A memory from my hometown: my cats endlessly playing with toilet paper rolls.
           </div>
         </div>
       </div>
 
+      <!-- CARD 6 -->
       <div class="card">
-        <img src="assets/paintings/Mountains.png" alt="Mountains" />
-        <div style="height:220px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:12px;">
+        <div class="media">
+          <img src="assets/paintings/Mountains.png" alt="Mountains" />
         </div>
         <div class="card-body">
-          <div class="card-title">Title of painting #2</div>
-          <div class="card-meta">Medium · Year</div>
-          <div>
-            Being born in the Pyrenées in France, I have always felt connected to the nature. Mountains are beautiful companions during starry nights.
+          <div class="card-title">Mountains</div>
+          <div class="card-meta">Digital · Year</div>
+          <div class="card-desc">
+            Born in the Pyrenees, I’ve always felt connected to nature—mountains under a starry night feel like home.
           </div>
         </div>
       </div>
 
+      <!-- CARD 7 -->
       <div class="card">
-        <img src="assets/paintings/Galaxy.png" alt="Galaxy" />
-        <div style="height:220px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:12px;">
+        <div class="media">
+          <img src="assets/paintings/Galaxy.png" alt="Galaxy" />
         </div>
         <div class="card-body">
-          <div class="card-title">Title of painting #2</div>
-          <div class="card-meta">Medium · Year</div>
-          <div>
-            My very first paint, trying the capture the beauty of our galaxy in a clear nightsky.
+          <div class="card-title">Galaxy</div>
+          <div class="card-meta">Digital · Year</div>
+          <div class="card-desc">
+            My very first painting—trying to capture the beauty of our galaxy on a clear night sky.
           </div>
         </div>
       </div>
-
-      <!-- Tu peux copier/coller ce bloc pour ajouter autant de peintures que tu veux -->
     </div>
   </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" type="button">Close ✕</button>
+    <div class="lightbox-inner">
+      <img class="lightbox-img" id="lightboxImg" alt="Expanded artwork" />
+    </div>
+  </div>
+
+  <script src="stars.js"></script>
+
+  <script>
+    /* --- Reveal on scroll --- */
+    const cards = Array.from(document.querySelectorAll(".card"));
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) e.target.classList.add("reveal");
+      }
+    }, { threshold: 0.10 });
+    cards.forEach(c => io.observe(c));
+
+    /* --- Lightbox --- */
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const closeBtn = document.getElementById("lightboxClose");
+
+    function openLightbox(src, alt){
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || "Artwork";
+      lightbox.classList.add("open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+    function closeLightbox(){
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden", "true");
+      lightboxImg.src = "";
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(".media img").forEach(img => {
+      img.addEventListener("click", () => openLightbox(img.src, img.alt));
+    });
+
+    closeBtn.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
+
+    /* --- Fancy tilt on hover (desktop) --- */
+    const supportsHover = window.matchMedia("(hover:hover)").matches;
+    if (supportsHover){
+      cards.forEach(card => {
+        card.classList.add("tilt");
+        const strength = 7; // degrees
+
+        card.addEventListener("mousemove", (e) => {
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width;
+          const py = (e.clientY - r.top) / r.height;
+
+          const rx = (0.5 - py) * strength;
+          const ry = (px - 0.5) * strength;
+
+          card.style.transform = `translateY(0) rotateX(${rx}deg) rotateY(${ry}deg)`;
+        });
+
+        card.addEventListener("mouseleave", () => {
+          card.style.transform = "";
+        });
+      });
+    }
+  </script>
 </body>
 </html>
