@@ -1,198 +1,347 @@
-// projects.js
-const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Projects — Yann Sadou</title>
+  <meta name="description" content="Selected projects — surface power architectures for Moon & Mars, BICEP Array instrumentation at the South Pole, dark-matter detector cryogenic systems, and ESA SEEDS mission concept work." />
 
-/* ---------------------------
-   Scroll progress bar
----------------------------- */
-const progressBar = document.getElementById('progressBar');
-function updateProgress(){
-  const doc = document.documentElement;
-  const scrollTop = doc.scrollTop || document.body.scrollTop;
-  const scrollHeight = doc.scrollHeight - doc.clientHeight;
-  const p = scrollHeight > 0 ? (scrollTop / scrollHeight) : 0;
-  progressBar.style.width = (p * 100).toFixed(2) + '%';
-}
+  <link rel="stylesheet" href="style_test.css" />
+</head>
 
-/* ---------------------------
-   Reveal on scroll
----------------------------- */
-function initReveal(){
-  const els = document.querySelectorAll('.reveal');
-  if (prefersReduced){
-    els.forEach(el => el.classList.add('is-in'));
-    return;
-  }
-  const io = new IntersectionObserver((entries) => {
-    for (const e of entries){
-      if (e.isIntersecting) e.target.classList.add('is-in');
-    }
-  }, { threshold: 0.14 });
-  els.forEach(el => io.observe(el));
-}
+<body>
+  <!-- Scroll progress -->
+  <div class="progress" aria-hidden="true"><div class="progress__bar" id="progressBar"></div></div>
 
-/* ---------------------------
-   Hero parallax (mouse + scroll)
----------------------------- */
-function initHeroParallax(){
-  const hero = document.querySelector('.hero');
-  if (!hero || prefersReduced) return;
+  <!-- Background starfield canvas -->
+  <canvas id="stars" aria-hidden="true"></canvas>
 
-  const layers = hero.querySelectorAll('.hero__layer');
-  let mx = 0, my = 0, sy = 0;
-  let raf = null;
+  <!-- Top Nav -->
+  <header class="top">
+    <a class="brand" href="index.html" aria-label="Back to home">
+      <span class="brand__dot"></span>
+      <span class="brand__name">Yann Sadou</span>
+    </a>
 
-  function apply(){
-    raf = null;
-    layers.forEach((layer, i) => {
-      const depth = (i + 1) * 0.012;
-      const scrollDepth = (i + 1) * 0.06;
-      layer.style.transform = `translate3d(${mx * depth}px, ${my * depth + sy * scrollDepth}px, 0)`;
-    });
-  }
+    <nav class="nav">
+      <a href="#surface-power">Surface Power</a>
+      <a href="#bicep">BICEP Array</a>
+      <a href="#dark-matter">Dark Matter</a>
+      <a href="#seeds">ESA SEEDS</a>
+      <a class="nav__pill" href="index.html">Home</a>
+    </nav>
+  </header>
 
-  window.addEventListener('mousemove', (e) => {
-    const r = hero.getBoundingClientRect();
-    const cx = r.left + r.width / 2;
-    const cy = r.top + r.height / 2;
-    mx = (e.clientX - cx) * 0.6;
-    my = (e.clientY - cy) * 0.5;
-    if (!raf) raf = requestAnimationFrame(apply);
-  }, { passive: true });
+  <!-- HERO (mouse + scroll parallax) -->
+  <section class="hero" id="top">
+    <div class="hero__layers" aria-hidden="true">
+      <div class="hero__layer hero__layer--img" style="--bg:url('assets/projects/hero_orion.jpg');"></div>
+      <div class="hero__layer hero__layer--vignette"></div>
+      <div class="hero__layer hero__layer--glow"></div>
+      <div class="hero__layer hero__layer--grid"></div>
+    </div>
 
-  window.addEventListener('scroll', () => {
-    sy = window.scrollY * -0.02;
-    if (!raf) raf = requestAnimationFrame(apply);
-  }, { passive: true });
-}
+    <div class="wrap hero__content">
+      <p class="kicker reveal">Selected Projects</p>
 
-/* ---------------------------
-   Scene background parallax (blurred backdrop)
----------------------------- */
-function initSceneParallax(){
-  const scenes = document.querySelectorAll('.scene__bg');
-  if (prefersReduced || scenes.length === 0) return;
+      <h1 class="hero__title reveal">
+        Engineering that moves from
+        <span class="accent">architecture → hardware → verification</span>
+        in extreme environments.
+      </h1>
 
-  function tick(){
-    const y = window.scrollY || 0;
-    scenes.forEach((bg) => {
-      const r = bg.parentElement.getBoundingClientRect();
-      const center = r.top + r.height / 2;
-      const t = (center - window.innerHeight / 2) / window.innerHeight; // -1..+1
-      bg.style.transform = `translate3d(0, ${t * 18}px, 0) scale(1.08)`;
-    });
-  }
-  window.addEventListener('scroll', tick, { passive: true });
-  tick();
-}
+      <p class="hero__lead reveal">
+        A cinematic overview of my main projects: digital-twin-driven surface power infrastructures
+        for Moon & Mars, South Pole instrument integration and readiness verification, and mission
+        concept studies shaped by heritage systems like ISS, Orion, and Artemis.
+      </p>
 
-/* ---------------------------
-   Tilt effect (cards/images)
----------------------------- */
-function initTilt(){
-  const items = document.querySelectorAll('[data-tilt]');
-  if (prefersReduced || items.length === 0) return;
+      <div class="hero__cta reveal">
+        <a class="btn btn--primary" href="#surface-power">Enter projects</a>
+        <a class="btn btn--ghost" href="index.html">Back to home</a>
+      </div>
 
-  items.forEach((el) => {
-    let raf = null;
-    let rx = 0, ry = 0;
+      <div class="hero__mini reveal">
+        <div class="mini">
+          <div class="mini__n">4</div>
+          <div class="mini__t">Flagship tracks</div>
+        </div>
+        <div class="mini">
+          <div class="mini__n">∞</div>
+          <div class="mini__t">Coupled constraints</div>
+        </div>
+        <div class="mini">
+          <div class="mini__n">↯</div>
+          <div class="mini__t">Systems thinking</div>
+        </div>
+      </div>
+    </div>
 
-    function apply(){
-      raf = null;
-      el.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
-    }
+    <a class="scrollhint" href="#surface-power" aria-label="Scroll to projects">
+      <span class="scrollhint__wheel"></span>
+    </a>
+  </section>
 
-    el.addEventListener('mousemove', (e) => {
-      const r = el.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width;  // 0..1
-      const py = (e.clientY - r.top) / r.height;  // 0..1
-      ry = (px - 0.5) * 10;   // rotateY
-      rx = -(py - 0.5) * 8;   // rotateX
-      if (!raf) raf = requestAnimationFrame(apply);
-    }, { passive: true });
+  <!-- Gallery strip (horizontal, parallax-ish) -->
+  <section class="wrap strip">
+    <h2 class="section-title reveal">A quick visual index</h2>
 
-    el.addEventListener('mouseleave', () => {
-      rx = 0; ry = 0;
-      if (!raf) raf = requestAnimationFrame(apply);
-    });
-  });
-}
+    <div class="strip__rail" id="rail">
+      <a class="tile reveal tilt" href="#surface-power" data-tilt>
+        <img src="assets/projects/lunar_power.jpg" alt="Lunar surface power concept" />
+        <div class="tile__overlay">
+          <div class="tile__title">Surface Power</div>
+          <div class="tile__sub">Digital twin microgrids</div>
+        </div>
+      </a>
 
-/* ---------------------------
-   Starfield canvas (impressive but light)
----------------------------- */
-function initStars(){
-  const canvas = document.getElementById('stars');
-  if (!canvas) return;
+      <a class="tile reveal tilt" href="#bicep" data-tilt>
+        <img src="assets/projects/bicep_southpole.jpg" alt="BICEP telescope context at the South Pole" />
+        <div class="tile__overlay">
+          <div class="tile__title">BICEP Array</div>
+          <div class="tile__sub">I&amp;T + readiness</div>
+        </div>
+      </a>
 
-  const ctx = canvas.getContext('2d', { alpha: true });
-  let w = 0, h = 0, dpr = 1;
-  let stars = [];
-  const N = 240;
+      <a class="tile reveal tilt" href="#dark-matter" data-tilt>
+        <img src="assets/projects/jwst_cryochamber.jpg" alt="Cryogenic integration & test chamber context" />
+        <div class="tile__overlay">
+          <div class="tile__title">Cryogenic Systems</div>
+          <div class="tile__sub">Thermal + mechanical</div>
+        </div>
+      </a>
 
-  function resize(){
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = Math.floor(window.innerWidth * dpr);
-    h = Math.floor(window.innerHeight * dpr);
-    canvas.width = w;
-    canvas.height = h;
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
+      <a class="tile reveal tilt" href="#seeds" data-tilt>
+        <img src="assets/projects/mars_hiad.jpg" alt="Inflatable decelerator concept for Mars EDL" />
+        <div class="tile__overlay">
+          <div class="tile__title">ESA SEEDS</div>
+          <div class="tile__sub">Trajectories + EDL</div>
+        </div>
+      </a>
 
-    stars = Array.from({ length: N }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      z: Math.random() * 1 + 0.2,           // brightness
-      r: Math.random() * 1.6 + 0.2,         // radius
-      vx: (Math.random() - 0.5) * 0.10,     // drift
-      vy: (Math.random() - 0.5) * 0.08
-    }));
-  }
+      <a class="tile reveal tilt" href="#surface-power" data-tilt>
+        <img src="assets/projects/iss_solar.jpg" alt="ISS solar arrays" />
+        <div class="tile__overlay">
+          <div class="tile__title">Heritage</div>
+          <div class="tile__sub">ISS / Orion / Artemis</div>
+        </div>
+      </a>
+    </div>
+  </section>
 
-  function draw(){
-    ctx.clearRect(0,0,w,h);
+  <!-- PROJECT SECTION TEMPLATE: cinematic scene (sticky media + scroll narrative) -->
 
-    // subtle gradient wash
-    const g = ctx.createLinearGradient(0,0,w,h);
-    g.addColorStop(0, 'rgba(183,198,255,0.06)');
-    g.addColorStop(1, 'rgba(124,240,255,0.03)');
-    ctx.fillStyle = g;
-    ctx.fillRect(0,0,w,h);
+  <!-- 1) Surface Power -->
+  <section class="scene" id="surface-power">
+    <div class="scene__bg" aria-hidden="true" style="--bg:url('assets/projects/lunar_power.jpg');"></div>
 
-    const scroll = (window.scrollY || 0) * dpr;
+    <div class="wrap scene__grid">
+      <div class="scene__sticky">
+        <div class="frame reveal tilt" data-tilt>
+          <div class="frame__img" style="--img:url('assets/projects/lunar_power.jpg');"></div>
+          <div class="frame__meta">
+            <div class="tag">PhD • Politecnico di Milano (ASTRA)</div>
+            <div class="badge badge--live">In progress</div>
+          </div>
+          <div class="frame__title">Hybrid Surface Power Architectures</div>
+          <div class="frame__subtitle">Digital-twin microgrids for Moon &amp; Mars</div>
+        </div>
+      </div>
 
-    for (const s of stars){
-      // drift + gentle scroll parallax
-      s.x += s.vx * dpr;
-      s.y += s.vy * dpr + (prefersReduced ? 0 : 0.02 * dpr);
+      <div class="scene__text">
+        <p class="kicker reveal">Architecture + operations + verification mindset</p>
+        <h2 class="h2 reveal">Hybrid Surface Power Architectures for Lunar &amp; Martian Infrastructures</h2>
 
-      // wrap
-      if (s.x < -10) s.x = w + 10;
-      if (s.x > w + 10) s.x = -10;
-      if (s.y < -10) s.y = h + 10;
-      if (s.y > h + 10) s.y = -10;
+        <div class="callout reveal">
+          <div class="callout__icon">⟡</div>
+          <div class="callout__text">
+            Heritage-driven benchmarking using lessons learned from ISS power distribution, Orion development flows,
+            and the evolving Artemis surface architecture.
+          </div>
+        </div>
 
-      const py = (s.y + (scroll * 0.02)) % h;
-      ctx.beginPath();
-      ctx.fillStyle = `rgba(255,255,255,${0.10 + 0.28 * s.z})`;
-      ctx.arc(s.x, py, s.r * dpr, 0, Math.PI * 2);
-      ctx.fill();
-    }
+        <p class="p reveal">
+          This project focuses on digital-twin-driven design of hybrid surface power systems for large-scale
+          human-class infrastructures. The objective is to turn early architecture decisions into model-backed
+          trade-offs that remain traceable as the system scales.
+        </p>
 
-    requestAnimationFrame(draw);
-  }
+        <ul class="bullets reveal">
+          <li>Digital twin–driven design of hybrid power systems for large surface infrastructures.</li>
+          <li>Integration of microgrids, PMAD networks, advanced storage, and ISRU-based generation.</li>
+          <li>Robustness, scalability, autonomy, reliability and mission-level performance under extreme constraints.</li>
+        </ul>
 
-  window.addEventListener('resize', resize, { passive: true });
-  resize();
-  draw();
-}
+        <div class="pillrow reveal">
+          <span class="pill">Microgrids</span>
+          <span class="pill">PMAD</span>
+          <span class="pill">Energy Storage</span>
+          <span class="pill">ISRU</span>
+          <span class="pill">Digital Twin</span>
+        </div>
 
-/* ---------------------------
-   Init
----------------------------- */
-window.addEventListener('scroll', updateProgress, { passive: true });
-updateProgress();
-initReveal();
-initHeroParallax();
-initSceneParallax();
-initTilt();
-initStars();
+        <div class="scene__actions reveal">
+          <a class="btn btn--primary" href="#bicep">Next: BICEP Array</a>
+          <a class="btn btn--ghost" href="#top">Back to top</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2) BICEP -->
+  <section class="scene scene--alt" id="bicep">
+    <div class="scene__bg" aria-hidden="true" style="--bg:url('assets/projects/bicep_southpole.jpg');"></div>
+
+    <div class="wrap scene__grid">
+      <div class="scene__sticky">
+        <div class="frame reveal tilt" data-tilt>
+          <div class="frame__img" style="--img:url('assets/projects/bicep_southpole.jpg');"></div>
+          <div class="frame__meta">
+            <div class="tag">Research Assistant • Caltech</div>
+            <div class="badge">South Pole</div>
+          </div>
+          <div class="frame__title">BICEP Array Detector Modules</div>
+          <div class="frame__subtitle">Integration, testing, readiness verification</div>
+        </div>
+      </div>
+
+      <div class="scene__text">
+        <p class="kicker reveal">Flight-like discipline for extreme environments</p>
+        <h2 class="h2 reveal">Cryogenic Detector Modules &amp; Belleville Washer Stacks — BICEP Array</h2>
+
+        <p class="p reveal">
+          Engineering work supporting a large-scale scientific instrument operating at the South Pole, where
+          thermal margins, interfaces, and integration repeatability matter. The work emphasized verification-oriented
+          engineering: controlled preload strategies, interface design, module readiness, and test campaign support.
+        </p>
+
+        <ul class="bullets reveal">
+          <li>Design and analysis of mechanical stacks to maintain controlled preload at cryogenic temperatures.</li>
+          <li>Interface design between detector wafers, modules, and cryostat structures.</li>
+          <li>Support to integration and testing of CMB detector hardware.</li>
+        </ul>
+
+        <div class="pillrow reveal">
+          <span class="pill">I&amp;T</span>
+          <span class="pill">Thermo-mechanical</span>
+          <span class="pill">Cryogenic interfaces</span>
+          <span class="pill">Readiness</span>
+        </div>
+
+        <div class="scene__actions reveal">
+          <a class="btn btn--primary" href="#dark-matter">Next: Dark Matter</a>
+          <a class="btn btn--ghost" href="#top">Back to top</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3) Dark Matter / Cryogenic Systems -->
+  <section class="scene" id="dark-matter">
+    <div class="scene__bg" aria-hidden="true" style="--bg:url('assets/projects/jwst_cryochamber.jpg');"></div>
+
+    <div class="wrap scene__grid">
+      <div class="scene__sticky">
+        <div class="frame reveal tilt" data-tilt>
+          <div class="frame__img" style="--img:url('assets/projects/jwst_cryochamber.jpg');"></div>
+          <div class="frame__meta">
+            <div class="tag">Research Assistant • Caltech</div>
+            <div class="badge">Cryogenic Systems</div>
+          </div>
+          <div class="frame__title">Cryogenic Detector Instrumentation</div>
+          <div class="frame__subtitle">Thermal architecture + precision structures</div>
+        </div>
+      </div>
+
+      <div class="scene__text">
+        <p class="kicker reveal">Engineering execution under sub-Kelvin constraints</p>
+        <h2 class="h2 reveal">Dark Matter Detector Instrumentation</h2>
+
+        <p class="p reveal">
+          Work on cryogenic instrumentation emphasized robust thermal architectures, mechanical stability,
+          and verification-oriented design in vacuum environments. The mindset translates directly to space hardware:
+          controlling interfaces, noise drivers, thermal paths, and integration sequences.
+        </p>
+
+        <ul class="bullets reveal">
+          <li>Mechanical and thermal optimization of cryostat and fridge design for phonon-mediated detectors.</li>
+          <li>Support to MKID-based instruments and related optics structures.</li>
+        </ul>
+
+        <div class="pillrow reveal">
+          <span class="pill">Thermal modeling</span>
+          <span class="pill">Vacuum systems</span>
+          <span class="pill">Precision integration</span>
+          <span class="pill">Verification</span>
+        </div>
+
+        <div class="scene__actions reveal">
+          <a class="btn btn--primary" href="#seeds">Next: ESA SEEDS</a>
+          <a class="btn btn--ghost" href="#top">Back to top</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4) ESA SEEDS -->
+  <section class="scene scene--alt" id="seeds">
+    <div class="scene__bg" aria-hidden="true" style="--bg:url('assets/projects/mars_hiad.jpg');"></div>
+
+    <div class="wrap scene__grid">
+      <div class="scene__sticky">
+        <div class="frame reveal tilt" data-tilt>
+          <div class="frame__img" style="--img:url('assets/projects/mars_hiad.jpg');"></div>
+          <div class="frame__meta">
+            <div class="tag">ESA SEEDS • Collaborative teams</div>
+            <div class="badge">Concept Studies</div>
+          </div>
+          <div class="frame__title">Human Mars Lander &amp; Station Design</div>
+          <div class="frame__subtitle">Trajectories • EDL • architecture trade-offs</div>
+        </div>
+      </div>
+
+      <div class="scene__text">
+        <p class="kicker reveal">System-level reasoning, mission-driven constraints</p>
+        <h2 class="h2 reveal">Human Mars Lander &amp; Station Design — SEEDS / ESA</h2>
+
+        <p class="p reveal">
+          Mission concept work combining trajectories and systems architecture to explore human Mars missions,
+          including inflatable EDL concepts and mission-level trade-offs linking performance, risk, and operations.
+        </p>
+
+        <ul class="bullets reveal">
+          <li>Trajectory and architecture work for human Mars missions, including surface and orbital assets.</li>
+          <li>Study of inflatable EDL concepts and mission-level trade-offs.</li>
+        </ul>
+
+        <div class="pillrow reveal">
+          <span class="pill">EDL</span>
+          <span class="pill">Guidance</span>
+          <span class="pill">Architecture</span>
+          <span class="pill">Trade studies</span>
+        </div>
+
+        <div class="scene__actions reveal">
+          <a class="btn btn--primary" href="#top">Back to top</a>
+          <a class="btn btn--ghost" href="index.html">Home</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap footer__grid">
+      <div>
+        <div class="footer__title">Projects</div>
+        <div class="footer__muted">A cinematic subpage you can expand with dedicated project pages later.</div>
+      </div>
+      <div class="footer__links">
+        <a href="#top">Top</a>
+        <a href="index.html">Home</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="projects.js"></script>
+</body>
+</html>

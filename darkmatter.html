@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Direct Dark Matter Detection — KIPM/MKID Cryogenic Prototype | Yann Sadou</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Project page: Direct Dark Matter Detection R&D using kinetic inductance phonon-mediated detectors (KIPM/KIPMD). Mechanical design and integration of a prototype dilution refrigerator payload; collaboration spanning Caltech, Stanford/SLAC, and SNOLAB-related efforts." />
+
+  <!-- If you have a shared global stylesheet, keep it. Otherwise you can remove. -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    :root{
+      /* Keep the BICEP glass/stars aesthetic, but tune accents toward “deep space / dark matter”. */
+      --glass: rgba(255,255,255,0.08);
+      --glass2: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.14);
+      --txt: rgba(255,255,255,0.92);
+      --txt2: rgba(255,255,255,0.72);
+      --shadow: 0 18px 60px rgba(0,0,0,0.38);
+      --radius: 18px;
+      --max: 1400px;
+
+      /* Accents: teal/violet “dark matter glow” */
+      --accent: rgba(120, 255, 235, 0.95);
+      --accent2: rgba(175, 155, 255, 0.92);
+
+      --ok: rgba(160,255,220,0.90);
+      --warn: rgba(255,210,160,0.92);
+    }
+
+    *{ box-sizing: border-box; }
+
+    body{
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text","Helvetica Neue", Arial, sans-serif;
+      color: var(--txt);
+      background: transparent;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    header, main, footer{ position: relative; z-index: 1; }
+
+    header{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+
+    .head-left{ display:flex; flex-direction:column; gap: 4px; }
+
+    .title{
+      font-size: 24px;
+      font-weight: 850;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      text-shadow: 0 0 22px rgba(120,255,235,0.12);
+    }
+
+    .subtitle{
+      font-size: 13px;
+      color: var(--txt2);
+    }
+
+    .back-link{
+      font-size: 13px;
+      color: rgba(255,255,255,0.88);
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      background: var(--glass2);
+      backdrop-filter: blur(14px);
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+      white-space: nowrap;
+    }
+    .back-link:hover{
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.22);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    main{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 6px 20px 56px;
+    }
+
+    .section{ margin-top: 18px; }
+
+    .section-title{
+      margin: 0 0 10px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+    .hero{
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position: relative;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(900px 340px at 18% 10%, rgba(120,255,235,0.16), transparent 60%),
+        radial-gradient(700px 280px at 82% 0%, rgba(175,155,255,0.14), transparent 55%),
+        radial-gradient(900px 520px at 40% 120%, rgba(255,255,255,0.06), transparent 55%);
+      pointer-events:none;
+    }
+
+    .hero-inner{
+      padding: 18px 18px 16px;
+      display:grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: 16px;
+      position: relative;
+    }
+
+    .kicker{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .chip{
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.78);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .chip.accent{
+      border-color: rgba(120,255,235,0.30);
+      background: rgba(120,255,235,0.09);
+      color: rgba(215,255,250,0.94);
+    }
+    .chip.accent2{
+      border-color: rgba(175,155,255,0.30);
+      background: rgba(175,155,255,0.09);
+      color: rgba(235,230,255,0.94);
+    }
+    .chip.ok{
+      border-color: rgba(160,255,220,0.26);
+      background: rgba(160,255,220,0.08);
+      color: rgba(210,255,240,0.92);
+    }
+    .chip.warn{
+      border-color: rgba(255,210,160,0.30);
+      background: rgba(255,210,160,0.10);
+      color: rgba(255,240,220,0.92);
+    }
+
+    .hero-title{
+      margin: 0;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .hero-desc{
+      margin: 10px 0 0;
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.82);
+      max-width: 860px;
+    }
+
+    .hero-actions{
+      margin-top: 14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+    }
+
+    .btn{
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 9px 14px;
+      font-size: 13px;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.90);
+      text-decoration:none;
+      backdrop-filter: blur(14px);
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      white-space:nowrap;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(120,255,235,0.28);
+      text-decoration:none;
+    }
+
+    /* Same “big hero figure” feel as your BICEP page */
+    .hero-figure{
+      position: relative;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      overflow:hidden;
+      box-shadow: 0 14px 44px rgba(0,0,0,0.36);
+      aspect-ratio: 16 / 10;
+      width: 220%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-left: 100px;
+    }
+
+    .hero-figure img{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+    }
+
+    .hero-caption{
+      margin-left: 100px;
+      margin-top: 8px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      text-align:center;
+    }
+
+    @media (max-width: 980px){
+      .hero-inner{ grid-template-columns: minmax(0, 1fr); }
+      .hero-figure{ aspect-ratio: 16/9; width: 100%; margin-left: 0; }
+      .hero-caption{ margin-left: 0; }
+    }
+
+    /* =========================================================
+       FULL-WIDTH LOGO ROW (inside hero)
+    ========================================================= */
+    .collab-logos{
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: center;
+      gap: 34px;
+      background: rgba(255,255,255,0.92);
+      border-radius: 20px;
+      margin-right: 10px;
+
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+
+      padding: 10px 0 2px;
+      margin-top: 4px;
+    }
+
+    .collab-logos .logo-pill{
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: saturate(1.05) contrast(1.05);
+    }
+
+    .collab-logos .logo-pill img{
+      height: 70px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .collab-logos::-webkit-scrollbar{ height: 8px; }
+    .collab-logos::-webkit-scrollbar-thumb{
+      background: rgba(0,0,0,0.14);
+      border-radius: 999px;
+    }
+
+    /* =========================================================
+       CARDS / GRID
+    ========================================================= */
+    .grid-2{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    @media (max-width: 980px){ .grid-2{ grid-template-columns: minmax(0, 1fr); } }
+
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 16px 46px rgba(0,0,0,0.34);
+      overflow:hidden;
+      position: relative;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 260px at 18% 10%, rgba(120,255,235,0.10), transparent 60%),
+        radial-gradient(650px 240px at 85% 0%, rgba(175,155,255,0.08), transparent 55%);
+      pointer-events:none;
+      opacity: 0.85;
+    }
+
+    .card-inner{ padding: 14px 14px 14px; position: relative; }
+
+    .card h3{
+      margin: 0 0 6px;
+      font-size: 15px;
+      font-weight: 850;
+      letter-spacing: -0.01em;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .card p{
+      margin: 0;
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.78);
+    }
+
+    .list{
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: rgba(255,255,255,0.80);
+      font-size: 13.5px;
+      line-height: 1.7;
+    }
+    .list li{ margin: 4px 0; }
+
+    /* =========================================================
+       WORKSTREAMS / VALIDATION GATES (timeline-like)
+    ========================================================= */
+    .timelineX{
+      position: relative;
+      display: grid;
+      gap: 14px;
+      padding-left: 22px;
+    }
+
+    .timelineX::before{
+      content:"";
+      position:absolute;
+      left: 8px;
+      top: 6px;
+      bottom: 18px;
+      width: 2px;
+      background: rgba(255,255,255,0.14);
+      border-radius: 999px;
+    }
+
+    .timelineX::after{
+      content:"";
+      position:absolute;
+      left: 3px;
+      bottom: 4px;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 10px solid rgba(120,255,235,0.72);
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.35));
+      opacity: 0.95;
+    }
+
+    .step{
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+      position: relative;
+    }
+
+    .step::before{
+      content:"";
+      position:absolute;
+      left: -18px;
+      top: 24px;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(120,255,235,0.82);
+      box-shadow: 0 0 0 4px rgba(120,255,235,0.14), 0 10px 24px rgba(0,0,0,0.30);
+    }
+
+    .step-badge{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      padding: 10px 10px 9px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    }
+
+    .step-month{
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: rgba(255,255,255,0.84);
+      margin-bottom: 4px;
+    }
+
+    .step-dur{
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
+    }
+
+    .step-card{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 16px 46px rgba(0,0,0,0.32);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .step-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 260px at 18% 10%, rgba(120,255,235,0.10), transparent 60%),
+        radial-gradient(650px 240px at 85% 0%, rgba(175,155,255,0.06), transparent 55%);
+      pointer-events:none;
+      opacity: 0.9;
+    }
+
+    .step-head{
+      position: relative;
+      padding: 12px 14px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .step-title h4{
+      margin: 0;
+      font-size: 15px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .step-sub{
+      margin-top: 3px;
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.66);
+      line-height: 1.35;
+    }
+
+    .step-logos{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.92;
+    }
+    .step-logos img{
+      height: 20px;
+      width: auto;
+      object-fit: contain;
+      filter: contrast(1.05);
+      opacity: 0.92;
+    }
+
+    .step-body{
+      position: relative;
+      padding: 12px 14px 14px;
+    }
+
+    .step-text{
+      margin: 0;
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.7;
+    }
+
+    .milestones{
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255,255,255,0.18);
+    }
+
+    .ms-title{
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
+      margin-bottom: 10px;
+    }
+
+    .ms-row{
+      display: grid;
+      grid-template-columns: 10px 42px minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .ms-row:last-child{ margin-bottom: 0; }
+
+    .ms-dot{
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(175,155,255,0.85);
+      box-shadow: 0 0 0 4px rgba(175,155,255,0.12);
+    }
+
+    .ms-line{
+      height: 2px;
+      background: rgba(255,255,255,0.14);
+      border-radius: 999px;
+    }
+
+    .ms-date{
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
+      margin-bottom: 2px;
+    }
+
+    .ms-text{
+      font-size: 13.2px;
+      color: rgba(255,255,255,0.86);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 720px){
+      .step{ grid-template-columns: minmax(0, 1fr); }
+      .step::before{ top: 18px; }
+      .step-badge{ width: fit-content; }
+    }
+
+    /* =========================================================
+       MEDIA / GALLERY GRID
+    ========================================================= */
+    .team-grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    @media (max-width: 980px){ .team-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px){ .team-grid{ grid-template-columns: minmax(0, 1fr); } }
+
+    .media-box{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      overflow:hidden;
+      box-shadow: 0 14px 44px rgba(0,0,0,0.30);
+      position: relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      aspect-ratio: 4 / 3;
+      width: 100%;
+    }
+
+    .media-box img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+
+    .cap{
+      margin-top: 8px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      text-align:center;
+    }
+
+    /* =========================================================
+       LIGHTBOX
+    ========================================================= */
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      display:none;
+      z-index: 999;
+      background: rgba(0,0,0,0.74);
+      backdrop-filter: blur(10px);
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+    }
+    .lightbox.open{ display:flex; }
+
+    .lightbox-inner{
+      width: min(1100px, 96vw);
+      max-height: 86vh;
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      box-shadow: 0 20px 80px rgba(0,0,0,0.48);
+    }
+
+    .lightbox-img{
+      width: 100%;
+      height: 100%;
+      max-height: 86vh;
+      object-fit: contain;
+      background: rgba(0,0,0,0.22);
+      display:block;
+    }
+
+    .lightbox-close{
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 1000;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.92);
+      padding: 8px 12px;
+      cursor:pointer;
+      transition: transform 180ms ease, background 180ms ease;
+    }
+    .lightbox-close:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.12);
+    }
+
+    /* =========================================================
+       PROJECT PAGE IMAGE ZOOM EFFECT
+    ========================================================= */
+    .zoom-media{
+      position: relative;
+      display: block;
+      border-radius: 18px;
+      overflow: hidden;
+      text-decoration: none;
+      outline: none;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 16px 46px rgba(0,0,0,0.34);
+    }
+
+    .zoom-img{
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transform: scale(1);
+      transition: transform 220ms ease;
+    }
+
+    .zoom-media:hover .zoom-img,
+    .zoom-media:focus-visible .zoom-img{
+      transform: scale(1.12);
+    }
+
+    /* =========================================================
+       MEETING NOTES (nice expandable blocks)
+    ========================================================= */
+    details.notes{
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      padding: 10px 12px;
+      margin-top: 10px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+      position: relative;
+    }
+    details.notes summary{
+      cursor: pointer;
+      font-weight: 850;
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.90);
+      list-style: none;
+      outline: none;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    details.notes summary::-webkit-details-marker{ display:none; }
+    .notes-meta{
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .notes-body{
+      margin-top: 10px;
+      font-size: 13.2px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.78);
+      white-space: pre-wrap;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+    footer{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px 20px 36px;
+      color: rgba(255,255,255,0.62);
+      font-size: 12px;
+      text-align:center;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Stars background (same as BICEP) -->
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <header>
+    <div class="head-left">
+      <div class="title">Direct Dark Matter Detection — Cryogenic Prototype (KIPM/MKID)</div>
+      <div class="subtitle">Research Assistant · Caltech · Prof. Sunil Golwala</div>
+    </div>
+    <a class="back-link" href="index.html">← Back to main site</a>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" aria-label="Project hero">
+      <div class="hero-inner">
+
+        <!-- LEFT COLUMN -->
+        <div>
+          <div class="kicker">
+            <span class="chip accent">Caltech</span>
+            <span class="chip">Direct detection</span>
+            <span class="chip accent2">KIPM / MKID</span>
+            <span class="chip ok">Dilution refrigerator</span>
+            <span class="chip">Mechanical design</span>
+            <span class="chip warn">Low-background path (SNOLAB)</span>
+          </div>
+
+          <h1 class="hero-title">Mechanical design & integration of a dilution-fridge prototype for phonon-mediated MKID dark matter detectors</h1>
+
+          <p class="hero-desc">
+            Over <strong>~18 months</strong> at Caltech under Prof. Sunil Golwala, I contributed to the <strong>mechanical design</strong>,
+            <strong>integration readiness</strong>, and <strong>hardware coordination</strong> of a prototype cryogenic payload supporting
+            phonon-mediated <strong>kinetic inductance detector (KID/MKID)</strong> concepts for <strong>direct dark matter detection</strong>.
+            The work emphasized practical deployability: tight clearances, connector access, thermal/mechanical interfaces, and repeatable assembly.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn" href="#context">🧠 Context</a>
+            <a class="btn" href="#workstreams">🧩 Workstreams</a>
+            <a class="btn" href="#highlights">✅ My highlights</a>
+            <a class="btn" href="#notes">🗒️ Meeting notes</a>
+            <a class="btn" href="#media">🖼️ Media</a>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div>
+          <div class="hero-figure">
+            <!-- Replace with your best hero image:
+                 - cryostat / fridge CAD render
+                 - lab integration photo
+                 - device payload close-up
+            -->
+            <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+              <img class="zoom-img lb" src="assets/projects/darkmatter/darkmatter.jpg" alt="Dark matter cryogenic prototype (hero image)" />
+            </a>
+          </div>
+          <div class="hero-caption">Dark Matter Illustration Concept</div>
+        </div>
+
+        <!-- FULL-WIDTH LOGOS -->
+        <div class="collab-logos" aria-label="Collaboration logos">
+          <!-- Replace paths with your own assets. -->
+          <div class="logo-pill"><img class="lb" src="assets/logo/caltech.png" alt="Caltech" /></div>
+          <div class="logo-pill"><img class="lb" src="assets/logo/stanford-university-logo.png" alt="Stanford" /></div>
+          <div class="logo-pill"><img class="lb" src="assets/logo/UC-Berkeley-logo.png" alt="Berkeley" /></div>
+          <div class="logo-pill"><img class="lb" src="assets/logo/WashU-logo.jpg" alt="WashU" /></div>
+          <div class="logo-pill"><img class="lb" src="assets/logo/SLAC_logo.png" alt="SLAC" /></div>
+          <div class="logo-pill"><img class="lb" src="assets/logo/SNOLAB-Logo.png" alt="SNOLAB" /></div>
+          <div class="logo-pill"><img class="lb" src="assets/logo/nasajpl.png" alt="NASA JPL" /></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- QUICK CONTEXT -->
+    <section class="section" id="context" aria-label="Context">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-inner">
+            <div class="section-title">Context</div>
+            <h3>What is this project (in one page)?</h3>
+            <p>
+              This effort sits in the R&amp;D landscape of <strong>low-mass dark matter</strong> direct detection: phonons created by tiny energy deposits
+              are sensed with superconducting resonators (<strong>MKIDs/KIDs</strong>) in a cryogenic environment.
+              The design philosophy rewards <strong>low threshold</strong>, <strong>high multiplexing</strong>, and
+              <strong>hardware repeatability</strong>—which makes the cryogenic payload and interfaces a first-order engineering problem.
+            </p>
+            <ul class="list">
+              <li>Goal: push sensitivity with phonon-mediated superconducting sensor concepts (KIPM/KIPMD)</li>
+              <li>Hardware reality: tight clearances, connector access, cable routing, assembly discipline</li>
+              <li>Program context: cross-institution development paths aligned with low-background underground directions (e.g., SNOLAB)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="section-title">My role</div>
+            <h3>Fridge/payload mechanics as an “integration amplifier”</h3>
+            <p>
+              I worked on the mechanics that turn detector/RF concepts into a buildable cryogenic prototype:
+              connector and coax interfaces, clearances (including tooling access), feedthrough placement,
+              and CAD updates to keep the as-built configuration consistent with assembly reality.
+            </p>
+            <ul class="list">
+              <li>Mechanical CAD iterations for cryogenic payload subassemblies and interfaces</li>
+              <li>Connector/access-driven design decisions (SMA/SMP constraints, wrench clearance)</li>
+              <li>Integration readiness: feedthrough placement, cable routing discipline, fit checks</li>
+              <li>Hardware tracking + design updates from real components and vendor models</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKSTREAMS -->
+    <section class="section" id="workstreams" aria-label="Workstreams and validation gates">
+      <div class="card">
+        <div class="card-inner">
+          <div class="section-title">Workstreams</div>
+          <h3>How a cryogenic prototype becomes buildable (not just “a CAD model”)</h3>
+          <p style="margin-bottom:12px;">
+            Progress wasn’t a single linear “milestone plan”: it was recurring fit checks, ordering waves, interface decisions,
+            and fixes that preserve <strong>accessibility</strong>, <strong>repeatability</strong>, and <strong>assembly sanity</strong>.
+            The blocks below reflect the main workstreams I contributed to.
+          </p>
+
+          <div class="timelineX" role="list">
+
+            <!-- WORKSTREAM 1 -->
+            <article class="step" role="listitem">
+              <div class="step-left">
+                <div class="step-badge">
+                  <div class="step-month">Workstream</div>
+                  <div class="step-dur">Cryogenic payload mechanics</div>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <header class="step-head">
+                  <div class="step-title">
+                    <h4>Dilution-fridge payload integration mechanics</h4>
+                    <div class="step-sub">Interfaces · constraints · fit checks · assembly-minded CAD</div>
+                  </div>
+                  <div class="step-logos" aria-label="Host lab logos">
+                    <img class="lb" src="assets/logo/caltech.png" alt="Caltech logo" />
+                  </div>
+                </header>
+
+                <div class="step-body">
+                  <p class="step-text">
+                    Mechanical design iterations focused on making the prototype realistically buildable:
+                    clearance-aware placement, feedthrough and connector alignment, and CAD updates driven by real purchased parts.
+                  </p>
+
+                  <div class="milestones">
+                    <div class="ms-title">Validation gates</div>
+
+                    <div class="ms-row">
+                      <div class="ms-dot"></div><div class="ms-line"></div>
+                      <div class="ms-content">
+                        <div class="ms-date">Fit checks</div>
+                        <div class="ms-text">3D printed mockups + interferences resolved before metal fabrication</div>
+                      </div>
+                    </div>
+
+                    <div class="ms-row">
+                      <div class="ms-dot"></div><div class="ms-line"></div>
+                      <div class="ms-content">
+                        <div class="ms-date">Tooling access</div>
+                        <div class="ms-text">Connector access (wrench clearance) and order-of-assembly verified</div>
+                      </div>
+                    </div>
+
+                    <div class="ms-row">
+                      <div class="ms-dot"></div><div class="ms-line"></div>
+                      <div class="ms-content">
+                        <div class="ms-date">As-built realism</div>
+                        <div class="ms-text">Vendor CAD models integrated; dimensions checked against actual hardware</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- WORKSTREAM 2 -->
+            <article class="step" role="listitem">
+              <div class="step-left">
+                <div class="step-badge">
+                  <div class="step-month">Workstream</div>
+                  <div class="step-dur">RF interfaces & cabling</div>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <header class="step-head">
+                  <div class="step-title">
+                    <h4>Coax / feedthrough interfaces that survive real assembly</h4>
+                    <div class="step-sub">SMA constraints · routing · bend loops · jigs · drawing consistency</div>
+                  </div>
+                  <div class="step-logos" aria-label="Partner logos">
+                    <img class="lb" src="assets/logo/caltech.png" alt="Caltech logo" />
+                    <img class="lb" src="assets/logo/SLAC_logo.png" alt="SLAC logo" />
+                  </div>
+                </header>
+
+                <div class="step-body">
+                  <p class="step-text">
+                    Ensuring that RF cabling, feedthroughs, and connector stacks remain assemble-able at cryogenic stages:
+                    alignment of reference planes, clearance for nuts/tools, and routing choices that avoid collisions with nearby hardware.
+                  </p>
+
+                  <div class="milestones">
+                    <div class="ms-title">Integration gates</div>
+
+                    <div class="ms-row">
+                      <div class="ms-dot"></div><div class="ms-line"></div>
+                      <div class="ms-content">
+                        <div class="ms-date">Connector clearance</div>
+                        <div class="ms-text">Adequate space to torque connectors + avoid hidden assembly dead-ends</div>
+                      </div>
+                    </div>
+
+                    <div class="ms-row">
+                      <div class="ms-dot"></div><div class="ms-line"></div>
+                      <div class="ms-content">
+                        <div class="ms-date">Routing discipline</div>
+                        <div class="ms-text">Bend radius / loops and right-angle decisions validated against nearby boxes/plates</div>
+                      </div>
+                    </div>
+
+                    <div class="ms-row">
+                      <div class="ms-dot"></div><div class="ms-line"></div>
+                      <div class="ms-content">
+                        <div class="ms-date">Configuration control</div>
+                        <div class="ms-text">Schematics updated to match “now” + planned future upgrades</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- WORKSTREAM 3 -->
+            <article class="step" role="listitem">
+              <div class="step-left">
+                <div class="step-badge">
+                  <div class="step-month">Workstream</div>
+                  <div class="step-dur">Fastener strategy</div>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <header class="step-head">
+                  <div class="step-title">
+                    <h4>Washers / lock-washers / preload survival under cooldown</h4>
+                    <div class="step-sub">CTE-informed decisions · space constraints · CAD updates</div>
+                  </div>
+                  <div class="step-logos" aria-label="Lab logos">
+                    <img class="lb" src="assets/logo/caltech.png" alt="Caltech logo" />
+                  </div>
+                </header>
+
+                <div class="step-body">
+                  <p class="step-text">
+                    A recurring reliability issue in cryogenic mechanics is “it assembled fine, then cooldown changed everything”.
+                    I analyzed where lock washers are needed vs. where they are not, and then pushed these decisions into the CAD model
+                    so the build stays consistent.
+                  </p>
+
+                  <div class="milestones">
+                    <div class="ms-title">Design gates</div>
+
+                    <div class="ms-row">
+                      <div class="ms-dot"></div><div class="ms-line"></div>
+                      <div class="ms-content">
+                        <div class="ms-date">Preload reasoning</div>
+                        <div class="ms-text">Bolt/material combinations checked; decisions documented and reflected in CAD</div>
+                      </div>
+                    </div>
+
+                    <div class="ms-row">
+                      <div class="ms-dot"></div><div class="ms-line"></div>
+                      <div class="ms-content">
+                        <div class="ms-date">Space reality</div>
+                        <div class="ms-text">Where washers are needed, ensure there’s physical room to install them</div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- WORKSTREAM 4 -->
+            <article class="step" role="listitem">
+              <div class="step-left">
+                <div class="step-badge">
+                  <div class="step-month">Consortium</div>
+                  <div class="step-dur">Cross-institution coordination</div>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <header class="step-head">
+                  <div class="step-title">
+                    <h4>Collaboration across Caltech × Stanford/SLAC × SNOLAB direction</h4>
+                    <div class="step-sub">Shared constraints · ordering cadence · interface alignment</div>
+                  </div>
+                  <div class="step-logos" aria-label="Consortium logos">
+                    <img class="lb" src="assets/logo/caltech.png" alt="Caltech logo" />
+                    <img class="lb" src="assets/logo/stanford-university-logo.png" alt="Stanford logo" />
+                    <img class="lb" src="assets/logo/UC-Berkeley-logo.png" alt="Berkeley logo" />
+                    <img class="lb" src="assets/logo/SLAC_logo.png" alt="SLAC logo" />
+                    <img class="lb" src="assets/logo/SNOLAB-Logo.png" alt="SNOLAB logo" />
+                  </div>
+                </header>
+
+                <div class="step-body">
+                  <p class="step-text">
+                    These prototypes evolve quickly. Keeping the mechanical/cryogenic interfaces aligned across institutions
+                    is what prevents “great device physics” from dying in integration.
+                    I contributed through interface-driven CAD updates, vendor model integration, and keeping as-built decisions coherent.
+                  </p>
+
+                  <div class="milestones">
+                    <div class="ms-title">Outcome</div>
+
+                    <div class="ms-row">
+                      <div class="ms-dot"></div><div class="ms-line"></div>
+                      <div class="ms-content">
+                        <div class="ms-date">Recurring</div>
+                        <div class="ms-text">Interface alignment, ordering waves, and design-for-assembly fixes</div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HIGHLIGHTS -->
+    <section class="section" id="highlights" aria-label="Highlights">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-inner">
+            <div class="section-title">My highlights</div>
+            <h3>Concrete contributions (straight from meeting reality)</h3>
+            <ul class="list">
+              <li>Implemented a <strong>stub filter set</strong> and iterated on device-box sizing and connector strategy</li>
+              <li>Investigated <strong>SMA wrench clearance</strong> and connector access constraints</li>
+              <li>Designed <strong>jigs</strong> to support SMA cable routing/assembly repeatability</li>
+              <li>Added/managed <strong>washers & lock-washer decisions</strong> (and pushed them into CAD)</li>
+              <li>Updated CAD to reflect <strong>real parts</strong> (e.g., Radiall switch connector details / feedthrough models)</li>
+              <li>Improved coax routing realism (e.g., <strong>bend loop</strong> / reference-plane-to-reference-plane constraints)</li>
+              <li>Supported magnetic shielding dimensional checks and integration details</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="section-title">Deliverables</div>
+            <h3>What this page can host</h3>
+            <ul class="list">
+              <li>CAD renders: full stack + exploded views + interface close-ups</li>
+              <li>Fit-check photos: printed mockups, assembly sequences, “tool access proofs”</li>
+              <li>Hardware snapshots: feedthroughs, coaxes, module boxes, shielding layers</li>
+              <li>Consortium photos: Caltech/SLAC/Stanford visits, lab days, workshops</li>
+              <li>Design logs: “what changed and why” (great for credibility)</li>
+              <li>Standardization of a design of MKID box for use at Caltech, Stanford, UC Berkeley and other research groups</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEDIA / GALLERY -->
+    <section class="section" id="media" aria-label="Media">
+      <div class="card">
+        <div class="card-inner">
+          <div class="section-title">Media</div>
+          <h3>Hardware, CAD, and collaboration photos</h3>
+
+          <div class="team-grid">
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                  <img class="zoom-img lb" src="assets/projects/darkmatter/YannDM.jpg" alt="YannAssembling" />
+                </a>
+              </div>
+              <div class="cap">Me assembling the dark matter detector prototype dilution fridge at Caltech</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                  <img class="zoom-img lb" src="assets/projects/darkmatter/CAD.png" alt="CAD Dilution Fridge" />
+                </a>
+              </div>
+              <div class="cap">3D CAD model of the dilution fridge</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                  <img class="zoom-img lb" src="assets/projects/darkmatter/UpperStage.png" alt="UpperStage" />
+                </a>
+              </div>
+              <div class="cap">Upper Stage of the dilution fridge</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                  <img class="zoom-img lb" src="assets/projects/darkmatter/CAD MKIDs box.png" alt="CAD MKIDs box" />
+                </a>
+              </div>
+              <div class="cap">Standardized CAD of the MKID box I designed for global use at Caltech, Stanford, UC Berkeley and other research groups</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                  <img class="zoom-img lb" src="assets/projects/darkmatter/VonMises.png" alt="VonMises" />
+                </a>
+              </div>
+              <div class="cap">Von Mises simulations performed on Solidworks to design CFRP</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                  <img class="zoom-img lb" src="assets/projects/darkmatter/RFCircuit.png" alt="RF" />
+                </a>
+              </div>
+              <div class="cap">RF Circuit Schematics modelization performed on EASY EDA</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" aria-label="Contact">
+      <div class="card">
+        <div class="card-inner">
+          <div class="section-title">Contact</div>
+          <h3>Questions or collaboration?</h3>
+          <p>
+            I’m happy to connect with people interested in direct detection hardware, cryogenic integration,
+            and large-scale cross-institution R&amp;D where buildability is a first-class requirement.
+          </p>
+          <div class="hero-actions">
+            <a class="btn" href="mailto:yann.sadou@polimi.it">✉️ yann.sadou@polimi.it</a>
+            <a class="btn" href="index.html#projects">← Back to projects</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © <span id="year"></span> Yann Sadou — Direct Dark Matter Detection Project Page<br/>
+    Hosted on GitHub Pages.
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" type="button">Close ✕</button>
+    <div class="lightbox-inner">
+      <img class="lightbox-img" id="lightboxImg" alt="Expanded image" />
+    </div>
+  </div>
+
+  <!-- Stars: keep your existing stars.js for identical look -->
+  <script src="stars.js"></script>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Lightbox
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const closeBtn = document.getElementById("lightboxClose");
+
+    function openLightbox(src, alt){
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || "Image";
+      lightbox.classList.add("open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+    function closeLightbox(){
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden", "true");
+      lightboxImg.src = "";
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll("img.lb").forEach(img => {
+      img.style.cursor = "zoom-in";
+      img.addEventListener("click", () => openLightbox(img.src, img.alt));
+    });
+
+    closeBtn.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
+
+    // Optional: if stars.js fails to load, provide a tiny fallback so the page never looks “empty”.
+    // (You can remove this if you prefer.)
+    (function starsFallback(){
+      const c = document.getElementById("stars");
+      if (!c) return;
+
+      // If stars.js already drew something, do nothing.
+      // We detect by waiting a tick and checking if canvas has been sized/drawn by your script.
+      setTimeout(() => {
+        // If your stars.js sets width/height every frame, these will already be non-zero.
+        if (c.width > 0 && c.height > 0) return;
+
+        const ctx = c.getContext("2d");
+        let w = 0, h = 0;
+        const stars = Array.from({length: 140}, () => ({
+          x: Math.random(), y: Math.random(),
+          r: Math.random()*1.2 + 0.2,
+          a: Math.random()*0.6 + 0.2,
+          tw: Math.random()*0.8 + 0.2,
+          t: Math.random()*Math.PI*2
+        }));
+
+        function resize(){
+          w = c.width = window.innerWidth;
+          h = c.height = window.innerHeight;
+        }
+        window.addEventListener("resize", resize);
+        resize();
+
+        function draw(){
+          ctx.clearRect(0,0,w,h);
+          // subtle deep gradient
+          const g = ctx.createRadialGradient(w*0.2, h*0.1, 0, w*0.5, h*0.6, Math.max(w,h));
+          g.addColorStop(0, "rgba(120,255,235,0.06)");
+          g.addColorStop(0.35, "rgba(175,155,255,0.05)");
+          g.addColorStop(1, "rgba(0,0,0,0)");
+          ctx.fillStyle = g;
+          ctx.fillRect(0,0,w,h);
+
+          for (const s of stars){
+            s.t += 0.01*s.tw;
+            const alpha = s.a*(0.6 + 0.4*Math.sin(s.t));
+            ctx.beginPath();
+            ctx.arc(s.x*w, s.y*h, s.r, 0, Math.PI*2);
+            ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+            ctx.fill();
+          }
+          requestAnimationFrame(draw);
+        }
+        draw();
+      }, 40);
+    })();
+  </script>
+</body>
+</html>

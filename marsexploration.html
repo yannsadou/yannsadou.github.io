@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SEEDS XV — Human Mars Lander Feasibility Study | Yann Sadou</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="SEEDS XV project page: feasibility study of a human Mars lander, with international rotations and ASI workshops; final paper presented at IAC." />
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* =========================================================
+       SAME “PAINTINGS PAGE” GLASS + STARS THEME
+    ========================================================= */
+    :root{
+      --glass: rgba(255,255,255,0.08);
+      --glass2: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.14);
+      --txt: rgba(255,255,255,0.92);
+      --txt2: rgba(255,255,255,0.72);
+      --shadow: 0 18px 60px rgba(0,0,0,0.38);
+      --radius: 18px;
+      --max: 1400px;
+      --accent: rgba(124,199,255,0.95);
+      --accent2: rgba(180,170,255,0.90);
+      --ok: rgba(160,255,220,0.90);
+      --warn: rgba(255,210,160,0.92);
+    }
+
+    body{
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text","Helvetica Neue", Arial, sans-serif;
+      color: var(--txt);
+      background: transparent;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    header, main, footer{ position: relative; z-index: 1; }
+
+    header{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+
+    .head-left{ display:flex; flex-direction:column; gap: 4px; }
+
+    .title{
+      font-size: 24px;
+      font-weight: 850;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      text-shadow: 0 0 22px rgba(124,199,255,0.14);
+    }
+
+    .subtitle{
+      font-size: 13px;
+      color: var(--txt2);
+    }
+
+    .back-link{
+      font-size: 13px;
+      color: rgba(255,255,255,0.88);
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      background: var(--glass2);
+      backdrop-filter: blur(14px);
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+      white-space: nowrap;
+    }
+    .back-link:hover{
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.22);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    main{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 6px 20px 56px;
+    }
+
+    .section{ margin-top: 18px; }
+
+    .section-title{
+      margin: 0 0 10px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+    .hero{
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position: relative;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(900px 340px at 20% 10%, rgba(124,199,255,0.18), transparent 60%),
+        radial-gradient(700px 280px at 82% 0%, rgba(255,255,255,0.10), transparent 55%);
+      pointer-events:none;
+    }
+
+    .hero-inner{
+      padding: 18px 18px 16px;
+      display:grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: 16px;
+      position: relative;
+    }
+
+    .kicker{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .chip{
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.78);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .chip.accent{
+      border-color: rgba(124,199,255,0.30);
+      background: rgba(124,199,255,0.10);
+      color: rgba(210,240,255,0.92);
+    }
+    .chip.ok{
+      border-color: rgba(160,255,220,0.26);
+      background: rgba(160,255,220,0.08);
+      color: rgba(210,255,240,0.92);
+    }
+
+    .hero-title{
+      margin: 0;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .hero-desc{
+      margin: 10px 0 0;
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.82);
+      max-width: 840px;
+    }
+
+    .hero-actions{
+      margin-top: 14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+    }
+
+    .btn{
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 9px 14px;
+      font-size: 13px;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.90);
+      text-decoration:none;
+      backdrop-filter: blur(14px);
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      white-space:nowrap;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(124,199,255,0.28);
+      text-decoration:none;
+    }
+
+    /* stable hero image frame (prevents tiny image) */
+    .hero-figure{
+      position: relative;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      overflow:hidden;
+      box-shadow: 0 14px 44px rgba(0,0,0,0.36);
+      aspect-ratio: 16 / 10;
+      width: 250%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .hero-figure img{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* switch to contain if you prefer no crop */
+      display:block;
+    }
+
+    .placeholder{
+      padding: 18px;
+      text-align:center;
+      color: rgba(255,255,255,0.70);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .placeholder strong{ color: rgba(255,255,255,0.90); }
+
+    .hero-caption{
+      margin-top: 8px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      text-align:center;
+    }
+
+    @media (max-width: 980px){
+      .hero-inner{ grid-template-columns: minmax(0, 1fr); }
+      .hero-figure{ aspect-ratio: 16/9; }
+    }
+
+    /* =========================================================
+       CARDS / GRID
+    ========================================================= */
+    .grid-2{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    @media (max-width: 980px){ .grid-2{ grid-template-columns: minmax(0, 1fr); } }
+
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 16px 46px rgba(0,0,0,0.34);
+      overflow:hidden;
+      position: relative;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 260px at 18% 10%, rgba(124,199,255,0.12), transparent 60%),
+        radial-gradient(650px 240px at 85% 0%, rgba(255,255,255,0.07), transparent 55%);
+      pointer-events:none;
+      opacity: 0.85;
+    }
+
+    .card-inner{ padding: 14px 14px 14px; position: relative; }
+
+    .card h3{
+      margin: 0 0 6px;
+      font-size: 15px;
+      font-weight: 850;
+      letter-spacing: -0.01em;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .card p{
+      margin: 0;
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.78);
+    }
+
+    .list{
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: rgba(255,255,255,0.80);
+      font-size: 13.5px;
+      line-height: 1.7;
+    }
+    .list li{ margin: 4px 0; }
+
+    .card a{
+      color: rgba(210,240,255,0.92);
+      text-decoration: none;
+    }
+    .card a:hover{ text-decoration: underline; }
+
+    /* =========================================================
+   TIMELINE (clean + elegant)
+========================================================= */
+
+/* container + left spine arrow */
+.timelineX{
+  position: relative;
+  display: grid;
+  gap: 14px;
+  padding-left: 22px; /* space for spine */
+}
+
+/* spine line */
+.timelineX::before{
+  content:"";
+  position:absolute;
+  left: 8px;
+  top: 6px;
+  bottom: 18px;      /* leave space for arrow head */
+  width: 2px;
+  background: rgba(255,255,255,0.14);
+  border-radius: 999px;
+}
+
+/* arrow head at bottom */
+.timelineX::after{
+  content:"";
+  position:absolute;
+  left: 3px;
+  bottom: 4px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 10px solid rgba(124,199,255,0.72);
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.35));
+  opacity: 0.95;
+}
+
+/* a "step" row: left badge column + right card */
+.step{
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  position: relative;
+}
+
+/* dot on the spine per step */
+.step::before{
+  content:"";
+  position:absolute;
+  left: -18px;    /* aligns with spine */
+  top: 24px;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(124,199,255,0.82);
+  box-shadow: 0 0 0 4px rgba(124,199,255,0.14), 0 10px 24px rgba(0,0,0,0.30);
+}
+
+/* left badge */
+.step-badge{
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.05);
+  padding: 10px 10px 9px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+}
+
+.step-month{
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: rgba(255,255,255,0.84);
+  margin-bottom: 4px;
+}
+
+.step-dur{
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.62);
+}
+
+/* right card: reuse glass look */
+.step-card{
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 16px 46px rgba(0,0,0,0.32);
+  overflow: hidden;
+  position: relative;
+}
+
+.step-card::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background:
+    radial-gradient(700px 260px at 18% 10%, rgba(124,199,255,0.10), transparent 60%),
+    radial-gradient(650px 240px at 85% 0%, rgba(255,255,255,0.06), transparent 55%);
+  pointer-events:none;
+  opacity: 0.9;
+}
+
+.step-head{
+  position: relative;
+  padding: 12px 14px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+.step-title h4{
+  margin: 0;
+  font-size: 15px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.92);
+}
+
+.step-sub{
+  margin-top: 3px;
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.66);
+  line-height: 1.35;
+}
+
+/* logos subtle */
+.step-logos{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.92;
+}
+.step-logos img{
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+  filter: contrast(1.05);
+  opacity: 0.9;
+}
+
+/* body */
+.step-body{
+  position: relative;
+  padding: 12px 14px 14px;
+}
+
+.step-text{
+  margin: 0;
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.7;
+}
+
+/* milestones are visually separate: title + rail items */
+.milestones{
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(255,255,255,0.18);
+}
+
+.ms-title{
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.62);
+  margin-bottom: 10px;
+}
+
+/* each milestone row: dot + horizontal line + content */
+.ms-row{
+  display: grid;
+  grid-template-columns: 10px 42px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.ms-row:last-child{ margin-bottom: 0; }
+
+.ms-dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(180,170,255,0.85);
+  box-shadow: 0 0 0 4px rgba(180,170,255,0.12);
+}
+
+.ms-line{
+  height: 2px;
+  background: rgba(255,255,255,0.14);
+  border-radius: 999px;
+}
+
+.ms-date{
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.62);
+  margin-bottom: 2px;
+}
+
+.ms-text{
+  font-size: 13.2px;
+  color: rgba(255,255,255,0.86);
+  line-height: 1.5;
+}
+
+/* responsive */
+@media (max-width: 720px){
+  .step{
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .step::before{
+    top: 18px;
+  }
+  .step-badge{
+    width: fit-content;
+  }
+}
+
+    /* =========================================================
+       TEAM + LOGOS (placeholders)
+    ========================================================= */
+    .team-grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    @media (max-width: 980px){ .team-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px){ .team-grid{ grid-template-columns: minmax(0, 1fr); } }
+
+    .media-box{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      overflow:hidden;
+      box-shadow: 0 14px 44px rgba(0,0,0,0.30);
+      position: relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      aspect-ratio: 4 / 3;
+      width: 100%;
+    }
+
+    .media-box img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+
+    .cap{
+      margin-top: 8px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      text-align:center;
+    }
+
+    /* =========================================================
+       IAC PAPER PANEL (clean link block)
+    ========================================================= */
+    .paper{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      padding: 12px 12px 10px;
+    }
+
+    .paper-head{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom: 6px;
+    }
+
+    .paper-title{
+      margin: 0;
+      font-weight: 900;
+      font-size: 14px;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.25;
+    }
+
+    .paper-meta{
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.70);
+      line-height: 1.55;
+      margin: 6px 0 0;
+    }
+
+    .lightbox{
+  position: fixed;
+  inset: 0;
+  display:none;
+  z-index: 999;
+  background: rgba(0,0,0,0.74);
+  backdrop-filter: blur(10px);
+  align-items:center;
+  justify-content:center;
+  padding: 18px;
+}
+.lightbox.open{ display:flex; }
+
+.lightbox-inner{
+  width: min(1100px, 96vw);
+  max-height: 86vh;
+  border-radius: 18px;
+  overflow:hidden;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 20px 80px rgba(0,0,0,0.48);
+}
+
+.lightbox-img{
+  width: 100%;
+  height: 100%;
+  max-height: 86vh;
+  object-fit: contain;
+  background: rgba(0,0,0,0.22);
+  display:block;
+}
+
+.lightbox-close{
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 1000;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.92);
+  padding: 8px 12px;
+  cursor:pointer;
+  transition: transform 180ms ease, background 180ms ease;
+}
+.lightbox-close:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.12);
+}
+
+.h3-logo{
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+  border-radius:16px;
+  /*border: 1px solid rgba(255,255,255,0.14);*/
+  /*background: rgba(255,255,255,0.06);*/
+  padding: 4px;
+  /*box-shadow: 0 10px 26px rgba(0,0,0,0.22);*/
+  flex: 0 0 auto;
+  margin-left: 140px;
+}
+
+/* =========================================================
+   PROJECT PAGE IMAGE ZOOM EFFECT
+========================================================= */
+/* ✅ Zoom frame that always has a real height */
+.zoom-media{
+  position: relative;
+  display: block;
+  border-radius: 18px;
+  overflow: hidden;
+  text-decoration: none;
+  outline: none;
+
+  /* pick the ratio you want */
+  /*aspect-ratio: 16 / 9;          /* ✅ prevents the “bar” collapse */
+  width: 100%;
+  height: 100%;               /* ✅ makes the zoom area fill the container */
+
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 16px 46px rgba(0,0,0,0.34);
+}
+
+.zoom-img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 220ms ease;
+}
+
+.zoom-media:hover .zoom-img,
+.zoom-media:focus-visible .zoom-img{
+  transform: scale(1.12);
+}
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+    footer{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px 20px 36px;
+      color: rgba(255,255,255,0.62);
+      font-size: 12px;
+      text-align:center;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <header>
+    <div class="head-left">
+      <div class="title">SEEDS XV — Human Mars Lander Feasibility Study</div>
+    </div>
+    <a class="back-link" href="index.html">← Back to main site</a>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" aria-label="Project hero">
+      <div class="hero-inner">
+        <div>
+          <div class="kicker">
+            <span class="chip accent">SEEDS XV</span>
+            <span class="chip">Human exploration</span>
+            <span class="chip ok">Mission design</span>
+            <span class="chip">Systems engineering</span>
+            <span class="chip">EDL + surface ops</span>
+          </div>
+
+          <h1 class="hero-title">Feasibility study of a crewed Human Mars Lander</h1>
+
+          <p class="hero-desc">
+            SEEDS XV is an intensive, international, hands-on program in which students rotate across multiple
+            European institutions to carry out real systems-engineering studies. Our team developed a complete
+            <strong>feasibility study of a crewed Mars lander</strong>, covering mission context, architectural trade-offs,
+            high-level subsystem sizing, and scenario-driven reasoning for human exploration of Mars.
+            The project culminated in a <strong>final presentation at ESA's ESTEC</strong> and a <strong>final paper presented at the International Astronautical Congress 2023 (IAC) in Baku</strong>.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn" href="#timeline">📍 Program timeline</a>
+            <a class="btn" href="#work">🧩 What we did</a>
+            <a class="btn" href="#team">👥 Team & partners</a>
+            <a class="btn" href="#paper">📄 IAC paper</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="hero-figure">
+            <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                <img class="zoom-img lb" src="assets/projects/marsexploration/HML.webp" alt="Mars lander concept illustration" />
+            </a>
+          </div>
+          <div class="hero-caption">Human Mars Lander concept</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK CONTEXT -->
+    <section class="section" aria-label="Context">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-inner">
+            <div class="section-title">Context</div>
+            <h3 class="h3-with-icon">
+                <img class="h3-logo lb" src="assets/projects/marsexploration/logo_seeds.jpg" alt="SEEDS XV logo" />
+                What is SEEDS XV?
+            </h3>
+            <p>
+              SEEDS XV is a European space-systems program structured as a multi-site project sprint.
+              Participants work in interdisciplinary teams across several partner institutions such 
+              as <strong>ISAE-SUPAERO (France), University of Leicester (UK), and Politecnico di Torino (Italy)</strong>, using
+              systems engineering methods and mission design trade-offs to produce a cohesive study
+              that is both technically grounded and clearly communicated.
+            </p>
+            <ul class="list">
+              <li>Fast-paced systems engineering with real deliverables</li>
+              <li>Mission architecture + subsystem-level reasoning</li>
+              <li>International teamwork and iterative design reviews</li>
+              <li>Final dissemination through a conference paper</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="section-title">Project scope</div>
+            <h3>Human Mars Lander feasibility</h3>
+            <p>
+              The objective was to evaluate a crewed Mars lander concept at feasibility level:
+              mission assumptions, EDL constraints, surface operations drivers, and key architectural choices.
+              The final study aimed to be coherent end-to-end, from high-level mission context down to
+              sizing logic and risk-aware trade-offs.
+            </p>
+            <ul class="list">
+              <li>Mission context & assumptions</li>
+              <li>Architecture trade studies</li>
+              <li>EDL and landing site constraints (high level)</li>
+              <li>Power, mass, thermal, and operational drivers (system view)</li>
+            </ul>
+          </div>
+          <img class="h3-logo lb" src="assets/projects/marsexploration/logo_hemera.jpg" alt="HEMERA logo" />
+          <div class="hero-caption">Logo for <strong>HEMERA (Human Exploration of Mars with an Entry Research and Ascent Vehicle)</strong></div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- PROGRAM TIMELINE (REDESIGNED) — HUMAN MARS LANDER (SEEDS XV) -->
+    <section class="section" id="timeline" aria-label="Timeline">
+    <div class="card">
+        <div class="card-inner">
+        <div class="section-title">Program timeline</div>
+        <h3>Rotating residencies + ASI workshops + milestone presentations</h3>
+        <p style="margin-bottom:12px;">
+            SEEDS XV followed a structured rotation across three host universities (~2 months each),
+            with milestone checkpoints (presentations + ASI workshops) used to validate progress and align the team.
+        </p>
+
+        <div class="timelineX" role="list">
+
+            <!-- ====== STEP 1 ====== -->
+            <article class="step" role="listitem">
+            <div class="step-left">
+                <div class="step-badge">
+                <div class="step-month">April 2023</div>
+                <div class="step-dur">~2 months</div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <header class="step-head">
+                <div class="step-title">
+                    <h4>Leicester (UK)</h4>
+                    <div class="step-sub">Kick-off · mission scenario · stakeholders · baseline architecture</div>
+                </div>
+
+                <div class="step-logos" aria-label="Host university logos">
+                    <img src="assets/logo/University_of_Leicester_logo.jpg" alt="University of Leicester logo" />
+                </div>
+                </header>
+
+                <div class="step-body">
+                <p class="step-text">
+                    Program kick-off and early framing of a crewed Mars lander feasibility study: exploration scenario,
+                    mission goals, key stakeholders, and an initial end-to-end concept view (phases, major subsystems, and constraints).
+                    The focus was on building a coherent feasibility narrative and defining the first baseline configuration.
+                </p>
+
+                <div class="milestones">
+                    <div class="ms-title">Milestone checkpoints</div>
+
+                    <div class="ms-row">
+                    <div class="ms-dot"></div>
+                    <div class="ms-line"></div>
+                    <div class="ms-content">
+                        <div class="ms-date">May 2023</div>
+                        <div class="ms-text">Presentation at the Space Park (Leicester)</div>
+                    </div>
+                    </div>
+
+                </div>
+                </div>
+            </div>
+            </article>
+
+            <!-- ====== STEP 2 ====== -->
+            <article class="step" role="listitem">
+            <div class="step-left">
+                <div class="step-badge">
+                <div class="step-month">May 2023</div>
+                <div class="step-dur">~2 months</div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <header class="step-head">
+                <div class="step-title">
+                    <h4>Turin (Italy)</h4>
+                    <div class="step-sub">Concept consolidation · trade-offs · operational concept · feasibility storyline</div>
+                </div>
+
+                <div class="step-logos" aria-label="Host university logos">
+                    <img src="assets/logo/logo_Polito.png" alt="Politecnico di Torino logo" />
+                </div>
+                </header>
+
+                <div class="step-body">
+                <p class="step-text">
+                    Consolidation of the lander concept at feasibility level: clarification of mission phases (EDL to surface ops),
+                    refinement of the operational concept, and high-level trade-offs to converge toward a consistent architecture.
+                    Emphasis was on end-to-end coherence and realistic programmatic framing rather than deep subsystem engineering.
+                </p>
+
+                <div class="milestones">
+                    <div class="ms-title">Milestone checkpoints</div>
+
+                    <!-- Workshop #1 -->
+                    <div class="ms-row">
+                    <div class="ms-dot"></div>
+                    <div class="ms-line"></div>
+                    <div class="ms-content">
+                        <div class="ms-date">June 2023</div>
+                        <div class="ms-text">ASI Workshop #1 (Rome) — mid-term alignment and feedback</div>
+                    </div>
+                    </div>
+
+                       <!-- Workshop #2 -->
+                    <div class="ms-row">
+                    <div class="ms-dot"></div>
+                    <div class="ms-line"></div>
+                    <div class="ms-content">
+                        <div class="ms-date">July 2023</div>
+                        <div class="ms-text">ASI Workshop #2 (Rome) — final consolidation & review rehearsal</div>
+                    </div>
+                    </div>
+
+                    <!-- ASI presentation -->
+                    <div class="ms-row">
+                    <div class="ms-dot"></div>
+                    <div class="ms-line"></div>
+                    <div class="ms-content">
+                        <div class="ms-date">July 2023</div>
+                        <div class="ms-text">Presentation at ASI (Rome)</div>
+                    </div>
+                    </div>
+
+                </div>
+                </div>
+            </div>
+            </article>
+
+            <!-- ====== STEP 3 ====== -->
+            <article class="step" role="listitem">
+            <div class="step-left">
+                <div class="step-badge">
+                <div class="step-month">July 2023</div>
+                <div class="step-dur">~2 months</div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <header class="step-head">
+                <div class="step-title">
+                    <h4>Toulouse (France)</h4>
+                    <div class="step-sub">Final synthesis · report writing · publication preparation · review readiness</div>
+                </div>
+
+                <div class="step-logos" aria-label="Host university logos">
+                    <img src="assets/logo/supaero.png" alt="ISAE-SUPAERO logo" />
+                </div>
+                </header>
+
+                <div class="step-body">
+                <p class="step-text">
+                    Final synthesis and communication: integrating the full study into a clear, consistent deliverable,
+                    refining figures and narrative, and preparing publication material (conference paper + talk) for IAC.
+                    Priority was readability, traceable assumptions, and a strong end-to-end storyline.
+                </p>
+
+                <div class="milestones">
+                    <div class="ms-title">Milestone checkpoints</div>
+
+                    <div class="ms-row">
+                    <div class="ms-dot"></div>
+                    <div class="ms-line"></div>
+                    <div class="ms-content">
+                        <div class="ms-date">September 2023</div>
+                        <div class="ms-text">Presentation at CNES</div>
+                    </div>
+                    </div>
+
+                    <div class="ms-row">
+                    <div class="ms-dot"></div>
+                    <div class="ms-line"></div>
+                    <div class="ms-content">
+                        <div class="ms-date">October 2023</div>
+                        <div class="ms-text">Presentation at ESA ESTEC</div>
+                    </div>
+                    </div>
+
+                </div>
+                </div>
+            </div>
+            </article>
+
+        </div><!-- /timelineX -->
+        </div>
+    </div>
+    </section>
+
+    <!-- WHAT WE DID -->
+    <section class="section" id="work" aria-label="What we did">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-inner">
+            <div class="section-title">Work content</div>
+            <h3>Key contributions (feasibility level)</h3>
+            <ul class="list">
+              <li>Defined a consistent mission context and feasibility assumptions</li>
+              <li>Built and compared architecture options and subsystem strategies</li>
+              <li>Linked mission drivers (EDL, surface ops, safety) to top-level sizing logic</li>
+              <li>Iterated through design reviews and integrated feedback from workshops</li>
+              <li>Produced a coherent written study and a final conference publication</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="section-title">Deliverables</div>
+            <ul class="list">
+              <li>Concept figures (lander architecture, mission phases, EDL sketch)</li>
+              <li>Subsystem sizing snapshots (mass, power, budgets)</li>
+              <li>Trade-off tables and decision rationale</li>
+              <li>Workshop photos + timeline visuals</li>
+              <li>Paper PDF / presentation deck links</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM & PARTNERS (placeholders) -->
+    <section class="section" id="team" aria-label="Team and partners">
+      <div class="card">
+        <div class="card-inner">
+          <div class="section-title">Team & partners</div>
+          <h3>Photos and acknowledgements</h3>
+
+          <div class="team-grid">
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                    <img class="zoom-img lb" src="assets/projects/marsexploration/YannESA2.jpg" alt="Yann photo" />
+                </a>
+              </div>
+              <div class="cap">Me presenting our project at ESA's ESTEC (Netherlands)</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                    <img class="zoom-img lb" src="assets/projects/marsexploration/seedsESTEC1.jpg" alt="SEEDS XV team photo" />
+                </a>
+              </div>
+              <div class="cap">SEEDS XV team at ESA's ESTEC (Netherlands)</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                    <img class="zoom-img lb" src="assets/projects/marsexploration/seedsThales.jpg" alt="SEEDS XV team photo" />
+                </a>
+              </div>
+              <div class="cap">SEEDS XV team at Thales Alenia Space (Turin, Italy)</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                    <img class="zoom-img lb" src="assets/projects/marsexploration/seedsASI1.jpg" alt="SEEDS XV team photo" />
+                </a>
+              </div>
+              <div class="cap">SEEDS XV team at ASI (Rome, Italy)</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                    <img class="zoom-img lb" src="assets/projects/marsexploration/seedsLeicester.jpg" alt="SEEDS XV team photo" />
+                </a>
+              </div>
+              <div class="cap">SEEDS XV team at the Space Park of Leicester (UK)</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                    <img class="zoom-img lb" src="assets/projects/marsexploration/seedsSEC.jpg" alt="SEEDS XV team photo" />
+                </a>
+              </div>
+              <div class="cap">SEEDS XV team at the 2023 AIDAA International Conference on Space Exploration (Turin, Italy)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- IAC PAPER -->
+    <section class="section" id="paper" aria-label="IAC paper">
+      <div class="card">
+        <div class="card-inner">
+          <div class="section-title">Publication</div>
+          <h3>Final conference paper presented at IAC</h3>
+
+          <div class="paper">
+            <div class="paper-head">
+              <p class="paper-title">Feasibility study on a crewed Mars lander</p>
+              <span class="chip accent">IAC</span>
+            </div>
+
+            <p class="paper-meta">
+              Presented at the 2023 International Astronautical Congress (IAC) in Baku.<br/>
+              Paper reference: <strong>IAC-23,D1,IP,5,x77691</strong> (as listed on ResearchGate).<br/>
+              Full text link:
+              <a href="https://www.researchgate.net/publication/393716393_Feasibility_study_on_a_crewed_Mars_lander"
+                 target="_blank" rel="noopener noreferrer">
+                 ResearchGate publication page ↗
+              </a>
+            </p>
+
+            <div class="hero-actions" style="margin-top:12px;">
+              <a class="btn" href="https://www.researchgate.net/publication/393716393_Feasibility_study_on_a_crewed_Mars_lander"
+                 target="_blank" rel="noopener noreferrer">📄 Open paper</a>
+
+              <!-- Optional: add your own PDF later -->
+              <a class="btn" href="#" onclick="return false;">⬇️ PDF (add later)</a>
+
+              <!-- Optional: add slides later -->
+              <a class="btn" href="#" onclick="return false;">🖥️ Slides (add later)</a>
+            </div>
+          </div>
+
+          <p style="margin-top:12px; font-size:12px; color: rgba(255,255,255,0.65);">
+            Tip: if you later host a PDF in your repo, place it in <code>assets/projects/seeds-mars/</code> and link it above.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" aria-label="Contact">
+      <div class="card">
+        <div class="card-inner">
+          <div class="section-title">Contact</div>
+          <h3>Questions or collaboration?</h3>
+          <p>
+            I’m happy to connect with people interested in mission architecture, human exploration,
+            feasibility studies, and systems-engineering training programs like SEEDS.
+          </p>
+          <div class="hero-actions">
+            <a class="btn" href="mailto:yann.sadou@polimi.it">✉️ yann.sadou@polimi.it</a>
+            <a class="btn" href="index.html#projects">← Back to projects</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Yann Sadou — SEEDS XV Project Page<br/>
+    Hosted on GitHub Pages.
+  </footer>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" type="button">Close ✕</button>
+    <div class="lightbox-inner">
+        <img class="lightbox-img" id="lightboxImg" alt="Expanded image" />
+    </div>
+    </div>
+
+  <script src="stars.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  <script>
+        /* --- Lightbox (same behavior as paintings page) --- */
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightboxImg");
+        const closeBtn = document.getElementById("lightboxClose");
+
+        function openLightbox(src, alt){
+            lightboxImg.src = src;
+            lightboxImg.alt = alt || "Image";
+            lightbox.classList.add("open");
+            lightbox.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+        }
+        function closeLightbox(){
+            lightbox.classList.remove("open");
+            lightbox.setAttribute("aria-hidden", "true");
+            lightboxImg.src = "";
+            document.body.style.overflow = "";
+        }
+
+        // click any image with class "lb"
+        document.querySelectorAll("img.lb").forEach(img => {
+            img.style.cursor = "zoom-in";
+            img.addEventListener("click", () => openLightbox(img.src, img.alt));
+        });
+
+        closeBtn.addEventListener("click", closeLightbox);
+        lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+        document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
+    </script>
+</body>
+</html>

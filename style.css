@@ -456,12 +456,12 @@ section:last-of-type{
   object-fit: cover;
   display: block;
   transform: scale(1);
-  transition: transform 420ms ease;
+  transition: transform 220ms ease;
 }
 
 /* nice hover (optional) */
 .hero-photo-card:hover .hero-photo-frame img{
-  transform: scale(1.03);
+  transform: scale(1.12);
 }
 
 .hero-photo-caption{
@@ -878,6 +878,82 @@ section:last-of-type{
 
 @media (prefers-reduced-motion: reduce){
   .project-thumb{ transition: none; }
+}
+
+/* =========================================================
+   PUBLICATIONS
+========================================================= */
+.pubs-subtitle{
+  margin: 0 0 16px;
+  color: rgba(255,255,255,0.70);
+  font-size: 14px;
+}
+
+.pubs-grid{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 900px){
+  .pubs-grid{ grid-template-columns: minmax(0, 1fr); }
+}
+
+.pub-card{
+  padding: 16px 16px 14px;
+}
+
+.pub-top{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.pub-pill{
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.80);
+  letter-spacing: 0.02em;
+}
+
+.pub-pill-soft{
+  color: rgba(255,255,255,0.72);
+  background: rgba(255,255,255,0.04);
+}
+
+.pub-pill-accent{
+  border-color: rgba(124,199,255,0.28);
+  background: rgba(124,199,255,0.10);
+  color: rgba(210,240,255,0.90);
+}
+
+.pub-title{
+  margin: 0 0 8px;
+  font-size: 16px;
+  line-height: 1.25;
+  color: rgba(255,255,255,0.94);
+}
+
+.pub-meta{
+  font-size: 13px;
+  color: rgba(255,255,255,0.70);
+  margin-bottom: 12px;
+}
+
+.pub-actions{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.btn-small{
+  padding: 7px 12px;
+  font-size: 13px;
 }
 
 /* =========================================================

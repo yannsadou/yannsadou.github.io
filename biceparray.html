@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BICEP Array — South Pole CMB Experiment | Yann Sadou</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Project page: BICEP Array (South Pole) — cryogenic characterization of optical modules, SQUID tuning, FTS/OE measurements, micro-wirebonding with NASA JPL, and CMB-S4 prototype mechanical design; Caltech-led collaboration with Stanford, Harvard, UMN, and JPL." />
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    :root{
+      --glass: rgba(255,255,255,0.08);
+      --glass2: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.14);
+      --txt: rgba(255,255,255,0.92);
+      --txt2: rgba(255,255,255,0.72);
+      --shadow: 0 18px 60px rgba(0,0,0,0.38);
+      --radius: 18px;
+      --max: 1400px;
+      --accent: rgba(124,199,255,0.95);
+      --accent2: rgba(180,170,255,0.90);
+      --ok: rgba(160,255,220,0.90);
+      --warn: rgba(255,210,160,0.92);
+    }
+
+    *{ box-sizing: border-box; }
+
+    body{
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text","Helvetica Neue", Arial, sans-serif;
+      color: var(--txt);
+      background: transparent;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    header, main, footer{ position: relative; z-index: 1; }
+
+    header{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+
+    .head-left{ display:flex; flex-direction:column; gap: 4px; }
+
+    .title{
+      font-size: 24px;
+      font-weight: 850;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      text-shadow: 0 0 22px rgba(124,199,255,0.14);
+    }
+
+    .subtitle{
+      font-size: 13px;
+      color: var(--txt2);
+    }
+
+    .back-link{
+      font-size: 13px;
+      color: rgba(255,255,255,0.88);
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      background: var(--glass2);
+      backdrop-filter: blur(14px);
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+      white-space: nowrap;
+    }
+    .back-link:hover{
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.22);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    main{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 6px 20px 56px;
+    }
+
+    .section{ margin-top: 18px; }
+
+    .section-title{
+      margin: 0 0 10px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+    .hero{
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position: relative;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(900px 340px at 20% 10%, rgba(124,199,255,0.18), transparent 60%),
+        radial-gradient(700px 280px at 82% 0%, rgba(255,255,255,0.10), transparent 55%);
+      pointer-events:none;
+    }
+
+    /* IMPORTANT: hero-inner has 2 columns ONLY.
+       Logos are placed after these two columns and span full width. */
+    .hero-inner{
+      padding: 18px 18px 16px;
+      display:grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: 16px;
+      position: relative;
+    }
+
+    .kicker{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .chip{
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.78);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .chip.accent{
+      border-color: rgba(124,199,255,0.30);
+      background: rgba(124,199,255,0.10);
+      color: rgba(210,240,255,0.92);
+    }
+    .chip.ok{
+      border-color: rgba(160,255,220,0.26);
+      background: rgba(160,255,220,0.08);
+      color: rgba(210,255,240,0.92);
+    }
+    .chip.warn{
+      border-color: rgba(255,210,160,0.30);
+      background: rgba(255,210,160,0.10);
+      color: rgba(255,240,220,0.92);
+    }
+
+    .hero-title{
+      margin: 0;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .hero-desc{
+      margin: 10px 0 0;
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.82);
+      max-width: 860px;
+    }
+
+    .hero-actions{
+      margin-top: 14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+    }
+
+    .btn{
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 9px 14px;
+      font-size: 13px;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.90);
+      text-decoration:none;
+      backdrop-filter: blur(14px);
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      white-space:nowrap;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(124,199,255,0.28);
+      text-decoration:none;
+    }
+
+    /* keep your sizes/placement */
+    .hero-figure{
+      position: relative;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      overflow:hidden;
+      box-shadow: 0 14px 44px rgba(0,0,0,0.36);
+      aspect-ratio: 16 / 10;
+      width: 220%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-left: 100px;
+    }
+
+    .hero-figure img{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+    }
+
+    .hero-caption{
+      margin-left: 100px;
+      margin-top: 8px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      text-align:center;
+    }
+
+    @media (max-width: 980px){
+      .hero-inner{ grid-template-columns: minmax(0, 1fr); }
+      .hero-figure{ aspect-ratio: 16/9; width: 100%; margin-left: 0; }
+      .hero-caption{ margin-left: 0; }
+    }
+
+    /* =========================================================
+       FULL-WIDTH LOGO ROW
+    ========================================================= */
+    .collab-logos{
+      grid-column: 1 / -1;     /* spans both columns (full hero width) */
+      display: flex;
+      flex-wrap: nowrap;       /* stay in one row */
+      align-items: center;
+      justify-content: center;
+      gap: 34px;
+      background: white;
+      border-radius: 20px;
+      margin-right: 10px;
+
+      max-width: 100%;
+      overflow-x: auto;        /* safe fallback */
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+
+      padding: 10px 0 2px;     /* inside hero, no weird offsets */
+      margin-top: 4px;
+    }
+
+    .collab-logos .logo-pill{
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .collab-logos .logo-pill img{
+      height: 72px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    /* optional: nicer scrollbar on webkit */
+    .collab-logos::-webkit-scrollbar{ height: 8px; }
+    .collab-logos::-webkit-scrollbar-thumb{
+      background: rgba(255,255,255,0.14);
+      border-radius: 999px;
+    }
+
+    /* =========================================================
+       CARDS / GRID
+    ========================================================= */
+    .grid-2{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    @media (max-width: 980px){ .grid-2{ grid-template-columns: minmax(0, 1fr); } }
+
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 16px 46px rgba(0,0,0,0.34);
+      overflow:hidden;
+      position: relative;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 260px at 18% 10%, rgba(124,199,255,0.12), transparent 60%),
+        radial-gradient(650px 240px at 85% 0%, rgba(255,255,255,0.07), transparent 55%);
+      pointer-events:none;
+      opacity: 0.85;
+    }
+
+    .card-inner{ padding: 14px 14px 14px; position: relative; }
+
+    .card h3{
+      margin: 0 0 6px;
+      font-size: 15px;
+      font-weight: 850;
+      letter-spacing: -0.01em;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .card p{
+      margin: 0;
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.78);
+    }
+
+    .list{
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: rgba(255,255,255,0.80);
+      font-size: 13.5px;
+      line-height: 1.7;
+    }
+    .list li{ margin: 4px 0; }
+
+    /* =========================================================
+       TIMELINE (clean + elegant)
+    ========================================================= */
+    .timelineX{
+      position: relative;
+      display: grid;
+      gap: 14px;
+      padding-left: 22px;
+    }
+
+    .timelineX::before{
+      content:"";
+      position:absolute;
+      left: 8px;
+      top: 6px;
+      bottom: 18px;
+      width: 2px;
+      background: rgba(255,255,255,0.14);
+      border-radius: 999px;
+    }
+
+    .timelineX::after{
+      content:"";
+      position:absolute;
+      left: 3px;
+      bottom: 4px;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 10px solid rgba(124,199,255,0.72);
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.35));
+      opacity: 0.95;
+    }
+
+    .step{
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+      position: relative;
+    }
+
+    .step::before{
+      content:"";
+      position:absolute;
+      left: -18px;
+      top: 24px;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(124,199,255,0.82);
+      box-shadow: 0 0 0 4px rgba(124,199,255,0.14), 0 10px 24px rgba(0,0,0,0.30);
+    }
+
+    .step-badge{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      padding: 10px 10px 9px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    }
+
+    .step-month{
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: rgba(255,255,255,0.84);
+      margin-bottom: 4px;
+    }
+
+    .step-dur{
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
+    }
+
+    .step-card{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 16px 46px rgba(0,0,0,0.32);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .step-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 260px at 18% 10%, rgba(124,199,255,0.10), transparent 60%),
+        radial-gradient(650px 240px at 85% 0%, rgba(255,255,255,0.06), transparent 55%);
+      pointer-events:none;
+      opacity: 0.9;
+    }
+
+    .step-head{
+      position: relative;
+      padding: 12px 14px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .step-title h4{
+      margin: 0;
+      font-size: 15px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .step-sub{
+      margin-top: 3px;
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.66);
+      line-height: 1.35;
+    }
+
+    .step-logos{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.92;
+    }
+    .step-logos img{
+      height: 20px;
+      width: auto;
+      object-fit: contain;
+      filter: contrast(1.05);
+      opacity: 0.92;
+    }
+
+    .step-body{
+      position: relative;
+      padding: 12px 14px 14px;
+    }
+
+    .step-text{
+      margin: 0;
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.7;
+    }
+
+    .milestones{
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255,255,255,0.18);
+    }
+
+    .ms-title{
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
+      margin-bottom: 10px;
+    }
+
+    .ms-row{
+      display: grid;
+      grid-template-columns: 10px 42px minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .ms-row:last-child{ margin-bottom: 0; }
+
+    .ms-dot{
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(180,170,255,0.85);
+      box-shadow: 0 0 0 4px rgba(180,170,255,0.12);
+    }
+
+    .ms-line{
+      height: 2px;
+      background: rgba(255,255,255,0.14);
+      border-radius: 999px;
+    }
+
+    .ms-date{
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
+      margin-bottom: 2px;
+    }
+
+    .ms-text{
+      font-size: 13.2px;
+      color: rgba(255,255,255,0.86);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 720px){
+      .step{ grid-template-columns: minmax(0, 1fr); }
+      .step::before{ top: 18px; }
+      .step-badge{ width: fit-content; }
+    }
+
+    /* =========================================================
+       TEAM / GALLERY GRID
+    ========================================================= */
+    .team-grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    @media (max-width: 980px){ .team-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px){ .team-grid{ grid-template-columns: minmax(0, 1fr); } }
+
+    .media-box{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      overflow:hidden;
+      box-shadow: 0 14px 44px rgba(0,0,0,0.30);
+      position: relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      aspect-ratio: 4 / 3;
+      width: 100%;
+    }
+
+    .media-box img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+
+    .cap{
+      margin-top: 8px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      text-align:center;
+    }
+
+    /* =========================================================
+       LIGHTBOX
+    ========================================================= */
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      display:none;
+      z-index: 999;
+      background: rgba(0,0,0,0.74);
+      backdrop-filter: blur(10px);
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+    }
+    .lightbox.open{ display:flex; }
+
+    .lightbox-inner{
+      width: min(1100px, 96vw);
+      max-height: 86vh;
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      box-shadow: 0 20px 80px rgba(0,0,0,0.48);
+    }
+
+    .lightbox-img{
+      width: 100%;
+      height: 100%;
+      max-height: 86vh;
+      object-fit: contain;
+      background: rgba(0,0,0,0.22);
+      display:block;
+    }
+
+    .lightbox-close{
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 1000;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.92);
+      padding: 8px 12px;
+      cursor:pointer;
+      transition: transform 180ms ease, background 180ms ease;
+    }
+    .lightbox-close:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.12);
+    }
+
+    /* =========================================================
+       PROJECT PAGE IMAGE ZOOM EFFECT
+    ========================================================= */
+    .zoom-media{
+      position: relative;
+      display: block;
+      border-radius: 18px;
+      overflow: hidden;
+      text-decoration: none;
+      outline: none;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 16px 46px rgba(0,0,0,0.34);
+    }
+
+    .zoom-img{
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transform: scale(1);
+      transition: transform 220ms ease;
+    }
+
+    .zoom-media:hover .zoom-img,
+    .zoom-media:focus-visible .zoom-img{
+      transform: scale(1.12);
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+    footer{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px 20px 36px;
+      color: rgba(255,255,255,0.62);
+      font-size: 12px;
+      text-align:center;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <header>
+    <div class="head-left">
+      <div class="title">BICEP Array — South Pole CMB Experiment</div>
+      <div class="subtitle">Research Assistant · Caltech · Prof. James Bock</div>
+    </div>
+    <a class="back-link" href="index.html">← Back to main site</a>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" aria-label="Project hero">
+      <div class="hero-inner">
+
+        <!-- LEFT COLUMN -->
+        <div>
+          <div class="kicker">
+            <span class="chip accent">Caltech</span>
+            <span class="chip">BICEP Array</span>
+            <span class="chip ok">Cryogenic characterization</span>
+            <span class="chip">Detector modules</span>
+            <span class="chip warn">South Pole</span>
+          </div>
+
+          <h1 class="hero-title">Cryogenic characterization & module integration for the BICEP Array instrument at the South Pole</h1>
+
+          <p class="hero-desc">
+            As a Research Assistant at Caltech under Prof. James Bock, I contributed to the
+            end-to-end readiness of BICEP Array optical modules for deployment and operations at the South Pole.
+            My work focused on <strong>cryogenic characterization</strong> (optical efficiency, electrical checks, FTS measurements, SQUID tuning),
+            <strong>micro-wirebonding</strong> of module interconnects in collaboration with <strong>NASA JPL</strong>, and <strong>mechanical design</strong>
+            for a Caltech-inspired <strong>CMB-S4 prototype</strong> wafer implementation.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn" href="#timeline">🧭 Project timeline</a>
+            <a class="btn" href="#work">🧩 What I did</a>
+            <a class="btn" href="#consortium">🤝 Consortium</a>
+            <a class="btn" href="#media">🖼️ Media</a>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div>
+          <div class="hero-figure">
+            <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+              <img class="zoom-img lb" src="assets/projects/bicep/BICEP_Array.jpg" alt="BICEP Array / South Pole (hero image)" />
+            </a>
+          </div>
+          <div class="hero-caption">BICEP Array — South Pole CMB instrument</div>
+        </div>
+
+        <!-- FULL-WIDTH LOGOS (UNDER BOTH COLUMNS) -->
+        <div class="collab-logos" aria-label="Collaboration logos">
+          <div class="logo-pill"><img class="lb" src="assets/logo/Harvard_University_logo.png" alt="Harvard" /></div>
+          <div class="logo-pill"><img class="lb" src="assets/logo/stanford-university-logo.png" alt="Stanford" /></div>
+          <div class="logo-pill"><img class="lb" src="assets/logo/caltech.png" alt="Caltech" /></div>
+          <div class="logo-pill"><img class="lb" src="assets/logo/University_of_Minnesota.png" alt="UMN" /></div>
+          <div class="logo-pill"><img class="lb" src="assets/logo/nasajpl.jpg" alt="NASA JPL" /></div>
+          <div class="logo-pill"><img class="lb" src="assets/logo/Nist-logo.png" alt="NIST" /></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- QUICK CONTEXT -->
+    <section class="section" aria-label="Context">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-inner">
+            <div class="section-title">Context</div>
+            <h3>What is BICEP Array?</h3>
+            <p>
+              BICEP Array is a next-generation ground-based CMB polarization experiment operating at the South Pole,
+              designed to push sensitivity in the search for primordial B-modes and to precisely characterize polarized foregrounds.
+              The project combines advanced detector arrays, superconducting readout (SQUIDs), and cryogenic receiver technology,
+              coordinated through a high-profile multi-institution consortium.
+            </p>
+            <ul class="list">
+              <li>Harsh environment constraints: reliability, integration discipline, and deployability</li>
+              <li>Module-level characterization: electrical integrity, optical throughput, spectral response</li>
+              <li>Readout readiness: SQUID tuning and stable operating points</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="section-title">My role</div>
+            <h3>From lab characterization to module readiness</h3>
+            <p>
+              My contributions sat at the interface of detector physics, cryogenic test operations, and hands-on assembly:
+              I helped ensure that optical modules were electrically robust, optically validated, and mechanically integration-ready,
+              with particular attention to clean measurement practices and repeatable procedures.
+            </p>
+            <ul class="list">
+              <li>OE (optical efficiency) and spectral verification with FTS</li>
+              <li>Electrical checks, continuity screening, and troubleshooting</li>
+              <li>SQUID tuning and readout stability checks</li>
+              <li>Micro-wirebonding of module interconnects (with NASA JPL collaboration)</li>
+              <li>Mechanical design responsibility on a Caltech-inspired CMB-S4 prototype wafer implementation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKSTREAMS (replaces timeline) -->
+    <section class="section" id="timeline" aria-label="Workstreams and validation gates">
+    <div class="card">
+        <div class="card-inner">
+        <div class="section-title">Workstreams</div>
+        <h3>How readiness is built in a long-running research instrument</h3>
+        <p style="margin-bottom:12px;">
+            BICEP Array is not a short engineering program with fixed “milestones”. Instead, progress is driven by
+            <strong>recurring test campaigns</strong>, <strong>integration gates</strong>, and <strong>cross-institution coordination</strong>.
+            The blocks below summarize the main workstreams I contributed to and the practical validation gates used to turn lab work into deployment confidence.
+        </p>
+
+        <div class="timelineX" role="list">
+
+            <!-- ====== WORKSTREAM 1 ====== -->
+            <article class="step" role="listitem">
+            <div class="step-left">
+                <div class="step-badge">
+                <div class="step-month">Workstream</div>
+                <div class="step-dur">Cryogenic characterization</div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <header class="step-head">
+                <div class="step-title">
+                    <h4>Optical module validation in cryogenic conditions</h4>
+                    <div class="step-sub">OE · FTS · electrical integrity · SQUID tuning · repeatable procedures</div>
+                </div>
+
+                <div class="step-logos" aria-label="Host lab logos">
+                    <img class="lb" src="assets/logo/caltech.png" alt="Caltech logo" />
+                </div>
+                </header>
+
+                <div class="step-body">
+                <p class="step-text">
+                    I performed cryogenic test campaigns to validate module-level performance and readiness:
+                    optical efficiency (OE) measurements, Fourier Transform Spectrometer (FTS) runs to verify spectral behavior,
+                    electrical checks/continuity screening, and SQUID tuning for stable readout operation. The emphasis was on
+                    clean procedures, repeatability, and fast troubleshooting to keep integration throughput high.
+                </p>
+
+                <div class="milestones">
+                    <div class="ms-title">Validation gates (what “ready” means)</div>
+
+                    <div class="ms-row">
+                    <div class="ms-dot"></div>
+                    <div class="ms-line"></div>
+                    <div class="ms-content">
+                        <div class="ms-date">Electrical</div>
+                        <div class="ms-text">Continuity / shorts screening + stable readout connectivity before cooldown</div>
+                    </div>
+                    </div>
+
+                    <div class="ms-row">
+                    <div class="ms-dot"></div>
+                    <div class="ms-line"></div>
+                    <div class="ms-content">
+                        <div class="ms-date">Optical</div>
+                        <div class="ms-text">OE + FTS verification against expected band behavior (repeatable across runs)</div>
+                    </div>
+                    </div>
+
+                    <div class="ms-row">
+                    <div class="ms-dot"></div>
+                    <div class="ms-line"></div>
+                    <div class="ms-content">
+                        <div class="ms-date">Readout</div>
+                        <div class="ms-text">SQUID tuning convergence + stable operating points suitable for instrument use</div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </article>
+
+            <!-- ====== WORKSTREAM 2 ====== -->
+            <article class="step" role="listitem">
+            <div class="step-left">
+                <div class="step-badge">
+                <div class="step-month">Workstream</div>
+                <div class="step-dur">Integration & micro-wirebonding</div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <header class="step-head">
+                <div class="step-title">
+                    <h4>Module interconnects — micro-wirebonding leadership</h4>
+                    <div class="step-sub">Process discipline · inspection · coordination (Caltech × NASA JPL)</div>
+                </div>
+
+                <div class="step-logos" aria-label="Partner logos">
+                    <img class="lb" src="assets/logo/caltech.png" alt="Caltech logo" />
+                    <img class="lb" src="assets/logo/nasajpl.png" alt="NASA JPL logo" />
+                </div>
+                </header>
+
+                <div class="step-body">
+                <p class="step-text">
+                    I led micro-wirebonding activities for optical module connections, coordinating with NASA JPL collaborators.
+                    The goal was to ensure clean routing, electrically robust bonds, and consistent workmanship appropriate for a South Pole deployment environment.
+                </p>
+
+                <div class="milestones">
+                    <div class="ms-title">Integration gates</div>
+
+                    <div class="ms-row">
+                    <div class="ms-dot"></div>
+                    <div class="ms-line"></div>
+                    <div class="ms-content">
+                        <div class="ms-date">Inspection</div>
+                        <div class="ms-text">Visual inspection + workmanship consistency checks prior to acceptance</div>
+                    </div>
+                    </div>
+
+                    <div class="ms-row">
+                    <div class="ms-dot"></div>
+                    <div class="ms-line"></div>
+                    <div class="ms-content">
+                        <div class="ms-date">Electrical</div>
+                        <div class="ms-text">Continuity verification after bonding (and after any rework loop)</div>
+                    </div>
+                    </div>
+
+                    <div class="ms-row">
+                    <div class="ms-dot"></div>
+                    <div class="ms-line"></div>
+                    <div class="ms-content">
+                        <div class="ms-date">Handoff</div>
+                        <div class="ms-text">Integration checkpoint: module declared mechanically clean + electrically robust</div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </article>
+
+            <!-- ====== WORKSTREAM 3 ====== -->
+            <article class="step" role="listitem">
+            <div class="step-left">
+                <div class="step-badge">
+                <div class="step-month">Workstream</div>
+                <div class="step-dur">Mechanical design</div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <header class="step-head">
+                <div class="step-title">
+                    <h4>CMB-S4 prototype — wafer mechanical design responsibility</h4>
+                    <div class="step-sub">Interfaces · constraints · integration-minded CAD · manufacturability</div>
+                </div>
+
+                <div class="step-logos" aria-label="Lab logos">
+                    <img class="lb" src="assets/logo/caltech.png" alt="Caltech logo" />
+                </div>
+                </header>
+
+                <div class="step-body">
+                <p class="step-text">
+                    I was responsible for mechanical design aspects of the wafer implementation for a Caltech-inspired CMB-S4 prototype.
+                    This included mechanical interfaces, constraints-driven geometry decisions, and integration-minded design choices
+                    to support testability and assembly.
+                </p>
+
+                <div class="milestones">
+                    <div class="ms-title">Design gates</div>
+
+                    <div class="ms-row">
+                    <div class="ms-dot"></div>
+                    <div class="ms-line"></div>
+                    <div class="ms-content">
+                        <div class="ms-date">Interfaces</div>
+                        <div class="ms-text">Interface definition + tolerance awareness to avoid integration surprises</div>
+                    </div>
+                    </div>
+
+                    <div class="ms-row">
+                    <div class="ms-dot"></div>
+                    <div class="ms-line"></div>
+                    <div class="ms-content">
+                        <div class="ms-date">Review-ready</div>
+                        <div class="ms-text">CAD package suitable for design review and iteration with lab constraints</div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </article>
+
+            <!-- ====== WORKSTREAM 4 ====== -->
+            <article class="step" role="listitem">
+            <div class="step-left">
+                <div class="step-badge">
+                <div class="step-month">Consortium</div>
+                <div class="step-dur">Cross-institution coordination</div>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <header class="step-head">
+                <div class="step-title">
+                    <h4>Collaboration checkpoint — Chicago workshop (Oct 2025)</h4>
+                    <div class="step-sub">Alignment · integration priorities · readiness planning across institutions</div>
+                </div>
+
+                <div class="step-logos" aria-label="Consortium logos">
+                    <img class="lb" src="assets/logo/Harvard_University_logo.png" alt="Harvard logo" />
+                    <img class="lb" src="assets/logo/stanford-university-logo.png" alt="Stanford logo" />
+                    <img class="lb" src="assets/logo/caltech.png" alt="Caltech logo" />
+                    <img class="lb" src="assets/logo/University_of_Minnesota.png" alt="UMN logo" />
+                    <img class="lb" src="assets/logo/nasajpl.png" alt="NASA JPL logo" />
+                </div>
+                </header>
+
+                <div class="step-body">
+                <p class="step-text">
+                    A formal consortium checkpoint bringing together major partner institutions to align on status, integration priorities,
+                    and upcoming deployment needs. In collaborations at this scale (Caltech, Stanford, Harvard, UMN, NASA JPL, and partners),
+                    these workshops convert lab progress into shared program-level confidence.
+                </p>
+
+                <div class="milestones">
+                    <div class="ms-title">Outcome</div>
+
+                    <div class="ms-row">
+                    <div class="ms-dot"></div>
+                    <div class="ms-line"></div>
+                    <div class="ms-content">
+                        <div class="ms-date">Oct 2025</div>
+                        <div class="ms-text">Chicago collaboration workshop — consortium alignment checkpoint</div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </article>
+
+        </div><!-- /timelineX -->
+        </div>
+    </div>
+    </section>
+
+    <!-- WHAT I DID -->
+    <section class="section" id="work" aria-label="What I did">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-inner">
+            <div class="section-title">Work content</div>
+            <h3>Key contributions</h3>
+            <ul class="list">
+              <li>Performed cryogenic characterization of optical modules (OE, FTS, electrical checks)</li>
+              <li>Supported SQUID tuning and readout stability checks for detector operation</li>
+              <li>Led micro-wirebonding of module connections with NASA JPL collaboration</li>
+              <li>Owned mechanical design aspects of a Caltech-inspired CMB-S4 prototype wafer implementation</li>
+              <li>Contributed to consortium alignment through milestone coordination and workshop participation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="section-title">Deliverables</div>
+            <h3>What this page can host</h3>
+            <ul class="list">
+              <li>Measurement snapshots (OE curves, FTS plots, electrical screening summaries)</li>
+              <li>Cryostat/test-stand photos and “module under test” visuals</li>
+              <li>Wirebond process photos (before/after, inspection close-ups)</li>
+              <li>Mechanical CAD renders of prototype wafer hardware</li>
+              <li>Workshop photos (Chicago) + consortium diagram</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEDIA / GALLERY -->
+    <section class="section" id="media" aria-label="Media">
+      <div class="card">
+        <div class="card-inner">
+          <div class="section-title">Media</div>
+          <h3>Photos, lab hardware, and conferences</h3>
+
+          <div class="team-grid">
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                  <img class="zoom-img lb" src="assets/projects/bicep/ChicagoSPO.jpeg" alt="SPO Chicago" />
+                </a>
+              </div>
+              <div class="cap">Entire SPO Collaboration Meeting in Chicago</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                  <img class="zoom-img lb" src="assets/projects/bicep/YannHarvard.jpg" alt="FocalPlaneHarvard" />
+                </a>
+              </div>
+              <div class="cap">Photo of me after assembling the BICEP Focal Plane at Harvard</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                  <img class="zoom-img lb" src="assets/projects/bicep/BicepFP.jpg" alt="FPHarvard" />
+                </a>
+              </div>
+              <div class="cap">BICEP Focal Plane at Harvard</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                  <img class="zoom-img lb" src="assets/projects/bicep/YannCleanroom.jpg" alt="Yann Cleanroom" />
+                </a>
+              </div>
+              <div class="cap">Me while performing wirebonding on BA Modules in the cleanroom at Caltech</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                  <img class="zoom-img lb" src="assets/projects/bicep/Wirebonding2.jpg" alt="Wirebonding zoom" />
+                </a>
+              </div>
+              <div class="cap">Microscope view of wirebonds on SQUIDs/Nyquist Modules</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                  <img class="zoom-img lb" src="assets/projects/bicep/OE.png" alt="OE" />
+                </a>
+              </div>
+              <div class="cap">Example of Optical Efficiency performed on one of the BA modules (I4)</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" aria-label="Contact">
+      <div class="card">
+        <div class="card-inner">
+          <div class="section-title">Contact</div>
+          <h3>Questions or collaboration?</h3>
+          <p>
+            I’m happy to connect with people interested in CMB instrumentation, cryogenic testing, detector module integration,
+            and cross-institution collaboration at scale.
+          </p>
+          <div class="hero-actions">
+            <a class="btn" href="mailto:yann.sadou@polimi.it">✉️ yann.sadou@polimi.it</a>
+            <a class="btn" href="index.html#projects">← Back to projects</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Yann Sadou — BICEP Array Project Page<br/>
+    Hosted on GitHub Pages.
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" type="button">Close ✕</button>
+    <div class="lightbox-inner">
+      <img class="lightbox-img" id="lightboxImg" alt="Expanded image" />
+    </div>
+  </div>
+
+  <script src="stars.js"></script>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const closeBtn = document.getElementById("lightboxClose");
+
+    function openLightbox(src, alt){
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || "Image";
+      lightbox.classList.add("open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+    function closeLightbox(){
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden", "true");
+      lightboxImg.src = "";
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll("img.lb").forEach(img => {
+      img.style.cursor = "zoom-in";
+      img.addEventListener("click", () => openLightbox(img.src, img.alt));
+    });
+
+    closeBtn.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
+  </script>
+</body>
+</html>

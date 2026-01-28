@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Caltech × NASA JPL — MKID Optical Characterization (NEW-MUSIC) | Yann Sadou</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Six-month Caltech × NASA JPL internship: optical characterization and alignment setup for MKID antenna/sub-antenna mapping in the NEW-MUSIC instrument. Zemax modeling, SolidWorks design, procurement, assembly, measurements, and final thesis/report." />
+
+  <!-- Keep your global stylesheet if you want (optional) -->
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* =========================================================
+       SAME GLASS + STARS THEME (matching your SEEDS page)
+    ========================================================= */
+    :root{
+      --glass: rgba(255,255,255,0.08);
+      --glass2: rgba(255,255,255,0.06);
+      --border: rgba(255,255,255,0.14);
+      --txt: rgba(255,255,255,0.92);
+      --txt2: rgba(255,255,255,0.72);
+      --shadow: 0 18px 60px rgba(0,0,0,0.38);
+      --radius: 18px;
+      --max: 1400px;
+      --accent: rgba(124,199,255,0.95);
+      --accent2: rgba(180,170,255,0.90);
+      --ok: rgba(160,255,220,0.90);
+      --warn: rgba(255,210,160,0.92);
+      --danger: rgba(255,150,150,0.92);
+    }
+
+    body{
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, "SF Pro Text","Helvetica Neue", Arial, sans-serif;
+      color: var(--txt);
+      background: transparent;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    header, main, footer{ position: relative; z-index: 1; }
+
+    header{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+
+    .head-left{ display:flex; flex-direction:column; gap: 4px; }
+
+    .title{
+      font-size: 24px;
+      font-weight: 850;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      text-shadow: 0 0 22px rgba(124,199,255,0.14);
+    }
+
+    .subtitle{
+      font-size: 13px;
+      color: var(--txt2);
+    }
+
+    .back-link{
+      font-size: 13px;
+      color: rgba(255,255,255,0.88);
+      text-decoration: none;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      background: var(--glass2);
+      backdrop-filter: blur(14px);
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+      white-space: nowrap;
+    }
+    .back-link:hover{
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.22);
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    main{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 6px 20px 56px;
+    }
+
+    .section{ margin-top: 18px; }
+
+    .section-title{
+      margin: 0 0 10px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+    .hero{
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position: relative;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(900px 340px at 20% 10%, rgba(124,199,255,0.18), transparent 60%),
+        radial-gradient(700px 280px at 82% 0%, rgba(255,255,255,0.10), transparent 55%);
+      pointer-events:none;
+    }
+
+    .hero-inner{
+      padding: 18px 18px 16px;
+      display:grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+      gap: 16px;
+      position: relative;
+    }
+
+    .kicker{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .chip{
+      font-size: 11px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.78);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .chip.accent{
+      border-color: rgba(124,199,255,0.30);
+      background: rgba(124,199,255,0.10);
+      color: rgba(210,240,255,0.92);
+    }
+    .chip.ok{
+      border-color: rgba(160,255,220,0.26);
+      background: rgba(160,255,220,0.08);
+      color: rgba(210,255,240,0.92);
+    }
+    .chip.warn{
+      border-color: rgba(255,210,160,0.28);
+      background: rgba(255,210,160,0.08);
+      color: rgba(255,235,210,0.92);
+    }
+
+    .hero-title{
+      margin: 0;
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .hero-desc{
+      margin: 10px 0 0;
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.82);
+      max-width: 840px;
+    }
+
+    .hero-actions{
+      margin-top: 14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+    }
+
+    .btn{
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 9px 14px;
+      font-size: 13px;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.90);
+      text-decoration:none;
+      backdrop-filter: blur(14px);
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      white-space:nowrap;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(124,199,255,0.28);
+      text-decoration:none;
+    }
+
+    /* stable hero image frame */
+    .hero-figure{
+      position: relative;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      overflow:hidden;
+      box-shadow: 0 14px 44px rgba(0,0,0,0.36);
+      aspect-ratio: 16 / 10;
+      width: 270%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .hero-figure img{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* switch to contain if you prefer no crop */
+      display:block;
+    }
+
+    .hero-caption{
+      margin-top: 8px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      text-align:center;
+    }
+
+    @media (max-width: 980px){
+      .hero-inner{ grid-template-columns: minmax(0, 1fr); }
+      .hero-figure{ aspect-ratio: 16/9; }
+    }
+
+    /* =========================================================
+       CARDS / GRID
+    ========================================================= */
+    .grid-2{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    @media (max-width: 980px){ .grid-2{ grid-template-columns: minmax(0, 1fr); } }
+
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 16px 46px rgba(0,0,0,0.34);
+      overflow:hidden;
+      position: relative;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 260px at 18% 10%, rgba(124,199,255,0.12), transparent 60%),
+        radial-gradient(650px 240px at 85% 0%, rgba(255,255,255,0.07), transparent 55%);
+      pointer-events:none;
+      opacity: 0.85;
+    }
+
+    .card-inner{ padding: 14px 14px 14px; position: relative; }
+
+    .card h3{
+      margin: 0 0 6px;
+      font-size: 15px;
+      font-weight: 850;
+      letter-spacing: -0.01em;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .card p{
+      margin: 0;
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.78);
+    }
+
+    .list{
+      margin: 10px 0 0 18px;
+      padding: 0;
+      color: rgba(255,255,255,0.80);
+      font-size: 13.5px;
+      line-height: 1.7;
+    }
+    .list li{ margin: 4px 0; }
+
+    .muted{
+      margin-top: 10px;
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.62);
+      line-height: 1.65;
+    }
+
+    .card a{
+      color: rgba(210,240,255,0.92);
+      text-decoration: none;
+    }
+    .card a:hover{ text-decoration: underline; }
+
+    /* =========================================================
+       TIMELINE (clean + elegant)
+    ========================================================= */
+    .timelineX{
+      position: relative;
+      display: grid;
+      gap: 14px;
+      padding-left: 22px;
+    }
+    .timelineX::before{
+      content:"";
+      position:absolute;
+      left: 8px;
+      top: 6px;
+      bottom: 18px;
+      width: 2px;
+      background: rgba(255,255,255,0.14);
+      border-radius: 999px;
+    }
+    .timelineX::after{
+      content:"";
+      position:absolute;
+      left: 3px;
+      bottom: 4px;
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 10px solid rgba(124,199,255,0.72);
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.35));
+      opacity: 0.95;
+    }
+
+    .step{
+      display: grid;
+      grid-template-columns: 140px minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+      position: relative;
+    }
+    .step::before{
+      content:"";
+      position:absolute;
+      left: -18px;
+      top: 24px;
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(124,199,255,0.82);
+      box-shadow: 0 0 0 4px rgba(124,199,255,0.14), 0 10px 24px rgba(0,0,0,0.30);
+    }
+
+    .step-badge{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      padding: 10px 10px 9px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    }
+    .step-month{
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: rgba(255,255,255,0.84);
+      margin-bottom: 4px;
+    }
+    .step-dur{
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
+    }
+
+    .step-card{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 16px 46px rgba(0,0,0,0.32);
+      overflow: hidden;
+      position: relative;
+    }
+    .step-card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(700px 260px at 18% 10%, rgba(124,199,255,0.10), transparent 60%),
+        radial-gradient(650px 240px at 85% 0%, rgba(255,255,255,0.06), transparent 55%);
+      pointer-events:none;
+      opacity: 0.9;
+    }
+
+    .step-head{
+      position: relative;
+      padding: 12px 14px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .step-title h4{
+      margin: 0;
+      font-size: 15px;
+      font-weight: 900;
+      color: rgba(255,255,255,0.92);
+    }
+    .step-sub{
+      margin-top: 3px;
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.66);
+      line-height: 1.35;
+    }
+
+    .step-logos{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0.95;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .step-logos img{
+      height: 28px;
+      width: auto;
+      object-fit: contain;
+      filter: contrast(1.05);
+      opacity: 0.92;
+    }
+
+    .step-body{
+      position: relative;
+      padding: 12px 14px 14px;
+    }
+    .step-text{
+      margin: 0;
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.7;
+    }
+
+    .milestones{
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(255,255,255,0.18);
+    }
+    .ms-title{
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
+      margin-bottom: 10px;
+    }
+    .ms-row{
+      display: grid;
+      grid-template-columns: 10px 42px minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .ms-row:last-child{ margin-bottom: 0; }
+    .ms-dot{
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(180,170,255,0.85);
+      box-shadow: 0 0 0 4px rgba(180,170,255,0.12);
+    }
+    .ms-line{
+      height: 2px;
+      background: rgba(255,255,255,0.14);
+      border-radius: 999px;
+    }
+    .ms-date{
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
+      margin-bottom: 2px;
+    }
+    .ms-text{
+      font-size: 13.2px;
+      color: rgba(255,255,255,0.86);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 720px){
+      .step{ grid-template-columns: minmax(0, 1fr); }
+      .step::before{ top: 18px; }
+      .step-badge{ width: fit-content; }
+      .step-logos{ justify-content: flex-start; }
+    }
+
+    /* =========================================================
+       PUBLICATIONS
+    ========================================================= */
+    .paper{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      padding: 12px 12px 10px;
+    }
+
+    .paper-head{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom: 6px;
+    }
+
+    .paper-title{
+      margin: 0;
+      font-weight: 900;
+      font-size: 14px;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.25;
+    }
+
+    .paper-meta{
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.70);
+      line-height: 1.55;
+      margin: 6px 0 0;
+    }
+
+    /* =========================================================
+       MEDIA GRID
+    ========================================================= */
+    .team-grid{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    @media (max-width: 980px){ .team-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px){ .team-grid{ grid-template-columns: minmax(0, 1fr); } }
+
+    .media-box{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      overflow:hidden;
+      box-shadow: 0 14px 44px rgba(0,0,0,0.30);
+      position: relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      aspect-ratio: 4 / 3;
+      width: 100%;
+    }
+    .media-box img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+    .cap{
+      margin-top: 8px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.65);
+      text-align:center;
+    }
+
+    /* =========================================================
+       ZOOM HOVER + LIGHTBOX
+    ========================================================= */
+    .zoom-media{
+      position: relative;
+      display: block;
+      border-radius: 18px;
+      overflow: hidden;
+      text-decoration: none;
+      outline: none;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,0.06);
+    }
+    .zoom-img{
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transform: scale(1);
+      transition: transform 220ms ease;
+    }
+    .zoom-media:hover .zoom-img,
+    .zoom-media:focus-visible .zoom-img{
+      transform: scale(1.12);
+    }
+
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      display:none;
+      z-index: 999;
+      background: rgba(0,0,0,0.74);
+      backdrop-filter: blur(10px);
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+    }
+    .lightbox.open{ display:flex; }
+
+    .lightbox-inner{
+      width: min(1100px, 96vw);
+      max-height: 86vh;
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      box-shadow: 0 20px 80px rgba(0,0,0,0.48);
+    }
+    .lightbox-img{
+      width: 100%;
+      height: 100%;
+      max-height: 86vh;
+      object-fit: contain;
+      background: rgba(0,0,0,0.22);
+      display:block;
+    }
+    .lightbox-close{
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      z-index: 1000;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.92);
+      padding: 8px 12px;
+      cursor:pointer;
+      transition: transform 180ms ease, background 180ms ease;
+    }
+    .lightbox-close:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.12);
+    }
+
+    /* =========================================================
+       REPORT PANEL
+    ========================================================= */
+    .paper{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      padding: 12px 12px 10px;
+    }
+    .paper-head{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom: 6px;
+    }
+    .paper-title{
+      margin: 0;
+      font-weight: 900;
+      font-size: 14px;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.25;
+    }
+    .paper-meta{
+      font-size: 12.5px;
+      color: rgba(255,255,255,0.70);
+      line-height: 1.55;
+      margin: 6px 0 0;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+    footer{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px 20px 36px;
+      color: rgba(255,255,255,0.62);
+      font-size: 12px;
+      text-align:center;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Same stars canvas as your other pages -->
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <header>
+    <div class="head-left">
+      <div class="title">Caltech × NASA JPL — MKID Optical Characterization (NEW-MUSIC)</div>
+      <div class="subtitle">6-month internship · Prof. Sunil Golwala · Systems + optics + hardware delivery</div>
+    </div>
+    <a class="back-link" href="index.html">← Back to main site</a>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" aria-label="Project hero">
+      <div class="hero-inner">
+        <div>
+          <div class="kicker">
+            <span class="chip accent">CALTECH</span>
+            <span class="chip">NASA JPL collaboration</span>
+            <span class="chip ok">Hands-on lab build</span>
+            <span class="chip">Zemax + SolidWorks</span>
+            <span class="chip warn">NEW-MUSIC / MKIDs</span>
+          </div>
+
+          <h1 class="hero-title">From optical modeling to a working alignment rig for MKID antenna & sub-antenna mapping</h1>
+
+          <p class="hero-desc">
+            During my end-of-study internship (ISAE-SUPAERO), I joined Prof. Sunil Golwala’s team at Caltech to support
+            the development of <strong>Microwave Kinetic Inductance Detectors (MKIDs)</strong> for sub-millimeter astronomy.
+            My core deliverable was an <strong>optical reconstruction setup</strong> that makes it possible to <strong>identify and map</strong>
+            MKID <strong>antennas and sub-antennas</strong> outside the cryostat, by combining simulation (Zemax), mechanical design
+            (SolidWorks), procurement, assembly, and measurement campaigns on the lab beam-mapper.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn" href="#timeline">📍 Timeline</a>
+            <a class="btn" href="#work">🧩 Work packages</a>
+            <a class="btn" href="#results">📈 Results</a>
+            <a class="btn" href="#report">📄 Final report</a>
+            <a class="btn" href="#photos">🖼️ Photos</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="hero-figure">
+            <!-- Replace with your best hero image (rig / lab / optics render) -->
+            <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+              <img class="zoom-img lb" src="assets/projects/mkids/CSO.png" alt="Caltech Sub-millimeter Observatory" />
+            </a>
+          </div>
+          <div class="hero-caption">Caltech Sub-millimeter Observatory in Hawaï</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK CONTEXT -->
+    <section class="section" aria-label="Context">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-inner">
+            <div class="section-title">Context</div>
+            <h3>Why this mattered</h3>
+            <p>
+              In the NEW-MUSIC instrument development flow, a critical step is being able to
+              <strong>associate readout resonance features</strong> to the <strong>physical location</strong> of pixels (antennas / sub-antennas)
+              in the detector array. This requires a reliable way to reconstruct the detector “image”
+              on an external plane and compare it to the expected geometry.
+            </p>
+            <ul class="list">
+              <li>Cryogenic detectors inside a cryostat (fixed geometry)</li>
+              <li>Beam-mapper used to scan a plane with a controlled source</li>
+              <li>Optical reconstruction needed to map antennas & resolve sub-antennas</li>
+              <li>Delivered as a robust lab setup, not a one-off demo</li>
+            </ul>
+            <p class="muted">
+              (Technical foundations: NEW-MUSIC context, cryostat + detectors, beam-mapper and mapping objective are documented in the internship report.)
+            </p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="section-title">My role</div>
+            <h3>Ownership from modeling → hardware → measurements</h3>
+            <p>
+              I worked with strong autonomy (weekly team checkpoint) and carried the project end-to-end:
+              optical design decisions, CAD, procurement, assembly integration, then measurement runs and iterative refinements.
+            </p>
+            <ul class="list">
+              <li><strong>Zemax</strong> model of the ellipsoidal mirror + fold mirror optical path</li>
+              <li>Mechanical design in <strong>SolidWorks</strong> using 8020 / standard frames and custom interfaces</li>
+              <li>Procurement & manufacturing coordination (McMaster-Carr, 8020, Xometry, shop support)</li>
+              <li>Assembly, alignment, measurement campaigns and repeatability improvements</li>
+            </ul>
+            <div class="hero-actions" style="margin-top:12px;">
+              <a class="btn" href="#awards">🏅 Awards & honors</a>
+              <a class="btn" href="#team">👥 Team & partners</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="section" id="timeline" aria-label="Timeline">
+      <div class="card">
+        <div class="card-inner">
+          <div class="section-title">Project timeline</div>
+          <h3>January 2024 → September 2024 · from discovery to thesis defense</h3>
+          <p style="margin-bottom:12px;">
+            A full project arc: learn the system constraints, build the model, design & fabricate the structure,
+            integrate in the lab, run measurements, refine repeatability, and deliver a complete report + presentation.
+          </p>
+
+          <div class="timelineX" role="list">
+
+            <!-- Step 1 -->
+            <article class="step" role="listitem">
+              <div class="step-left">
+                <div class="step-badge">
+                  <div class="step-month">Jan–Feb 2024</div>
+                  <div class="step-dur">Discovery</div>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <header class="step-head">
+                  <div class="step-title">
+                    <h4>System onboarding & constraints</h4>
+                    <div class="step-sub">Cryostat + detectors + beam-mapper · mapping objective</div>
+                  </div>
+                  <div class="step-logos" aria-label="Logos">
+                    <img class="lb" src="assets/logo/caltech.png" alt="Caltech logo" />
+                    <img class="lb" src="assets/logo/nasa-jpl.png" alt="NASA JPL logo" />
+                  </div>
+                </header>
+
+                <div class="step-body">
+                  <p class="step-text">
+                    Defined the measurement problem and success criteria: rebuild the detector image outside the cryostat,
+                    enabling identification of antennas and resolving sub-antenna structure using the beam-mapper scanning plane.
+                  </p>
+                  <div class="milestones">
+                    <div class="ms-title">Outputs</div>
+                    <div class="ms-row">
+                      <div class="ms-dot"></div><div class="ms-line"></div>
+                      <div class="ms-content">
+                        <div class="ms-date">Requirements</div>
+                        <div class="ms-text">Mapping resolution target + geometry/clearance constraints</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Step 2 -->
+            <article class="step" role="listitem">
+              <div class="step-left">
+                <div class="step-badge">
+                  <div class="step-month">Feb–Mar 2024</div>
+                  <div class="step-dur">Optical modeling</div>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <header class="step-head">
+                  <div class="step-title">
+                    <h4>Zemax model of the optical path</h4>
+                    <div class="step-sub">Ellipsoidal mirror + fold mirror · imaging on beam-mapper</div>
+                  </div>
+                  <div class="step-logos" aria-label="Tools">
+                    <img class="lb" src="assets/logo/zemax.png" alt="Zemax logo" />
+                  </div>
+                </header>
+
+                <div class="step-body">
+                  <p class="step-text">
+                    Implemented the ellipsoidal mirror parameters and validated focusing behavior, then integrated the full optical path
+                    including window clearance and fold mirror redirection. Performed trade studies (e.g., mirror distance choices to reduce
+                    beam obstruction) and locked the target geometry for hardware build.
+                  </p>
+                  <div class="milestones">
+                    <div class="ms-title">Outputs</div>
+                    <div class="ms-row">
+                      <div class="ms-dot"></div><div class="ms-line"></div>
+                      <div class="ms-content">
+                        <div class="ms-date">Validated model</div>
+                        <div class="ms-text">Optical configuration that reconstructs antenna/sub-antenna image on the beam-mapper plane</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Step 3 -->
+            <article class="step" role="listitem">
+              <div class="step-left">
+                <div class="step-badge">
+                  <div class="step-month">Mar–Apr 2024</div>
+                  <div class="step-dur">Mechanical design</div>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <header class="step-head">
+                  <div class="step-title">
+                    <h4>SolidWorks structures & interfaces</h4>
+                    <div class="step-sub">8020 frames · custom plates · alignment strategy</div>
+                  </div>
+                  <div class="step-logos" aria-label="Tools">
+                    <img class="lb" src="assets/logo/solidworks.png" alt="SolidWorks logo" />
+                  </div>
+                </header>
+
+                <div class="step-body">
+                  <p class="step-text">
+                    Designed two robust sub-assemblies: (1) a cryostat-referenced structure holding the ellipsoidal mirror, and
+                    (2) a beam-mapper-referenced structure holding the fold mirror. Created custom interfaces to ensure repeatable alignment
+                    and controlled distances/angles for measurement runs.
+                  </p>
+                  <div class="milestones">
+                    <div class="ms-title">Outputs</div>
+                    <div class="ms-row">
+                      <div class="ms-dot"></div><div class="ms-line"></div>
+                      <div class="ms-content">
+                        <div class="ms-date">CAD package</div>
+                        <div class="ms-text">Full assembly + manufacturing drawings for custom parts</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Step 4 -->
+            <article class="step" role="listitem">
+              <div class="step-left">
+                <div class="step-badge">
+                  <div class="step-month">Apr–May 2024</div>
+                  <div class="step-dur">Procurement</div>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <header class="step-head">
+                  <div class="step-title">
+                    <h4>Ordering & fabrication coordination</h4>
+                    <div class="step-sub">McMaster/8020 + custom parts + mirror integration</div>
+                  </div>
+                  <div class="step-logos" aria-label="Vendors">
+                    <img class="lb" src="assets/logo/mcmaster.png" alt="McMaster logo" />
+                    <img class="lb" src="assets/logo/8020.png" alt="8020 logo" />
+                    <img class="lb" src="assets/logo/xometry.png" alt="Xometry logo" />
+                  </div>
+                </header>
+
+                <div class="step-body">
+                  <p class="step-text">
+                    Managed sourcing and fabrication: standard frame components, wheels/pivots, mirror hardware and custom machined interfaces.
+                    Ensured compatibility with lab constraints and safe/rigid support of optics (including fold mirror mass handling).
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <!-- Step 5 -->
+            <article class="step" role="listitem">
+              <div class="step-left">
+                <div class="step-badge">
+                  <div class="step-month">May–Jun 2024</div>
+                  <div class="step-dur">Build & integration</div>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <header class="step-head">
+                  <div class="step-title">
+                    <h4>Assembly, alignment, fit checks</h4>
+                    <div class="step-sub">Lab integration with cryostat and beam-mapper</div>
+                  </div>
+                  <div class="step-logos" aria-label="Orgs">
+                    <img class="lb" src="assets/logo/caltech.png" alt="Caltech logo" />
+                    <img class="lb" src="assets/logo/nasa-jpl.png" alt="NASA JPL logo" />
+                  </div>
+                </header>
+
+                <div class="step-body">
+                  <p class="step-text">
+                    Built both sub-assemblies, mounted optics, performed mechanical fit checks, and integrated the complete end-to-end setup.
+                    Addressed practical constraints (stability, handling, alignment tolerance stack-ups) prior to measurement campaigns.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <!-- Step 6 -->
+            <article class="step" role="listitem">
+              <div class="step-left">
+                <div class="step-badge">
+                  <div class="step-month">Jun–Aug 2024</div>
+                  <div class="step-dur">Measurements</div>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <header class="step-head">
+                  <div class="step-title">
+                    <h4>Beam-mapper scans & reconstruction</h4>
+                    <div class="step-sub">Identify antennas + resolve sub-antennas · repeatability improvements</div>
+                  </div>
+                  <div class="step-logos" aria-label="Tools">
+                    <img class="lb" src="assets/logo/python.png" alt="Python logo" />
+                  </div>
+                </header>
+
+                <div class="step-body">
+                  <p class="step-text">
+                    Ran multi-tone measurement batches and reconstructed detector images on the beam-mapper plane.
+                    Verified antenna identification and observed sub-antenna maxima structure. Improved repeatability via guidance fixtures
+                    and more rigid coupling between assemblies.
+                  </p>
+
+                  <div class="milestones">
+                    <div class="ms-title">Key outcomes</div>
+
+                    <div class="ms-row">
+                      <div class="ms-dot"></div><div class="ms-line"></div>
+                      <div class="ms-content">
+                        <div class="ms-date">Imaging success</div>
+                        <div class="ms-text">Antenna pixels clearly reconstructed; sub-antenna pattern visible in maxima maps</div>
+                      </div>
+                    </div>
+
+                    <div class="ms-row">
+                      <div class="ms-dot"></div><div class="ms-line"></div>
+                      <div class="ms-content">
+                        <div class="ms-date">Repeatability</div>
+                        <div class="ms-text">Post-refinement deviations reduced to ~0.4 in (X) and ~0.1 in (Y) between re-setups</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Step 7 -->
+            <article class="step" role="listitem">
+              <div class="step-left">
+                <div class="step-badge">
+                  <div class="step-month">Aug–Sep 2024</div>
+                  <div class="step-dur">Thesis delivery</div>
+                </div>
+              </div>
+
+              <div class="step-card">
+                <header class="step-head">
+                  <div class="step-title">
+                    <h4>Final report & presentation</h4>
+                    <div class="step-sub">Full thesis write-up + defense at ISAE-SUPAERO</div>
+                  </div>
+                  <div class="step-logos" aria-label="Orgs">
+                    <img class="lb" src="assets/logo/supaero.png" alt="ISAE-SUPAERO logo" />
+                  </div>
+                </header>
+
+                <div class="step-body">
+                  <p class="step-text">
+                    Consolidated methods, design decisions, measurement results and lessons learned into a complete end-of-study report,
+                    then presented the work at ISAE-SUPAERO as the internship thesis deliverable.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+          </div><!-- /timelineX -->
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK PACKAGES -->
+    <section class="section" id="work" aria-label="Work packages">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-inner">
+            <div class="section-title">Work packages</div>
+            <h3>What I built</h3>
+            <ul class="list">
+              <li><strong>Optical model (Zemax):</strong> full path implementation, clearance trade studies, focus/plane selection</li>
+              <li><strong>Mechanical system (SolidWorks):</strong> two rigid assemblies + coupling interfaces for repeatable alignment</li>
+              <li><strong>Procurement & manufacturing:</strong> vendor coordination + custom parts + integration strategy</li>
+              <li><strong>Lab integration:</strong> build, fit checks, alignment workflow, safe handling, iteration loops</li>
+              <li><strong>Measurement campaign:</strong> beam-mapper scans, reconstruction, identification of antennas & sub-antennas</li>
+              <li><strong>Repeatability engineering:</strong> guidance frames and structure modifications to reduce setup drift</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-inner">
+            <div class="section-title">Technical highlights</div>
+            <h3>What was hard (and fun)</h3>
+            <ul class="list">
+              <li>Bridging CAD geometry and Zemax parameterization (mirror representation + practical tolerances)</li>
+              <li>Managing obstruction/clearance constraints while preserving image reconstruction performance</li>
+              <li>Designing for <strong>repeatability</strong>: real lab setups move; your structure must “snap back” reliably</li>
+              <li>Balancing rigidity, mass, and adjustability (especially around the fold mirror)</li>
+              <li>Turning measurement plots into actionable mechanical changes</li>
+            </ul>
+            <p class="muted">
+              This project was a true Caltech × NASA JPL style workflow: simulation → hardware → test → iterate → document.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="section" id="results" aria-label="Results">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-inner">
+            <div class="section-title">Results</div>
+            <h3>Validated optical reconstruction</h3>
+            <p>
+              The final setup successfully reconstructed the detector image on the beam-mapper plane, enabling
+              <strong>antenna identification</strong> and revealing <strong>sub-antenna structure</strong> in the maxima maps.
+              Repeatability was improved through mechanical guidance features and more rigid coupling between assemblies.
+            </p>
+            <ul class="list">
+              <li>Antenna pixels reconstructed with clear localization</li>
+              <li>Sub-antenna pattern visible as multiple maxima within antenna regions</li>
+              <li>Repeatability improved after structural refinements</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card" id="awards">
+          <div class="card-inner">
+            <div class="section-title">Recognition</div>
+            <h3>Thesis honors & nomination</h3>
+            <ul class="list">
+              <li><strong>Highest honors</strong> for the internship thesis with mention “<strong>Exceptional</strong>”</li>
+              <li><strong>Nominated</strong> for the ISAE-SUPAERO <strong>Excellence Award</strong> (graduation)</li>
+              <li>Presented as end-of-study Master internship deliverable (ISAE-SUPAERO)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM & PARTNERS -->
+    <section class="section" id="team" aria-label="Team and partners">
+      <div class="card">
+        <div class="card-inner">
+          <div class="section-title">Team & partners</div>
+          <h3>Collaboration context</h3>
+          <p>
+            Work performed within Caltech’s astrophysics / observational cosmology ecosystem, in direct collaboration with NASA JPL,
+            supporting NEW-MUSIC MKID technology development under Prof. Sunil Golwala.
+          </p>
+
+          <div class="grid-2" style="margin-top:12px;">
+            <div class="paper">
+              <div class="paper-head">
+                <p class="paper-title">Host</p>
+                <span class="chip accent">Caltech</span>
+              </div>
+              <p class="paper-meta">
+                Mentor: <strong>Prof. Sunil Golwala</strong><br/>
+                Lab: detector development & instrumentation for sub-mm astronomy (NEW-MUSIC).
+              </p>
+            </div>
+
+            <div class="paper">
+              <div class="paper-head">
+                <p class="paper-title">Partner</p>
+                <span class="chip accent">NASA JPL</span>
+              </div>
+              <p class="paper-meta">
+                Collaboration with JPL team providing key hardware (e.g., ellipsoidal mirror) and instrumentation expertise.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REPORT -->
+    <section class="section" id="report" aria-label="Final report">
+        <div class="card">
+            <div class="card-inner">
+                <div class="section-title">Final deliverable</div>
+                <h3>Internship thesis report (PDF)</h3>
+
+                <div class="paper">
+                    <div class="paper-head">
+                    <p class="paper-title">Optical Characterization for Optimizing MKID Technology for Astronomical Observations</p>
+                    <span class="chip accent">PDF</span>
+                    </div>
+
+                    <div class="hero-actions" style="margin-top:12px;">
+                    <!-- Report -->
+                    <a class="btn" href="assets/projects/mkids/report.pdf" target="_blank" rel="noopener noreferrer">📄 Open report</a>
+                    <a class="btn" href="assets/projects/mkids/report.pdf" download>⬇️ Download report</a>
+
+                    <!-- Slides -->
+                    <a class="btn" href="assets/projects/mkids/slides.pdf" target="_blank" rel="noopener noreferrer">🖥️ Open slides</a>
+                    <a class="btn" href="assets/projects/mkids/slides.pdf" download>⬇️ Download slides</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section class="section" id="paper" aria-label="paper">
+      <div class="card">
+        <div class="card-inner">
+          <div class="section-title">Publication</div>
+          <h3>Co-authored papers</h3>
+
+          <div class="paper">
+            <div class="paper-head">
+              <p class="paper-title">Low-Frequency Noise Performance of Microstrip-Coupled Lumped-Element Aluminum KIDs using Hydrogenated Amorphous Silicon Parallel-Plate Capacitors for NEW-MUSIC</p>
+              <span class="chip accent">IEEE TRANSACTIONS ON APPLIED SUPERCONDUCTIVITY</span>
+            </div>
+
+            <p class="paper-meta">
+              Published in November 2025 in IEEE Transactions on Applied Superconductivity and written by Simon Hempel-Costello (PhD student at Caltech).<br/>
+              Paper reference: <strong>arXiv:2511.08898</strong> (as listed on arXiv).<br/>
+              Full text link:
+              <a href="https://arxiv.org/abs/2511.08898"
+                 target="_blank" rel="noopener noreferrer">
+                 arXiv publication page ↗
+              </a>
+            </p>
+
+            <div class="hero-actions" style="margin-top:12px;">
+              <a class="btn" href="https://arxiv.org/pdf/2511.08898"
+                 target="_blank" rel="noopener noreferrer">📄 Open paper</a>
+            </div>
+          </div>
+
+          <div class="paper">
+            <div class="paper-head">
+              <p class="paper-title">Improved Modeling of Quasi-Static Thermal and Optical Response of Lumped-Element Aluminum Manganese KIDs</p>
+              <span class="chip accent">IEEE TRANSACTIONS ON APPLIED SUPERCONDUCTIVITY</span>
+            </div>
+
+            <p class="paper-meta">
+              Published in November 2025 in IEEE Transactions on Applied Superconductivity and written by Adriana Gavidia (PhD student at Caltech).<br/>
+              Paper reference: <strong>arXiv:2511.08959</strong> (as listed on arXiv).<br/>
+              Full text link:
+              <a href="https://arxiv.org/abs/2511.08959"
+                 target="_blank" rel="noopener noreferrer">
+                 arXiv publication page ↗
+              </a>
+            </p>
+
+            <div class="hero-actions" style="margin-top:12px;">
+              <a class="btn" href="https://arxiv.org/pdf/2511.08959"
+                 target="_blank" rel="noopener noreferrer">📄 Open paper</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PHOTOS -->
+    <section class="section" id="photos" aria-label="Photos">
+      <div class="card">
+        <div class="card-inner">
+          <div class="section-title">Photos</div>
+          <h3>Lab build, integration, and presentations</h3>
+
+          <div class="team-grid">
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                  <img class="zoom-img lb" src="assets/projects/mkids/ZemaxSimu.MOV" alt="ZemaxSimu" />
+                </a>
+              </div>
+              <div class="cap">Simulation of the optical path I made on Zemax with distance Mirror-KIDs varying</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                  <img class="zoom-img lb" src="assets/projects/mkids/CAD.png" alt="CAD" />
+                </a>
+              </div>
+              <div class="cap">3D CAD model of the whole assembly made on Solidworks</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                  <img class="zoom-img lb" src="assets/projects/mkids/Assembly.png" alt="Full assembly" />
+                </a>
+              </div>
+              <div class="cap">Full optical setup assembled in the lab</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                  <img class="zoom-img lb" src="assets/projects/mkids/TestVideo.MOV" alt="LightTest" />
+                </a>
+              </div>
+              <div class="cap">Video of a light test performed in the lab at Caltech</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                  <img class="zoom-img lb" src="assets/projects/mkids/Experiment.png" alt="LaserTest" />
+                </a>
+              </div>
+              <div class="cap">Photos of a laser test performed in the lab at Caltech</div>
+            </div>
+
+            <div>
+              <div class="media-box">
+                <a class="zoom-media" href="javascript:void(0)" aria-label="Open image">
+                  <img class="zoom-img lb" src="assets/projects/mkids/Results.png" alt="Results" />
+                </a>
+              </div>
+              <div class="cap">Final results of the beam-mapping run (we can successfully locate the 4 antennas on the focal plane)</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" aria-label="Contact">
+      <div class="card">
+        <div class="card-inner">
+          <div class="section-title">Contact</div>
+          <h3>Questions or collaboration?</h3>
+          <p>
+            If you work on detector characterization, optics/mechanics integration, or lab test setups,
+            I’m happy to connect.
+          </p>
+          <div class="hero-actions">
+            <a class="btn" href="mailto:yann.sadou@polimi.it">✉️ yann.sadou@polimi.it</a>
+            <a class="btn" href="index.html#projects">← Back to projects</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Yann Sadou — MKID Optical Characterization Project Page<br/>
+    Hosted on GitHub Pages.
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" type="button">Close ✕</button>
+    <div class="lightbox-inner">
+      <img class="lightbox-img" id="lightboxImg" alt="Expanded image" />
+    </div>
+  </div>
+
+  <!-- Stars background: reuse your existing file -->
+  <script src="stars.js"></script>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <script>
+    /* --- Lightbox (same behavior as your other pages) --- */
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const closeBtn = document.getElementById("lightboxClose");
+
+    function openLightbox(src, alt){
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || "Image";
+      lightbox.classList.add("open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+    function closeLightbox(){
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden", "true");
+      lightboxImg.src = "";
+      document.body.style.overflow = "";
+    }
+
+    // click any image with class "lb"
+    document.querySelectorAll("img.lb").forEach(img => {
+      img.style.cursor = "zoom-in";
+      img.addEventListener("click", () => openLightbox(img.src, img.alt));
+    });
+
+    closeBtn.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
+  </script>
+</body>
+</html>

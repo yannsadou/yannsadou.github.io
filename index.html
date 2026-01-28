@@ -21,30 +21,57 @@
       <div class="drawer-section-title">On this page</div>
       <ul class="drawer-link-group">
         <li><a class="drawer-link" href="#about"><span class="label">About Me</span><span class="chevron">›</span></a></li>
-        <li><a class="drawer-link" href="#research"><span class="label">Research</span><span class="chevron">›</span></a></li>
-        <li><a class="drawer-link" href="#experience"><span class="label">Experience</span><span class="chevron">›</span></a></li>
-        <li><a class="drawer-link" href="#education"><span class="label">Education</span><span class="chevron">›</span></a></li>
         <li><a class="drawer-link" href="#projects"><span class="label">Projects</span><span class="chevron">›</span></a></li>
+        <li><a class="drawer-link" href="#publications"><span class="label">Publications</span><span class="chevron">›</span></a></li>
+        <li><a class="drawer-link" href="#medias"><span class="label">Medias</span><span class="chevron">›</span></a></li>
         <li><a class="drawer-link" href="#contact"><span class="label">Contact</span><span class="chevron">›</span></a></li>
       </ul>
 
-      <div class="drawer-section-title">Research & CV</div>
+      <div class="drawer-section-title">My Projects</div>
       <ul class="drawer-link-group">
         <li>
-          <a class="drawer-link" href="research.html">
-            <span class="label">Detailed research page</span>
+          <a class="drawer-link" href="moonexploration.html">
+            <span class="label">Lunar Exploration (PhD project)</span>
             <span class="chevron">↗</span>
           </a>
         </li>
         <li>
-          <a class="drawer-link" href="projects.html">
-            <span class="label">Projects page</span>
+          <a class="drawer-link" href="marsexploration.html">
+            <span class="label">HML for Mars Exploration (SEEDS)</span>
             <span class="chevron">↗</span>
           </a>
         </li>
+        <li>
+          <a class="drawer-link" href="spacestation.html">
+            <span class="label">European Space Station (SEEDS)</span>
+            <span class="chevron">↗</span>
+          </a>
+        </li>
+        <li>
+          <a class="drawer-link" href="biceparray.html">
+            <span class="label">BICEP South Pole Telescope (Caltech)</span>
+            <span class="chevron">↗</span>
+          </a>
+        </li>
+        <li>
+          <a class="drawer-link" href="darkmatter.html">
+            <span class="label">Dark Matter Detection (Caltech)</span>
+            <span class="chevron">↗</span>
+          </a>
+        </li>
+        <li>
+          <a class="drawer-link" href="mkids.html">
+            <span class="label">MKIDs Detector for Astronomy (Caltech)</span>
+            <span class="chevron">↗</span>
+          </a>
+        </li>
+      </ul> 
+      
+      <div class="drawer-section-title">My CV</div>
+      <ul class="drawer-link-group">
         <li>
           <a class="drawer-link" href="cv.html">
-            <span class="label">Academic CV & documents</span>
+            <span class="label">Academic CV</span>
             <span class="chevron">↗</span>
           </a>
         </li>
@@ -73,6 +100,8 @@
         <div class="nav-links">
           <a href="#about">About Me</a>
           <a href="#projects">Projects</a>
+          <a href="#publications">Publications</a>
+          <a href="#medias">Medias</a>
           <a href="#contact">Contact</a>
         </div>
       </div>
@@ -148,7 +177,6 @@
 
         <aside class="hero-photo-card">
           <div class="hero-photo-frame">
-            <!-- TODO: remplace par ton image, ex: assets/photos/portrait.jpg -->
             <img src="assets/photos/IMG_2315.HEIC" alt="Yann Sadou" />
           </div>
           <div class="hero-photo-caption">
@@ -242,324 +270,6 @@
       </div>
     </section>
 
-    <!-- RESEARCH
-    <section id="research" aria-labelledby="research-title">
-      <h2 id="research-title" class="section-title">Research Interests</h2>
-      <div class="two-col">
-        
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Space Systems Architecture</div>
-              <div class="card-sub">Digital-twin microgrids for Moon & Mars – Politecnico di Milano</div>
-            </div>
-            <div class="card-badge">Systems</div>
-          </div>
-          <div class="card-body">
-            <ul>
-              <li>Design of hybrid surface power systems for human-class planetary outposts.</li>
-              <li>Digital-twin modeling of power generation, distribution, storage and ISRU integration.</li>
-              <li>Architecting resilient lunar/martian microgrids under extreme environmental constraints.</li>
-              <li>Multi-physics simulation of mission-scale energy flows and load profiles.</li>
-              <li>Optimization of autonomy, reliability and fault-tolerance of surface infrastructures.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">EDL & Power Systems Architecture</div>
-              <div class="card-sub">Human Mars lander – European Space Agency (SEEDS Program)</div>
-            </div>
-            <div class="card-badge">Trajectory & EPS</div>
-          </div>
-          <div class="card-body">
-            <ul>
-              <li>End-to-end design of guided entry, descent, and landing trajectories for a Human Mars Lander mission concept.</li>
-              <li>Trajectory-driven sizing and performance assessment of aeroshells, inflatable decelerators, and terminal descent propulsion.</li>
-              <li>Mission-level Electrical Power System (EPS) architecture and power budget from cruise to surface operations.</li>
-              <li>Trade-off studies and implementation concepts for RTGs, solar arrays, and fuel-cell solutions to secure take-off, EDL and early surface power needs.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Commercial Orbital Infrastructure</div>
-              <div class="card-sub">European Commercial Space Station in LEO – European Space Agency (SEEDS Program)</div>
-            </div>
-            <div class="card-badge">Space Strategy</div>
-          </div>
-          <div class="card-body">
-            <ul>
-              <li>Techno-economic assessment of a fully European commercial LEO station.</li>
-              <li>Cost modeling, market forecasting, and roadmap definition for crewed operations.</li>
-              <li>Benchmarking against ISS, Axiom, Starlab and international commercial players.</li>
-              <li>Identification of strategic ESA/NASA/industry partnerships for sustainable deployment.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">CMB Polarimetric Instrumentation</div>
-              <div class="card-sub">BICEP Array – Caltech</div>
-            </div>
-            <div class="card-badge">Space Instrumentation</div>
-          </div>
-          <div class="card-body">
-            <ul>
-              <li>Mechanical integration and validation of mm-wave focal plane modules.</li>
-              <li>Micro-wirebonding of TES RF Readout.</li>
-              <li>Cryogenic interfaces for large-format TES bolometer arrays.</li>
-              <li>Design of optical support structures and alignment of cold optics elements.</li>
-              <li>Module-level testing, characterization, and readiness verification for South Pole deployment.</li>
-              <li>Coordination with Harvard, Stanford, UBC, and Minnesota for multi-institution hardware development.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Dark-Matter Direct Detection</div>
-              <div class="card-sub">Cryogenic phonon-mediated detectors – Caltech</div>
-            </div>
-            <div class="card-badge">Space Instrumentation</div>
-          </div>
-          <div class="card-body">
-            <ul>
-              <li>Development of sub-Kelvin detector architectures for low-mass dark-matter searches.</li>
-              <li>Thermal system design for multi-stage dilution refrigeration cryostats.</li>
-              <li>Optimization of mechanical assemblies for extreme black-body radiation isolation and low-noise operation.</li>
-              <li>Integration of phonon-sensing elements with readout electronics in vacuum environments.</li>
-              <li>Contribution to next-generation detector concepts bridging astrophysics & particle physics.</li>
-            </ul>
-          </div>
-        </div>
-    
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Astronomical Instrumentation</div>
-              <div class="card-sub">Microwave Kinetic Inductance Detector (MKIDs) Developement– Caltech</div>
-            </div>
-            <div class="card-badge">Space Instrumentation</div>
-          </div>
-          <div class="card-body">
-            <ul>
-              <li>Development of large-format MKID arrays for ground-based mm/sub-mm astronomy (Caltech Submillimeter Observatory).</li>
-              <li>Integration of detector wafers into cryogenic optical benches for the CSO and prototype systems.</li>
-              <li>Design of mechanical/thermal interfaces for ultra-stable resonator performance.</li>
-              <li>Optimization of optical coupling architectures and cold alignment strategies.</li>
-              <li>End-to-end module assembly and system-level test campaigns for instrument prototypes.</li>
-            </ul>
-            <p style="margin-top:6px;font-size:13px;">
-              For a more detailed description of ongoing work and ideas, see the
-              <a href="research.html">dedicated research page</a>.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">Methods & Tools</div>
-        </div>
-        <div class="card-body">
-          <div class="pill-list">
-            <span class="pill">SolidWorks</span>
-            <span class="pill">FEA / Mechanical Design</span>
-            <span class="pill">Thermal Modeling</span>
-            <span class="pill">Python / MATLAB</span>
-            <span class="pill">Git / GitHub</span>
-            <span class="pill">Systems Engineering</span>
-          </div>
-        </div>
-      </div>
-    </section>
-    --->
-    <!-- EXPERIENCE 
-    <section id="experience" aria-labelledby="experience-title">
-      <h2 id="experience-title" class="section-title">Professional Experience</h2>
-      <div class="two-col">
-        <div>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-title">Research Assistant – Caltech</div>
-              <div class="timeline-meta">Observational Cosmology · Pasadena, USA · YYYY–YYYY</div>
-              <div class="timeline-desc">
-                Work with Prof. Sunil Golwala and Prof. Jamie Bock on cryogenic detector
-                instrumentation for dark-matter searches and the BICEP Array CMB experiment.
-                <ul>
-                  <li>Mechanical and thermal design of cryogenic structures and support hardware.</li>
-                  <li>Development and sizing of Belleville washer stacks for sub-Kelvin modules.</li>
-                  <li>Integration of detector wafers, modules, and readout into vacuum cryostats.</li>
-                  <li>Collaboration with JPL and international partners on next-generation CMB instruments.</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-title">Head of Design Office – Dreyer</div>
-              <div class="timeline-meta">Engineering company · France · YYYY–YYYY</div>
-              <div class="timeline-desc">
-                Led the mechanical design office, managing industrial projects from concept to
-                detailed design and manufacturing support.
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-title">Energy & Engineering Roles – Safran, APP Consultoría, Easycube</div>
-              <div class="timeline-meta">Europe · YYYY–YYYY</div>
-              <div class="timeline-desc">
-                Industrial internships and engineering roles across aerospace and energy,
-                focusing on modeling, design, and optimization of complex systems.
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-title">Mathematics Teacher – Middle School</div>
-              <div class="timeline-meta">France · YYYY–YYYY</div>
-              <div class="timeline-desc">
-                Taught mathematics at the middle-school level, building strong communication
-                and pedagogy skills while mentoring younger students.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">Selected Responsibilities</div>
-            </div>
-            <div class="card-body">
-              <ul>
-                <li>Owned mechanical and thermal interfaces in multi-partner cryogenic projects.</li>
-                <li>Coordinated with experimentalists, electronics teams, and fabrication shops.</li>
-                <li>Prepared technical documentation, drawings, and integration procedures.</li>
-                <li>Supervised or supported students and collaborators on specific tasks.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">Highlights</div>
-            </div>
-            <div class="card-body">
-              <ul>
-                <li>
-                  Panel chair representative at the 2025 California Science and Engineering
-                  Fair, presenting the best project in Senior – Applied Mechanics to the full congress.
-                </li>
-                <li>
-                  Participation in ESA’s SEEDS program on a human Mars lander and space station design project.
-                </li>
-                <li>
-                  Long-standing involvement in hands-on technical projects, from industrial design
-                  to high-precision cryogenic hardware.
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- EDUCATION 
-    <section id="education" aria-labelledby="education-title">
-      <h2 id="education-title" class="section-title">Education</h2>
-      <div class="two-col">
-        <div>
-          <div class="timeline">
-            <div class="timeline-item">
-              <div class="timeline-title">PhD in Aerospace Engineering</div>
-              <div class="timeline-meta">Politecnico di Milano · Italy · 2025–Now (ongoing)</div>
-              <div class="timeline-desc">
-                PhD project on
-                <em>“Advanced Power Supply Solutions for Large Infrastructures in Space”</em>,
-                focusing on digital twin–driven design and modeling of hybrid surface power architectures
-                for large-scale Lunar and Martian infrastructures.
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-title">MSc – Space Systems Engineering</div>
-              <div class="timeline-meta">ISAE-Supaero · France · 2022–2024</div>
-              <div class="timeline-desc">
-                Specialized MSc in space systems engineering, including mission design, spacecraft
-                architecture, and advanced systems engineering methods. Participation in ESA-related
-                projects and student teams.
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-title">MSc – Energy Engineering</div>
-              <div class="timeline-meta">Universidad Politécnica de Madrid (UPM) - ETSII · Spain · 2020–2021</div>
-              <div class="timeline-desc">
-                MSc with focus on energy systems, modeling, and optimization.
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-title">Diplôme d’ingénieur </div>
-              <div class="timeline-meta">Arts et Métiers ParisTech · France · 2018–2022</div>
-              <div class="timeline-desc">
-                General mechanical and industrial engineering education with strong emphasis on
-                structures, manufacturing, and hands-on engineering.
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-title">Classes Préparatoires – PCSI / PSI</div>
-              <div class="timeline-meta">Lycée Bellevue · France · 2015–2018</div>
-              <div class="timeline-desc">
-                Intensive two-year preparation in mathematics, physics, and engineering for entrance
-                into French Grandes Écoles.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">International & ESA-linked Training</div>
-            </div>
-            <div class="card-body">
-              <ul>
-                <li>SEEDS program with ESA partners (Mars lander and space station design).</li>
-                <li>Collaborations with Caltech, JPL, and international CMB/dark-matter consortia.</li>
-                <li>Academic trajectory spanning France, Spain, Italy, and the United States.</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">Suggested visuals</div>
-            </div>
-            <div class="card-body">
-              <p style="font-size: 13px; color: #666;">
-                You can add a small collage of campus or lab photos here
-                by inserting an <code>&lt;img&gt;</code> or a grid of images.
-                For example, create <code>assets/photos/campuses.jpg</code>
-                and include:
-              </p>
-              <pre style="font-size: 11px; background:#f6f6f7; padding:8px 10px; border-radius:10px; overflow-x:auto;">
-&lt;img src="assets/photos/campuses.jpg" alt="Campuses" style="width:100%; border-radius:16px;" /&gt;
-              </pre>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- PROJECTS -->
 <section id="projects" aria-labelledby="projects-title">
   <h2 id="projects-title" class="section-title">My selected projects</h2>
@@ -574,7 +284,7 @@
       <div class="card-badge">In progress</div>
     </div>
 
-    <a class="project-media" href="projects.html"
+    <a class="project-media" href="moonexploration.html"
        aria-label="Open project page: Hybrid Surface Power Architectures for Lunar & Martian Infrastructures">
       <img class="project-thumb" src="assets/photos/Moon_Surface.jpg"
            alt="Hybrid surface power architectures for lunar and martian infrastructures" />
@@ -597,16 +307,16 @@
   <div class="card project-card">
     <div class="card-header">
       <div>
-        <div class="card-title">Human Mars Lander & Station Design – SEEDS / ESA</div>
+        <div class="card-title">Human Mars Lander – SEEDS / ESA</div>
         <div class="card-sub">Collaborative project with multiple European universities</div>
       </div>
       <div class="card-badge">Systems & Trajectories</div>
     </div>
 
-    <a class="project-media" href="projects.html"
-       aria-label="Open project page: Human Mars Lander & Station Design – SEEDS / ESA">
+    <a class="project-media" href="marsexploration.html"
+       aria-label="Open project page: Human Mars Lander – SEEDS / ESA">
       <img class="project-thumb" src="assets/photos/SEEDS_Mars"
-           alt="Human Mars lander and station design concept" />
+           alt="Human Mars lander design" />
       <div class="project-overlay">
         <div class="project-overlay-title">SEEDS / ESA</div>
         <div class="project-overlay-cta">View project →</div>
@@ -625,16 +335,16 @@
   <div class="card project-card">
     <div class="card-header">
       <div>
-        <div class="card-title">Human Mars Lander & Station Design – SEEDS / ESA</div>
+        <div class="card-title">Station Design – SEEDS / ESA</div>
         <div class="card-sub">Collaborative project with multiple European universities</div>
       </div>
-      <div class="card-badge">Systems & Trajectories</div>
+      <div class="card-badge">Space Strategy and Business in Space</div>
     </div>
 
-    <a class="project-media" href="projects.html"
-       aria-label="Open project page: Human Mars Lander & Station Design – SEEDS / ESA">
+    <a class="project-media" href="spacestation.html"
+       aria-label="Open project page: Station Design – SEEDS / ESA">
       <img class="project-thumb" src="assets/photos/SEEDS_Station.jpg"
-           alt="Human Mars lander and station design concept" />
+           alt="Station design concept" />
       <div class="project-overlay">
         <div class="project-overlay-title">SEEDS / ESA</div>
         <div class="project-overlay-cta">View project →</div>
@@ -659,7 +369,7 @@
       <div class="card-badge">Cryogenics</div>
     </div>
 
-    <a class="project-media" href="projects.html"
+    <a class="project-media" href="biceparray.html"
        aria-label="Open project page: Cryogenic Detector Modules & Belleville Washer Stacks – BICEP Array">
       <img class="project-thumb" src="assets/photos/BICEP.jpg"
            alt="BICEP Array cryogenic detector modules and integration" />
@@ -689,7 +399,7 @@
       <div class="card-badge">Instrumentation</div>
     </div>
 
-    <a class="project-media" href="projects.html"
+    <a class="project-media" href="darkmatter.html"
        aria-label="Open project page: Dark Matter Detector Instrumentation">
       <img class="project-thumb" src="assets/photos/Dark_Matter.jpg"
            alt="Cryogenic detector instrumentation for dark matter direct detection" />
@@ -717,12 +427,12 @@
       <div class="card-badge">Instrumentation</div>
     </div>
 
-    <a class="project-media" href="projects.html"
-       aria-label="Open project page: Dark Matter Detector Instrumentation">
+    <a class="project-media" href="mkids.html"
+       aria-label="Open project page: Microwave Kinetic Inductance Detectors Instrumentation Development">
       <img class="project-thumb" src="assets/photos/MKIDs.jpg"
-           alt="Cryogenic detector instrumentation for dark matter direct detection" />
+           alt="Microwave Kinetic Inductance Detectors Instrumentation Development" />
       <div class="project-overlay">
-        <div class="project-overlay-title">Dark Matter Instrumentation</div>
+        <div class="project-overlay-title">MKIDs Instrumentation</div>
         <div class="project-overlay-cta">View project →</div>
       </div>
     </a>
@@ -736,7 +446,107 @@
   </div>
 </section>
 
-    <section id="they-speak-about-me" class="section">
+<!-- PUBLICATIONS -->
+<section id="publications" aria-labelledby="pubs-title">
+  <h2 id="pubs-title" class="section-title">Publications</h2>
+  <p class="pubs-subtitle">
+    Selected co-authored publications and conference papers (links to full text / DOI).
+  </p>
+
+  <div class="pubs-grid">
+    <!-- 1) arXiv 2511.08898 -->
+    <article class="card pub-card">
+      <div class="pub-top">
+        <span class="pub-pill">2025</span>
+        <span class="pub-pill pub-pill-accent">Caltech</span>
+        <span class="pub-pill pub-pill-soft">arXiv preprint</span>
+        <span class="pub-pill pub-pill-accent">NEW-MUSIC</span>
+      </div>
+
+      <h3 class="pub-title">
+        Low-Frequency Noise Performance of Microstrip-Coupled Lumped-Element Aluminum KIDs using Hydrogenated Amorphous Silicon Parallel-Plate Capacitors for NEW-MUSIC
+      </h3>
+
+      <div class="pub-meta">
+        arXiv:2511.08898 (posted Nov 12, 2025)
+      </div>
+
+      <div class="pub-actions">
+        <a class="btn-ghost btn-small" href="https://arxiv.org/abs/2511.08898" target="_blank" rel="noopener noreferrer">arXiv</a>
+        <a class="btn-ghost btn-small" href="https://arxiv.org/pdf/2511.08898.pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+      </div>
+    </article>
+
+    <!-- 2) arXiv 2511.08959 -->
+    <article class="card pub-card">
+      <div class="pub-top">
+        <span class="pub-pill">2025</span>
+        <span class="pub-pill pub-pill-accent">Caltech</span>
+        <span class="pub-pill pub-pill-soft">arXiv preprint</span>
+        <span class="pub-pill pub-pill-accent">NEW-MUSIC</span>
+      </div>
+
+      <h3 class="pub-title">
+        Improved Modeling of Quasi-Static Thermal and Optical Response of Lumped-Element Aluminum Manganese KIDs
+      </h3>
+
+      <div class="pub-meta">
+        arXiv:2511.08959 (posted Nov 12, 2025)
+      </div>
+
+      <div class="pub-actions">
+        <a class="btn-ghost btn-small" href="https://arxiv.org/abs/2511.08959" target="_blank" rel="noopener noreferrer">arXiv</a>
+        <a class="btn-ghost btn-small" href="https://arxiv.org/pdf/2511.08959.pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+      </div>
+    </article>
+
+    <!-- 3) IAC 2023 (SEEDS XV) -->
+    <article class="card pub-card">
+      <div class="pub-top">
+        <span class="pub-pill">2023</span>
+        <span class="pub-pill pub-pill-accent">ESA</span>
+        <span class="pub-pill pub-pill-soft">Conference paper</span>
+      </div>
+
+      <h3 class="pub-title">
+        Feasibility study on a crewed Mars lander
+      </h3>
+
+      <div class="pub-meta">
+        74th International Astronautical Congress (IAC), Baku, Azerbaijan — Oct 2–6, 2023 (paper: IAC-23,D1,IP,5,x77691)
+      </div>
+
+      <div class="pub-actions">
+        <a class="btn-ghost btn-small" href="https://www.researchgate.net/publication/393716393_Feasibility_study_on_a_crewed_Mars_lander" target="_blank" rel="noopener noreferrer">Full text</a>
+      </div>
+    </article>
+
+    <!-- 4) New Space journal -->
+    <article class="card pub-card">
+      <div class="pub-top">
+        <span class="pub-pill">2024</span>
+        <span class="pub-pill pub-pill-accent">ESA</span>
+        <span class="pub-pill pub-pill-soft">Journal article</span>
+        <span class="pub-pill pub-pill-accent">New Space</span>
+      </div>
+
+      <h3 class="pub-title">
+        Feasibility Study of a European Commercial Space Station in Low Earth Orbit
+      </h3>
+
+      <div class="pub-meta">
+        New Space, Vol. 12(4), Nov 2024 • DOI: 10.1089/space.2024.0017
+      </div>
+
+      <div class="pub-actions">
+        <a class="btn-ghost btn-small" href="https://www.liebertpub.com/doi/10.1089/space.2024.0017" target="_blank" rel="noopener noreferrer">Journal page</a>
+        <a class="btn-ghost btn-small" href="https://journals.sagepub.com/doi/abs/10.1089/space.2024.0017" target="_blank" rel="noopener noreferrer">Abstract</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+    <section id="medias" class="section">
     <div class="container">
     <h2 class="section-title">They Speak About Me</h2>
 
